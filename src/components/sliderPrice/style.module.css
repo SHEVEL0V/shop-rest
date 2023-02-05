@@ -1,0 +1,12 @@
+/** @format */
+
+.container {
+  display: flex;
+}
+.input {
+  display: flex;
+  height: 30px;
+  width: 45px;
+  margin-right: 10px;
+  border-radius: 5px;
+}

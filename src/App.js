@@ -1,5 +1,5 @@
 /** @format */
-import Header from "./components/header";
+import Header from "./modules/header";
 import Main from "./pages/main";
 
 function App() {

@@ -1,21 +1,12 @@
 /** @format */
-import Sidebar from "../components/sidebar";
-import Card from "../components/card";
+import ListProducts from "../modules/listProducts";
+import Sidebar from "../modules/sidebar";
 
 export default function Main() {
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </div>
+      <ListProducts />
     </div>
   );
 }
