@@ -43,7 +43,6 @@ export default function MinimumDistanceSlider() {
           type="text"
           value={value[1]}
           onChange={handleInputMax}
-          handleInputMax
         />
         <ButtonSearch onClick={() => dispatch(setPrice(value))} />
       </div>

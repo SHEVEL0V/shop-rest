@@ -8,8 +8,9 @@ export const shopApi = createApi({
 
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: (req) => ({
+      query: (options) => ({
         url: "products/",
+        params: options,
       }),
     }),
   }),

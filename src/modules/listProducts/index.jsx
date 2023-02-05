@@ -1,15 +1,28 @@
 /** @format */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { useGetProductsQuery } from "../../services/fetch";
-// import fetchPoducts from "../../services/fetch";
+
 import CardProduct from "../../components/cardProduct";
 import CircularProgress from "@mui/material/CircularProgress";
+
 import s from "./style.module.css";
 
 export default function ListProducts() {
-  const { data = [], isLoading } = useGetProductsQuery();
+  const { price, options } = useSelector((state) => state.filter);
+  const page = 1;
+
+  const {
+    data = [],
+    isLoading,
+    refetch,
+  } = useGetProductsQuery({ ...options, min: price[0], max: price[1], page });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch, price, options]);
 
   return (
     <div className={s.container}>
