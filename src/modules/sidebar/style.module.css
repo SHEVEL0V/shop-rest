@@ -1,7 +1,9 @@
 /** @format */
 .container {
-  padding: 30px;
+  padding: 20px;
+  height: 100%;
   background-color: #1976d29a;
+  transition: transform 2s ease-out;
 }
 .input {
   margin-bottom: 20px;

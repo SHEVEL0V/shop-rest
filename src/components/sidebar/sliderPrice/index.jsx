@@ -3,13 +3,13 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import ButtonSearch from "../../UI/buttonSearch";
+import ButtonSearch from "../../../UI/buttonSearch";
 import { useDispatch, useSelector } from "react-redux";
-import { setPrice } from "../../redux/filter/slice";
+import { setPrice } from "../../../redux/filter/slice";
 
 import s from "./style.module.css";
 
-export default function MinimumDistanceSlider() {
+export default function PriceSlider({ maxPrice }) {
   const dispatch = useDispatch();
   const [value, setValue] = useState(
     useSelector((state) => state.filter.price)
@@ -54,7 +54,7 @@ export default function MinimumDistanceSlider() {
         value={value}
         min={0}
         step={1000}
-        max={100000}
+        max={Number(maxPrice)}
         onChange={handleChange}
         valueLabelDisplay="auto"
         disableSwap

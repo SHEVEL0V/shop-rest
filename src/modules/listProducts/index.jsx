@@ -14,11 +14,12 @@ export default function ListProducts() {
   const { price, options } = useSelector((state) => state.filter);
   const page = 1;
 
-  const {
-    data = [],
-    isLoading,
-    refetch,
-  } = useGetProductsQuery({ ...options, min: price[0], max: price[1], page });
+  const { data, isLoading, refetch } = useGetProductsQuery({
+    ...options,
+    min: price[0],
+    max: price[1],
+    page,
+  });
 
   useEffect(() => {
     refetch();
@@ -29,7 +30,7 @@ export default function ListProducts() {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        data.map((el) => <CardProduct key={el._id} data={el} />)
+        data.products.map((el) => <CardProduct key={el._id} data={el} />)
       )}
     </div>
   );

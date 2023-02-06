@@ -3,11 +3,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  price: [1000, 20000],
+  price: [0, 30000],
   options: {},
 };
 
-export const counterSlice = createSlice({
+export const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
@@ -27,6 +27,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { setOptions, setPrice } = counterSlice.actions;
+export const { setOptions, setPrice } = filterSlice.actions;
 
-export default counterSlice.reducer;
+export default filterSlice.reducer;
