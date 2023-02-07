@@ -13,7 +13,28 @@ export const shopApi = createApi({
         params: options,
       }),
     }),
+    getBasket: builder.query({
+      query: () => "basket/",
+    }),
+    addBasket: builder.mutation({
+      query: (body) => ({
+        url: "basket/",
+        method: "POST",
+        body,
+      }),
+    }),
+    deleteBasket: builder.mutation({
+      query: (id) => ({
+        url: `basket/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = shopApi;
+export const {
+  useGetProductsQuery,
+  useAddBasketMutation,
+  useGetBasketQuery,
+  useDeleteBasketMutation,
+} = shopApi;

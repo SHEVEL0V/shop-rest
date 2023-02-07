@@ -1,20 +1,20 @@
 /** @format */
 
-import React, { useState } from "react";
+import React from "react";
 import Fab from "@mui/material/Fab";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import Modal from "@mui/material/Modal";
-import Basket from "../../../modules/basket";
+import { useDispatch } from "react-redux";
+import { setButtonBasket } from "../../../redux/buttton/slice";
 
 export default function BacketIkon() {
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   return (
     <Fab
       color="secondary"
       aria-label="add"
       size="small"
       style={{ marginLeft: 10 }}
-      onClick={() => setIsOpen((v) => !v)}
+      onClick={() => dispatch(setButtonBasket())}
     >
       <ShoppingBasketIcon />
     </Fab>

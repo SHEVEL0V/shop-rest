@@ -1,34 +1,34 @@
 /** @format */
 
-import React, { useState, useRef } from "react";
-import Paper from "@mui/material/Paper";
-import Slide from "@mui/material/Slide";
-import Popover from "@mui/material/Popover";
-import s from "./style.module.css";
+import React from "react";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Typography from "@mui/material/Typography";
+// import s from "./style.module.css";
 
 export default function OptonsCard() {
-  const containerRef = useRef(null);
-  const [isOpen, setIsOpen] = useState();
   return (
-    <div className={s.container} ref={containerRef}>
-      <button onClick={() => setIsOpen((s) => !s)}>open</button>
-      <Slide
-        in={isOpen}
-        direction="up"
-        container={containerRef.current}
-        mountOnEnter
-        unmountOnExit
-      >
-        <Paper>
-          <ul>
-            <li>ram</li>
-            <li>ssd</li>
-            <li>gpu</li>
-            <li>type-C</li>
-            <li>usb</li>
-          </ul>
-        </Paper>
-      </Slide>
-    </div>
+    <Accordion sx={{ backgroundColor: "#D5CDE3" }}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography>options</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <ul>
+          <li style={{ border: "solid" }}>1</li>
+          <li style={{ border: "solid" }}>2</li>
+          <li style={{ border: "solid" }}>3</li>
+          <li style={{ border: "solid" }}>4</li>
+          <li style={{ border: "solid" }}>5</li>
+          <li style={{ border: "solid" }}>6</li>
+          <li style={{ border: "solid" }}>7</li>
+          <li style={{ border: "solid" }}>8</li>
+          <li style={{ border: "solid" }}>9</li>
+          <li style={{ border: "solid" }}>10</li>
+        </ul>
+      </AccordionDetails>
+    </Accordion>
   );
 }

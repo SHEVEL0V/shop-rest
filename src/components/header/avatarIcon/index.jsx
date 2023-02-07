@@ -12,7 +12,7 @@ import {
   Box,
 } from "@mui/material";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 
 export default function AvatarIcon() {
   const [anchorElUser, setAnchorElUser] = useState(null);
