@@ -4,6 +4,7 @@ import { Modal } from "@mui/material";
 
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import CardBasket from "../../components/cardBasket";
 import { setButtonBasket } from "../../redux/buttton/slice";
 import { useGetBasketQuery } from "../../services/fetch";
 
@@ -13,7 +14,7 @@ export default function Basket() {
   const dispatch = useDispatch();
 
   const isOpenBasket = useSelector((store) => store.button.basket);
-  const { isLoading, data = [] } = useGetBasketQuery();
+  const { isLoading: isLoadingGet, data = [] } = useGetBasketQuery();
 
   return (
     <Modal
@@ -24,7 +25,8 @@ export default function Basket() {
       closeAfterTransition
     >
       <div className={s.container} id="child-modal">
-        {isLoading || data.map(({ product }) => <li>{product.name}</li>)}
+        {isLoadingGet ||
+          data.map((list) => <CardBasket key={list._id} data={list} />)}
       </div>
     </Modal>
   );

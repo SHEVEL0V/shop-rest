@@ -5,6 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3003/shop/" }),
+  tagTypes: ["Basket"],
 
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -15,6 +16,7 @@ export const shopApi = createApi({
     }),
     getBasket: builder.query({
       query: () => "basket/",
+      providesTags: ["Basket"],
     }),
     addBasket: builder.mutation({
       query: (body) => ({
@@ -22,12 +24,14 @@ export const shopApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Basket"],
     }),
     deleteBasket: builder.mutation({
       query: (id) => ({
         url: `basket/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Basket"],
     }),
   }),
 });
