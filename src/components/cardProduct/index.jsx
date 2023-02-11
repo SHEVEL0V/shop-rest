@@ -12,7 +12,7 @@ export default function CardProduct({ data }) {
   const { _id, name, price, rating, img, desc } = data;
   const [rat, setRat] = useState(rating);
 
-  const [updatePost, { isLoading }] = useAddBasketMutation();
+  const [addProduct, { isLoading }] = useAddBasketMutation();
 
   return (
     <div className={s.container}>
@@ -31,7 +31,7 @@ export default function CardProduct({ data }) {
         </div>
 
         <LoadingButton
-          onClick={() => updatePost({ product: _id })}
+          onClick={() => addProduct({ product: _id, qty: 1 })}
           loading={isLoading}
           loadingPosition="end"
           variant="contained"

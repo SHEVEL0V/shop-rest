@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import CardBasket from "../../components/cardBasket";
 import { setButtonBasket } from "../../redux/buttton/slice";
 import { useGetBasketQuery } from "../../services/fetch";
+import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
 
@@ -21,12 +22,21 @@ export default function Basket() {
       open={isOpenBasket}
       onClose={() => dispatch(setButtonBasket())}
       sx={{ padding: 10 }}
-      aria-labelledby="child-modal"
       closeAfterTransition
     >
-      <div className={s.container} id="child-modal">
+      <div className={s.container}>
         {isLoadingGet ||
           data.map((list) => <CardBasket key={list._id} data={list} />)}
+        <div className={s.flex}>
+          <b className={s.prise}>{1111}</b>
+          <Button
+            sx={{ width: 200 }}
+            variant="contained"
+            onClick={() => console.log("To order")}
+          >
+            To order
+          </Button>
+        </div>
       </div>
     </Modal>
   );

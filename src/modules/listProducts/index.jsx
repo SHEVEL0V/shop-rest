@@ -14,7 +14,11 @@ export default function ListProducts() {
   const { price, options } = useSelector((state) => state.filter);
   const page = 1;
 
-  const { data, isLoading, refetch } = useGetProductsQuery({
+  const {
+    data = [],
+    isLoading,
+    refetch,
+  } = useGetProductsQuery({
     ...options,
     min: price[0],
     max: price[1],

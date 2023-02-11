@@ -26,6 +26,14 @@ export const shopApi = createApi({
       }),
       invalidatesTags: ["Basket"],
     }),
+    updateBasket: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `basket/:${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Basket"],
+    }),
     deleteBasket: builder.mutation({
       query: (id) => ({
         url: `basket/${id}`,
@@ -39,6 +47,7 @@ export const shopApi = createApi({
 export const {
   useGetProductsQuery,
   useAddBasketMutation,
+  useUpdateBasketMutation,
   useGetBasketQuery,
   useDeleteBasketMutation,
 } = shopApi;
