@@ -11,22 +11,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import s from "./style.module.css";
 
 export default function CardBasket({ data, hendlePrice }) {
-  const id = data._id;
-  const { name, price, brand, img } = data.product;
-  const [count, setCount] = useState(1);
+  const { _id: id, qty } = data;
+  const { name, price, img } = data.product;
 
-  const [deleteProdukt, { isLoadDel }] = useDeleteBasketMutation();
-  const [updateProdukt, { isLoadUp }] = useUpdateBasketMutation();
+  const finalPrice = qty * price;
 
-  const hendleCountProduct = (e) => {
-    if (e === "-") {
-      setCount((v) => (v === 1 ? 1 : v - 1));
-    }
-    if (e === "+") {
-      setCount((v) => v + 1);
-    }
-    updateProdukt({ id, qty: count });
-  };
+  const [deleteProdukt] = useDeleteBasketMutation();
+  const [updateProdukt] = useUpdateBasketMutation();
+
+  const hendleCountDecrement = () =>
+    qty === 1 ? null : updateProdukt({ id, qty: qty - 1 });
+
+  const hendleCountIncrement = () => updateProdukt({ id, qty: qty + 1 });
 
   return (
     <div className={s.container}>
@@ -35,20 +31,14 @@ export default function CardBasket({ data, hendlePrice }) {
         <div className={s.titleContainer}>
           <h2 className={s.title}>{name}</h2>
           <div className={s.countContainer}>
-            <button
-              className={s.button}
-              onClick={() => hendleCountProduct("-")}
-            >
+            <button className={s.button} onClick={hendleCountDecrement}>
               -
             </button>
-            <b className={s.count}>{count}</b>
-            <button
-              className={s.button}
-              onClick={() => hendleCountProduct("+")}
-            >
+            <b className={s.count}>{qty}</b>
+            <button className={s.button} onClick={hendleCountIncrement}>
               +
             </button>
-            <b className={s.price}>{11111111} grn</b>
+            <b className={s.price}>{finalPrice} grn</b>
           </div>
         </div>
         <div></div>

@@ -1,28 +1,20 @@
 /** @format */
-
-import { useDispatch } from "react-redux";
-import { setOptions } from "../../../redux/filter/slice";
+import useSearchParamsCastome from "../../../hooks/useSearchParams";
 
 import Autocomplete from "../../../UI/avtocomplete";
 
-export default function Filter({ data = [] }) {
-  const dispatch = useDispatch();
+export default function Filter({ options }) {
+  const { type, brand } = options;
+  const { setParams } = useSearchParamsCastome();
 
-  const typeOptions = [...new Set(data.map(({ type }) => type))];
-  const brandOptions = [...new Set(data.map(({ brand }) => brand))];
-
-  const hendleChandeType = (value) => dispatch(setOptions({ type: value }));
-  const hendleChandeBrand = (value) => dispatch(setOptions({ brand: value }));
+  const hendleChandeType = (value) => setParams({ type: value });
+  const hendleChandeBrand = (value) => setParams({ brand: value });
 
   return (
     <div>
+      <Autocomplete options={type} name={"type"} onChange={hendleChandeType} />
       <Autocomplete
-        options={typeOptions}
-        name={"type"}
-        onChange={hendleChandeType}
-      />
-      <Autocomplete
-        options={brandOptions}
+        options={brand}
         name={"brand"}
         onChange={hendleChandeBrand}
       />

@@ -13,20 +13,28 @@ import OptonsCard from "../../components/sidebar/optionsCard";
 
 export default function Sidebar() {
   const isOpen = useSelector((store) => store.button.menu);
-  const { data } = useGetProductsQuery();
+  const { data = [], isLoading } = useGetProductsQuery();
 
-  const products = data?.products || [];
-  const maxPrice = data?.maxPrice || [];
+  const { maxPrice, minPrice, products = [] } = data;
+
+  const type = [...new Set(products.map(({ type }) => type))];
+  const brand = [...new Set(products.map(({ brand }) => brand))];
 
   return (
     <Slide direction="right" in={isOpen} mountOnEnter unmountOnExit>
-      <Paper>
-        <div className={s.container}>
-          <Filter data={products} />
-          <SliderPrice maxPrice={maxPrice} />
-          <OptonsCard />
-        </div>
-      </Paper>
+      {
+        <Paper>
+          {isLoading ? (
+            <div className={s.container}>loading</div>
+          ) : (
+            <div className={s.container}>
+              <Filter options={{ type, brand }} />
+              <SliderPrice price={[minPrice, maxPrice]} />
+              <OptonsCard />
+            </div>
+          )}
+        </Paper>
+      }
     </Slide>
   );
 }

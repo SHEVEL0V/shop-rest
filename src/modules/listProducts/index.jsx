@@ -9,25 +9,24 @@ import CardProduct from "../../components/cardProduct";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import s from "./style.module.css";
+import useSearchParamsCastome from "../../hooks/useSearchParams";
 
 export default function ListProducts() {
   const { price, options } = useSelector((state) => state.filter);
-  const page = 1;
+
+  const { params } = useSearchParamsCastome();
 
   const {
     data = [],
     isLoading,
     refetch,
   } = useGetProductsQuery({
-    ...options,
-    min: price[0],
-    max: price[1],
-    page,
+    ...params,
   });
 
   useEffect(() => {
     refetch();
-  }, [refetch, price, options]);
+  }, [refetch]);
 
   return (
     <div className={s.container}>

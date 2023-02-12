@@ -1,13 +1,13 @@
 /** @format */
-
+import { RouterProvider } from "react-router-dom";
 import Header from "./modules/header";
-import Main from "./pages/main";
+import { router } from "./router";
 
 function App() {
   return (
     <div>
       <Header />
-      <Main />
+      <RouterProvider router={router} />
     </div>
   );
 }

@@ -1,23 +1,18 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import ButtonSearch from "../../../UI/buttonSearch";
-import { useDispatch, useSelector } from "react-redux";
-import { setPrice } from "../../../redux/filter/slice";
-
+import useSearchParamsCastome from "../../../hooks/useSearchParams";
 import s from "./style.module.css";
 
-export default function PriceSlider({ maxPrice }) {
-  const dispatch = useDispatch();
-  const [value, setValue] = useState(
-    useSelector((state) => state.filter.price)
-  );
+export default function PriceSlider({ price }) {
+  const [value, setValue] = useState(price);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const { setParams } = useSearchParamsCastome();
+
+  const handleChange = (event, newValue) => setValue(newValue);
 
   const handleInputMin = (event) => {
     const value = Number(event.target.value);
@@ -44,7 +39,9 @@ export default function PriceSlider({ maxPrice }) {
           value={value[1]}
           onChange={handleInputMax}
         />
-        <ButtonSearch onClick={() => dispatch(setPrice(value))} />
+        <ButtonSearch
+          onClick={() => setParams({ price: `${value[0]}-${value[1]}` })}
+        />
       </div>
 
       <Slider
@@ -53,8 +50,8 @@ export default function PriceSlider({ maxPrice }) {
         getAriaLabel={() => "Minimum distance"}
         value={value}
         min={0}
-        step={1000}
-        max={Number(maxPrice)}
+        max={price[1]}
+        step={100}
         onChange={handleChange}
         valueLabelDisplay="auto"
         disableSwap

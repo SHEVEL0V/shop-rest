@@ -6,7 +6,7 @@ export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3003/shop/" }),
   tagTypes: ["Basket"],
-
+  //------------------------------------------------------------------------
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (options) => ({
@@ -14,10 +14,12 @@ export const shopApi = createApi({
         params: options,
       }),
     }),
+    //------------------------------------------------------------------------
     getBasket: builder.query({
       query: () => "basket/",
       providesTags: ["Basket"],
     }),
+    //------------------------------------------------------------------------
     addBasket: builder.mutation({
       query: (body) => ({
         url: "basket/",
@@ -26,14 +28,16 @@ export const shopApi = createApi({
       }),
       invalidatesTags: ["Basket"],
     }),
+    //------------------------------------------------------------------------
     updateBasket: builder.mutation({
       query: ({ id, ...body }) => ({
-        url: `basket/:${id}`,
+        url: `basket/${id}`,
         method: "PUT",
         body,
       }),
       invalidatesTags: ["Basket"],
     }),
+    //------------------------------------------------------------------------
     deleteBasket: builder.mutation({
       query: (id) => ({
         url: `basket/${id}`,

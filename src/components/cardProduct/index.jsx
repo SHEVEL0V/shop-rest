@@ -1,6 +1,5 @@
 /** @format */
 
-import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
@@ -17,34 +16,30 @@ export default function CardProduct({ data }) {
   return (
     <div className={s.container}>
       <img src={img} alt="logo" className={s.img} />
-      <div>
-        name: <span>{name}</span>
-      </div>
-      <div>
+
+      <h2>{name}</h2>
+      <b className={s.flex}>
+        Rating
         <Rating
-          name="simple-controlled"
+          sx={{ marginBottom: 1, marginLeft: 1 }}
           value={rat}
           onChange={(e, newValue) => setRat(newValue)}
         />
-        <div className={s.prise}>
-          price: <span>{price}</span> grn
-        </div>
+      </b>
 
+      <div className={s.flex}>
+        <div className={s.prise}>
+          price: <span>{price}</span> UAH
+        </div>
         <LoadingButton
           onClick={() => addProduct({ product: _id, qty: 1 })}
           loading={isLoading}
-          loadingPosition="end"
           variant="contained"
+          sx={{ marginLeft: "auto" }}
         >
           <span>Add to basket</span>
         </LoadingButton>
       </div>
-
-      <ul>
-        <li>
-          desc<span>{desc}</span>
-        </li>
-      </ul>
     </div>
   );
 }
