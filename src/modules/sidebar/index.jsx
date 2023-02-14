@@ -7,9 +7,9 @@ import Slide from "@mui/material/Slide";
 
 import SliderPrice from "../../components/sidebar/sliderPrice";
 import Filter from "../../components/sidebar/filter";
+import OptonsCard from "../../components/sidebar/optionsCard";
 
 import s from "./style.module.css";
-import OptonsCard from "../../components/sidebar/optionsCard";
 
 export default function Sidebar() {
   const isOpen = useSelector((store) => store.button.menu);
@@ -21,7 +21,12 @@ export default function Sidebar() {
   const brand = [...new Set(products.map(({ brand }) => brand))];
 
   return (
-    <Slide direction="right" in={isOpen} mountOnEnter unmountOnExit>
+    <Slide
+      direction="right"
+      in={isOpen && !isLoading}
+      mountOnEnter
+      unmountOnExit
+    >
       {
         <Paper>
           {isLoading ? (

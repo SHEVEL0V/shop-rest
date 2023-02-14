@@ -1,5 +1,5 @@
 /** @format */
-
+import { useNavigate } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
@@ -8,16 +8,18 @@ import { useAddBasketMutation } from "../../services/fetch";
 import s from "./style.module.css";
 
 export default function CardProduct({ data }) {
-  const { _id, name, price, rating, img, desc } = data;
+  const { _id, name, price, rating, img } = data;
   const [rat, setRat] = useState(rating);
 
+  const navigate = useNavigate();
   const [addProduct, { isLoading }] = useAddBasketMutation();
+
+  const hendeleClickCard = () => navigate(`/${_id}`);
 
   return (
     <div className={s.container}>
-      <img src={img} alt="logo" className={s.img} />
-
-      <h2>{name}</h2>
+      <img onClick={hendeleClickCard} src={img} alt="logo" className={s.img} />
+      <p>{name}</p>
       <b className={s.flex}>
         Rating
         <Rating

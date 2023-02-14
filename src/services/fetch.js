@@ -15,6 +15,13 @@ export const shopApi = createApi({
       }),
     }),
     //------------------------------------------------------------------------
+    getProductsById: builder.query({
+      query: (id) => ({
+        url: `products/${id}`,
+      }),
+    }),
+
+    //==========================================================================
     getBasket: builder.query({
       query: () => "basket/",
       providesTags: ["Basket"],
@@ -24,6 +31,9 @@ export const shopApi = createApi({
       query: (body) => ({
         url: "basket/",
         method: "POST",
+        headers: {
+          auth: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuQG1haWwuY29tIiwiaWF0IjoxNjc2MzIzNDk1fQ.almZPJ2Nl79ssqKaDaCrfo7J2YVb0hPgPtA6LTIGtTQ",
+        },
         body,
       }),
       invalidatesTags: ["Basket"],
@@ -45,13 +55,23 @@ export const shopApi = createApi({
       }),
       invalidatesTags: ["Basket"],
     }),
+    //==========================================================================
+    addUser: builder.mutation({
+      query: (body) => ({
+        url: "user/",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
 export const {
   useGetProductsQuery,
+  useGetProductsByIdQuery,
   useAddBasketMutation,
   useUpdateBasketMutation,
   useGetBasketQuery,
   useDeleteBasketMutation,
+  useAddUserMutation,
 } = shopApi;

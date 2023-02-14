@@ -2,13 +2,17 @@
 import ListProducts from "../modules/listProducts";
 import Sidebar from "../modules/sidebar";
 import Basket from "../modules/basket";
+import Header from "../modules/header";
 
 export default function Main() {
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
-      <ListProducts />
+    <>
+      <Header />
       <Basket />
-    </div>
+      <div style={{ display: "flex" }}>
+        <Sidebar />
+        <ListProducts />
+      </div>
+    </>
   );
 }

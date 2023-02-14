@@ -18,7 +18,7 @@ export default function Basket() {
     .map(({ qty, product }) => qty * product.price)
     .reduce((acc, v) => acc + v, 0);
 
-  const { boolean } = useMedia(850);
+  const { boolean } = useMedia(1000);
 
   return (
     <Modal

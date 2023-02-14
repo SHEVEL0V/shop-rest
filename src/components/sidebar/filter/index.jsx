@@ -7,8 +7,10 @@ export default function Filter({ options }) {
   const { type, brand } = options;
   const { setParams } = useSearchParamsCastome();
 
-  const hendleChandeType = (value) => setParams({ type: value });
-  const hendleChandeBrand = (value) => setParams({ brand: value });
+  const hendleChandeType = (value) =>
+    setParams(value ? { type: value } : { type: "" });
+  const hendleChandeBrand = (value) =>
+    setParams(value ? { brand: value } : { brand: "" });
 
   return (
     <div>

@@ -1,0 +1,13 @@
+/** @format */
+
+.container {
+  box-sizing: content-box;
+  max-width: 600px;
+  height: 100vh;
+  padding: 20px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--bg-color-tho);
+}

@@ -3,16 +3,11 @@
   box-sizing: border-box;
   display: block;
 
-  max-height: 450px;
-  padding: 10px;
+  height: 100vh;
+  padding: 100px;
 
   background-color: var(--bg-color-one);
   transition: all 350ms ease-out;
-}
-.container:hover {
-  scale: 105%;
-  border: 2px solid #f89b24;
-  border-radius: 1%;
 }
 
 .img {

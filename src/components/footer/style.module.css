@@ -1,0 +1,11 @@
+/** @format */
+.container {
+  display: flex;
+  justify-content: center;
+  height: 70px;
+  padding: 10px;
+  background-color: rgba(69, 104, 200, 0.655);
+}
+.title {
+  font-size: 18px;
+}

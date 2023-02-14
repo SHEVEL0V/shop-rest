@@ -13,7 +13,7 @@ import MenuButton from "../../components/header/menuButton";
 
 export default function SearchAppBar() {
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar>
         <MenuButton />
         <Typography

@@ -7,8 +7,7 @@ import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 
-import { useDispatch } from "react-redux";
-import { setOptions } from "../../../redux/filter/slice";
+import useSearchParamsCastome from "../../../hooks/useSearchParams";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -39,7 +38,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -53,16 +52,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchInput() {
-  const dispatch = useDispatch();
+  const { setParams } = useSearchParamsCastome();
 
   const changeHandler = ({ target: { value } }) => {
-    const search = value.trim() === "" ? null : value;
+    const search = value.trim() === "" ? "" : value;
 
-    dispatch(setOptions({ search }));
+    setParams({ search });
   };
 
   const debouncedChangeHandler = useMemo(
     () => debounce(changeHandler, 1000),
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
