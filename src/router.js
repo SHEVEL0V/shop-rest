@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
     element: <Product />,
   },
   {
-    path: "/login",
+    path: "user/login",
     element: <Auth />,
   },
 ]);

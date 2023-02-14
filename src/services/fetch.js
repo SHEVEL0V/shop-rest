@@ -2,12 +2,21 @@
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJhbHVAY29tLnVhIiwiaWF0IjoxNjc2Mzg0NjczfQ.db5kTU0qf2GLW22IYWZcLnUOg-llr3S1mCBtklSgB5o";
+
 export const shopApi = createApi({
   reducerPath: "shopApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3003/shop/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:3003/shop/",
+
+    prepareHeaders: (headers) =>
+      headers.set("authorization", `Bearer ${token}`),
+  }),
   tagTypes: ["Basket"],
-  //------------------------------------------------------------------------
+
   endpoints: (builder) => ({
+    //------------------------------------------------------------------------
     getProducts: builder.query({
       query: (options) => ({
         url: "products/",
@@ -58,7 +67,15 @@ export const shopApi = createApi({
     //==========================================================================
     addUser: builder.mutation({
       query: (body) => ({
-        url: "user/",
+        url: "user/auth",
+        method: "POST",
+        body,
+      }),
+    }),
+    //------------------------------------------------------------------------
+    loginUser: builder.mutation({
+      query: (body) => ({
+        url: "user/login",
         method: "POST",
         body,
       }),
@@ -74,4 +91,5 @@ export const {
   useGetBasketQuery,
   useDeleteBasketMutation,
   useAddUserMutation,
+  useLoginUserMutation,
 } = shopApi;

@@ -68,7 +68,7 @@ export default function SearchInput() {
   );
 
   return (
-    <Search>
+    <Search sx={{ marginRight: 2 }}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
