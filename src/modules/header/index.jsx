@@ -1,7 +1,7 @@
 /** @format */
 
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setButtonLogin } from "../../redux/buttton/slice";
 
 import AppBar from "@mui/material/AppBar";
@@ -12,9 +12,14 @@ import Button from "@mui/material/Button";
 import SearchInput from "../../components/header/search";
 import BacketIkon from "../../components/header/backetIcon";
 import MenuButton from "../../components/header/menuButton";
+import AvatarIcon from "../../components/header/avatarIcon";
 
 export default function SearchAppBar() {
+  const token = useSelector((s) => s.auth.token);
+  const [isAuth] = useState(token);
   const dispatch = useDispatch();
+
+  console.log(isAuth);
 
   return (
     <AppBar position="sticky">
@@ -29,6 +34,7 @@ export default function SearchAppBar() {
           SHOP
         </Typography>
         <SearchInput />
+        <AvatarIcon />
         <Button
           onClick={() => {
             dispatch(setButtonLogin());
@@ -37,7 +43,6 @@ export default function SearchAppBar() {
         >
           Login
         </Button>
-        {/* <AvatarIcon /> */}
 
         <BacketIkon />
       </Toolbar>

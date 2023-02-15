@@ -11,16 +11,16 @@ import {
   Tooltip,
   Box,
 } from "@mui/material";
-
-const settings = ["Profile", "Logout"];
+import { useDispatch } from "react-redux";
+import { setToken } from "../../../redux/token/slice";
 
 export default function AvatarIcon() {
   const [anchorElUser, setAnchorElUser] = useState(null);
-
+  const dispatch = useDispatch();
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
   };
   return (
@@ -46,11 +46,9 @@ export default function AvatarIcon() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
+        <MenuItem onClick={() => dispatch(setToken(false))}>
+          <Typography textAlign="center">Logout</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   );
