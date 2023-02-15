@@ -2,12 +2,11 @@
 .container {
   box-sizing: border-box;
   display: block;
-
-  max-height: 450px;
+  max-height: 470px;
   padding: 10px;
 
   background-color: var(--bg-color-one);
-  transition: all 350ms ease-out;
+  transition: all 350ms ease-in-out;
 }
 .container:hover {
   scale: 105%;
@@ -28,7 +27,4 @@
 }
 .flex {
   display: flex;
-}
-.flex:last-child {
-  margin-top: auto;
 }

@@ -1,42 +1,44 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../redux/token/slice";
+import { setButtonLogin } from "../../redux/buttton/slice";
+import { useAddUserMutation, useLoginUserMutation } from "../../services/fetch";
+
 import Switch from "@mui/material/Switch";
 import Button from "@mui/material/Button";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import TextInput from "../../UI/textInput";
-import { useAddUserMutation, useLoginUserMutation } from "../../services/fetch";
-
 import ModalCustom from "../../components/modal";
-import { setButtonLogin } from "../../redux/buttton/slice";
-import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../../redux/token/slice";
 
 export default function Auth() {
+  const dispatch = useDispatch();
+
   const [checked, setCheked] = useState(true);
+
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [passwordRep, setPasswordRep] = useState();
 
   const isOpen = useSelector((store) => store.button.login);
-  const dispatch = useDispatch();
 
-  const [addUser, { isError, error }] = useAddUserMutation();
-  const [loginUser, { isSuccess, data }] = useLoginUserMutation();
+  const [addUser, { isError: isErrAuth, error: errAdd }] = useAddUserMutation();
+  const [loginUser, { isError: isErrLogin, error: errLog, isSuccess, data }] =
+    useLoginUserMutation();
 
   useEffect(() => {
-    if (isError) {
-      toast.error(error?.status, { theme: "dark" });
+    if (isErrAuth || isErrLogin) {
+      toast.error(errLog?.status || errAdd?.status, { theme: "dark" });
     }
     if (isSuccess) {
       dispatch(setButtonLogin());
       dispatch(setToken(data?.token));
     }
-  }, [data?.token, dispatch, error?.status, isError, isSuccess]);
+  }, [data?.token, dispatch, isSuccess, isErrAuth, isErrLogin, errLog, errAdd]);
 
   const disabled = checked
     ? email?.trim() === "" || password?.trim() === ""
@@ -54,7 +56,19 @@ export default function Auth() {
 
   return (
     <div>
-      <ModalCustom open={isOpen} onClose={hendleCloseModal}>
+      <ModalCustom open={isOpen} onClick={hendleCloseModal}>
+        <button
+          style={{
+            width: 30,
+            height: 30,
+            marginBottom: 10,
+            marginLeft: "auto",
+            borderRadius: "50%",
+          }}
+          onClick={hendleCloseModal}
+        >
+          +
+        </button>
         {checked || <TextInput label="name" value={name} onChange={setName} />}
         <TextInput label="email" value={email} onChange={setEmail} />
         <TextInput label="password" value={password} onChange={setPassword} />
@@ -77,7 +91,6 @@ export default function Auth() {
           <Switch onChange={() => setCheked((s) => !s)} /> authorization
         </p>
       </ModalCustom>
-
       <ToastContainer />
     </div>
   );

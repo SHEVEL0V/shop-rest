@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setButtonLogin } from "../../redux/buttton/slice";
 
@@ -10,16 +10,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 import SearchInput from "../../components/header/search";
-import BacketIkon from "../../components/header/backetIcon";
 import MenuButton from "../../components/header/menuButton";
 import AvatarIcon from "../../components/header/avatarIcon";
 
 export default function SearchAppBar() {
-  const token = useSelector((s) => s.auth.token);
-  const [isAuth] = useState(token);
-  const dispatch = useDispatch();
+  const isAuth = useSelector((s) => s.auth.token);
 
-  console.log(isAuth);
+  const dispatch = useDispatch();
 
   return (
     <AppBar position="sticky">
@@ -34,17 +31,18 @@ export default function SearchAppBar() {
           SHOP
         </Typography>
         <SearchInput />
-        <AvatarIcon />
-        <Button
-          onClick={() => {
-            dispatch(setButtonLogin());
-          }}
-          color="inherit"
-        >
-          Login
-        </Button>
-
-        <BacketIkon />
+        {isAuth ? (
+          <AvatarIcon />
+        ) : (
+          <Button
+            onClick={() => {
+              dispatch(setButtonLogin());
+            }}
+            color="inherit"
+          >
+            Login
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   );
