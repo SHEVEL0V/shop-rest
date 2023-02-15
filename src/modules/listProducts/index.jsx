@@ -8,18 +8,21 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import s from "./style.module.css";
 import useSearchParamsCastome from "../../hooks/useSearchParams";
+import { useSelector } from "react-redux";
 
 export default function ListProducts() {
   const { params } = useSearchParamsCastome();
-
-  const { data = [], isLoading } = useGetProductsQuery({ ...params });
+  const user = useSelector((store) => store.auth.user);
+  const { data, isLoading } = useGetProductsQuery({ ...params });
 
   return (
     <div className={s.container}>
       {isLoading ? (
         <CircularProgress />
       ) : (
-        data.products.map((el) => <CardProduct key={el._id} data={el} />)
+        data?.products?.map((el) => (
+          <CardProduct key={el._id} data={el} user={user} />
+        ))
       )}
     </div>
   );

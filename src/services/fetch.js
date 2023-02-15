@@ -18,9 +18,9 @@ export const shopApi = createApi({
   endpoints: (builder) => ({
     //------------------------------------------------------------------------
     getProducts: builder.query({
-      query: (options) => ({
+      query: (params) => ({
         url: "products/",
-        params: options,
+        params,
       }),
     }),
     //------------------------------------------------------------------------
@@ -32,7 +32,7 @@ export const shopApi = createApi({
 
     //==========================================================================
     getBasket: builder.query({
-      query: () => "basket/",
+      query: (params) => ({ url: "basket/", params }),
       providesTags: ["Basket"],
     }),
     //------------------------------------------------------------------------
@@ -40,9 +40,6 @@ export const shopApi = createApi({
       query: (body) => ({
         url: "basket/",
         method: "POST",
-        headers: {
-          auth: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuQG1haWwuY29tIiwiaWF0IjoxNjc2MzIzNDk1fQ.almZPJ2Nl79ssqKaDaCrfo7J2YVb0hPgPtA6LTIGtTQ",
-        },
         body,
       }),
       invalidatesTags: ["Basket"],
@@ -60,6 +57,14 @@ export const shopApi = createApi({
     deleteBasket: builder.mutation({
       query: (id) => ({
         url: `basket/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Basket"],
+    }),
+    //==========================================================================
+    deleteBasketAll: builder.mutation({
+      query: (id) => ({
+        url: `basket/all/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Basket"],
@@ -90,6 +95,7 @@ export const {
   useUpdateBasketMutation,
   useGetBasketQuery,
   useDeleteBasketMutation,
+  useDeleteBasketAllMutation,
   useAddUserMutation,
   useLoginUserMutation,
 } = shopApi;

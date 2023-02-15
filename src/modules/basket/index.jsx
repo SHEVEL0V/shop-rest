@@ -5,7 +5,10 @@ import ModalCustom from "../../components/modal";
 
 import CardBasket from "../../components/cardBasket";
 import { setButtonBasket } from "../../redux/buttton/slice";
-import { useGetBasketQuery } from "../../services/fetch";
+import {
+  useGetBasketQuery,
+  useDeleteBasketAllMutation,
+} from "../../services/fetch";
 import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
@@ -14,9 +17,14 @@ import { useEffect } from "react";
 
 export default function Basket() {
   const dispatch = useDispatch();
-  const isOpenBasket = useSelector((store) => store.button.basket);
 
-  const { isLoading: isLoadingGet, data = [] } = useGetBasketQuery();
+  const {
+    auth: { user },
+    button: { basket: isOpen },
+  } = useSelector((s) => s);
+
+  const { isLoading: isLoadingGet, data = [] } = useGetBasketQuery({ user });
+  const [deleteBasket] = useDeleteBasketAllMutation();
 
   const qty = data.length;
   const disabled = qty === 0;
@@ -26,6 +34,10 @@ export default function Basket() {
     .reduce((acc, v) => acc + v, 0);
 
   const hendleClick = () => disabled || dispatch(setButtonBasket());
+  const hendleOrder = () => {
+    console.log(data);
+    deleteBasket(user);
+  };
 
   useEffect(() => {
     if (disabled) {
@@ -36,7 +48,7 @@ export default function Basket() {
   return (
     <div>
       <BacketIkon qty={qty} onClick={hendleClick} disabled={disabled} />
-      <ModalCustom open={isOpenBasket} onClick={hendleClick}>
+      <ModalCustom open={isOpen} onClick={hendleClick}>
         {isLoadingGet ||
           data.map((list) => <CardBasket key={list._id} data={list} />)}
         <div className={s.flex}>
@@ -45,7 +57,7 @@ export default function Basket() {
             sx={{ width: 200 }}
             color="success"
             variant="contained"
-            onClick={() => console.log("To order")}
+            onClick={hendleOrder}
           >
             To order
           </Button>

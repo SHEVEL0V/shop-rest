@@ -36,9 +36,9 @@ export default function Auth() {
     }
     if (isSuccess) {
       dispatch(setButtonLogin());
-      dispatch(setToken(data?.token));
+      dispatch(setToken(data));
     }
-  }, [data?.token, dispatch, isSuccess, isErrAuth, isErrLogin, errLog, errAdd]);
+  }, [data, dispatch, isSuccess, isErrAuth, isErrLogin, errLog, errAdd]);
 
   const disabled = checked
     ? email?.trim() === "" || password?.trim() === ""
