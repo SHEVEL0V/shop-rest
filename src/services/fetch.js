@@ -2,16 +2,18 @@
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJhbHVAY29tLnVhIiwiaWF0IjoxNjc2Mzg0NjczfQ.db5kTU0qf2GLW22IYWZcLnUOg-llr3S1mCBtklSgB5o";
-
 export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3003/shop/",
 
-    prepareHeaders: (headers) =>
-      headers.set("authorization", `Bearer ${token}`),
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   tagTypes: ["Basket"],
 

@@ -18,16 +18,19 @@ import { useEffect } from "react";
 export default function Basket() {
   const dispatch = useDispatch();
 
-  const {
-    auth: { user },
-    button: { basket: isOpen },
-  } = useSelector((s) => s);
+  const isOpen = useSelector((store) => store.button.basket);
 
-  const { isLoading: isLoadingGet, data = [] } = useGetBasketQuery({ user });
+  const { isLoading: isLoadingGet, data = [] } = useGetBasketQuery();
   const [deleteBasket] = useDeleteBasketAllMutation();
 
   const qty = data.length;
   const disabled = qty === 0;
+
+  useEffect(() => {
+    if (disabled) {
+      dispatch(setButtonBasket());
+    }
+  }, [dispatch, disabled]);
 
   const sumPrice = data
     .map(({ qty, product }) => qty * product.price)
@@ -36,14 +39,8 @@ export default function Basket() {
   const hendleClick = () => disabled || dispatch(setButtonBasket());
   const hendleOrder = () => {
     console.log(data);
-    deleteBasket(user);
+    deleteBasket();
   };
-
-  useEffect(() => {
-    if (disabled) {
-      dispatch(setButtonBasket());
-    }
-  }, [dispatch, disabled]);
 
   return (
     <div>

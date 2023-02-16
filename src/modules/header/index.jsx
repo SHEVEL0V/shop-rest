@@ -12,16 +12,27 @@ import Button from "@mui/material/Button";
 import SearchInput from "../../components/header/search";
 import MenuButton from "../../components/header/menuButton";
 import AvatarIcon from "../../components/header/avatarIcon";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchAppBar() {
   const isAuth = useSelector((s) => s.auth.token);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   return (
     <AppBar position="sticky">
       <Toolbar>
         <MenuButton />
+        <Button
+          onClick={() => {
+            navigate("/admin");
+          }}
+          color="error"
+          variant="contained"
+          sx={{ marginRight: 2 }}
+        >
+          Admin panel
+        </Button>
         <Typography
           variant="h6"
           noWrap
@@ -30,6 +41,7 @@ export default function SearchAppBar() {
         >
           SHOP
         </Typography>
+
         <SearchInput />
         {isAuth ? (
           <AvatarIcon />

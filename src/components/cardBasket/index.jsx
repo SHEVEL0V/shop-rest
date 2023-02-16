@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React from "react";
 import {
   useDeleteBasketMutation,
   useUpdateBasketMutation,
@@ -24,6 +24,8 @@ export default function CardBasket({ data, hendlePrice }) {
 
   const hendleCountIncrement = () => updateProdukt({ id, qty: qty + 1 });
 
+  const hendleDeleteProdukt = () => deleteProdukt(id);
+
   return (
     <div className={s.container}>
       <div className={s.flex}>
@@ -46,7 +48,7 @@ export default function CardBasket({ data, hendlePrice }) {
           sx={{ marginLeft: "auto", width: 200 }}
           variant="contained"
           startIcon={<DeleteIcon />}
-          onClick={() => deleteProdukt(id)}
+          onClick={hendleDeleteProdukt}
         >
           Delete
         </Button>

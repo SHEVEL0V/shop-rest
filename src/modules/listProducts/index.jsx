@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 export default function ListProducts() {
   const { params } = useSearchParamsCastome();
-  const user = useSelector((store) => store.auth.user);
+  const { token } = useSelector((store) => store.auth);
   const { data, isLoading } = useGetProductsQuery({ ...params });
 
   return (
@@ -21,7 +21,7 @@ export default function ListProducts() {
         <CircularProgress />
       ) : (
         data?.products?.map((el) => (
-          <CardProduct key={el._id} data={el} user={user} />
+          <CardProduct key={el._id} data={el} token={token} />
         ))
       )}
     </div>

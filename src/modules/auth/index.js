@@ -37,6 +37,7 @@ export default function Auth() {
     if (isSuccess) {
       dispatch(setButtonLogin());
       dispatch(setToken(data));
+      console.log(data);
     }
   }, [data, dispatch, isSuccess, isErrAuth, isErrLogin, errLog, errAdd]);
 

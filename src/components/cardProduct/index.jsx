@@ -7,7 +7,7 @@ import { useAddBasketMutation } from "../../services/fetch";
 
 import s from "./style.module.css";
 
-export default function CardProduct({ data, user }) {
+export default function CardProduct({ data, token }) {
   const { _id, name, price, rating, img } = data;
   const [rat, setRat] = useState(rating);
 
@@ -16,9 +16,9 @@ export default function CardProduct({ data, user }) {
 
   const hendeleClickCard = () => navigate(`/${_id}`);
 
-  const hendeleAddProducts = () => addProduct({ user, product: _id, qty: 1 });
+  const hendeleAddProducts = () => addProduct({ product: _id, qty: 1 });
 
-  const disabled = !user;
+  const disabled = !token;
 
   return (
     <div className={s.container}>
