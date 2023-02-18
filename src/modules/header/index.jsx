@@ -25,7 +25,7 @@ export default function SearchAppBar() {
         <MenuButton />
         <Button
           onClick={() => {
-            navigate("/admin");
+            navigate("/admin/update");
           }}
           color="error"
           variant="contained"

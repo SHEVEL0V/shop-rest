@@ -19,10 +19,10 @@ export default function Auth() {
 
   const [checked, setCheked] = useState(true);
 
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [passwordRep, setPasswordRep] = useState();
+  const [form, setForm] = useState({});
+
+  const hendleInput = ({ name, value }) =>
+    setForm((state) => ({ ...state, [name]: value }));
 
   const isOpen = useSelector((store) => store.button.login);
 
@@ -37,21 +37,20 @@ export default function Auth() {
     if (isSuccess) {
       dispatch(setButtonLogin());
       dispatch(setToken(data));
-      console.log(data);
+      setForm({});
     }
   }, [data, dispatch, isSuccess, isErrAuth, isErrLogin, errLog, errAdd]);
 
+  const { name, password, email, password_egain } = form;
+
   const disabled = checked
     ? email?.trim() === "" || password?.trim() === ""
-    : name === "" ||
-      email === "" ||
-      password === "" ||
-      password !== passwordRep;
+    : name?.trim() === "" ||
+      email?.trim() === "" ||
+      password?.trim() === "" ||
+      password?.trim() !== password_egain;
 
-  const hendleAuth = () =>
-    checked
-      ? loginUser({ email, password })
-      : addUser({ name, email, password });
+  const hendleAuth = () => (checked ? loginUser(form) : addUser(form));
 
   const hendleCloseModal = () => dispatch(setButtonLogin());
 
@@ -70,14 +69,16 @@ export default function Auth() {
         >
           +
         </button>
-        {checked || <TextInput label="name" value={name} onChange={setName} />}
-        <TextInput label="email" value={email} onChange={setEmail} />
-        <TextInput label="password" value={password} onChange={setPassword} />
+        {checked || (
+          <TextInput label="name" value={name} onChange={hendleInput} />
+        )}
+        <TextInput label="email" value={email} onChange={hendleInput} />
+        <TextInput label="password" value={password} onChange={hendleInput} />
         {checked || (
           <TextInput
-            label="password egain"
-            value={passwordRep}
-            onChange={setPasswordRep}
+            label="password_egain"
+            value={password_egain}
+            onChange={hendleInput}
           />
         )}
         <Button

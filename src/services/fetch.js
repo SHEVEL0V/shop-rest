@@ -15,7 +15,7 @@ export const shopApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Basket"],
+  tagTypes: ["Basket", "Product"],
 
   endpoints: (builder) => ({
     //------------------------------------------------------------------------
@@ -24,12 +24,39 @@ export const shopApi = createApi({
         url: "products/",
         params,
       }),
+      providesTags: ["Produkt"],
     }),
     //------------------------------------------------------------------------
     getProductsById: builder.query({
       query: (id) => ({
         url: `products/${id}`,
       }),
+    }),
+    //------------------------------------------------------------------------
+    addImage: builder.mutation({
+      query: (body) => ({
+        url: "images/",
+        method: "POST",
+        body,
+      }),
+    }),
+    //------------------------------------------------------------------------
+    addProducts: builder.mutation({
+      query: (body) => ({
+        url: "products/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Produkt"],
+    }),
+    //------------------------------------------------------------------------
+    deletedProducts: builder.mutation({
+      query: (body) => ({
+        url: "products/all",
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Produkt"],
     }),
 
     //==========================================================================
@@ -63,7 +90,7 @@ export const shopApi = createApi({
       }),
       invalidatesTags: ["Basket"],
     }),
-    //==========================================================================
+    //------------------------------------------------------------------------
     deleteBasketAll: builder.mutation({
       query: (id) => ({
         url: `basket/all/${id}`,
@@ -93,6 +120,8 @@ export const shopApi = createApi({
 export const {
   useGetProductsQuery,
   useGetProductsByIdQuery,
+  useAddProductsMutation,
+  useDeletedProductsMutation,
   useAddBasketMutation,
   useUpdateBasketMutation,
   useGetBasketQuery,
@@ -100,4 +129,5 @@ export const {
   useDeleteBasketAllMutation,
   useAddUserMutation,
   useLoginUserMutation,
+  useAddImageMutation,
 } = shopApi;
