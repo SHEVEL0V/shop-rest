@@ -8,7 +8,7 @@ import {
 
 import Button from "@mui/material/Button";
 
-import ListCard from "../../components/admin/listSetting";
+import ListRemove from "../../components/admin/listRemove";
 
 export default function Admin() {
   const [paramsDelete, setParamsDelete] = useState([]);
@@ -26,7 +26,7 @@ export default function Admin() {
   return (
     <div>
       {res?.products.map((e) => (
-        <ListCard
+        <ListRemove
           data={e}
           key={e._id}
           addItem={hendleAddItem}

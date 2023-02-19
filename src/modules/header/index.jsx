@@ -23,16 +23,18 @@ export default function SearchAppBar() {
     <AppBar position="sticky">
       <Toolbar>
         <MenuButton />
-        <Button
-          onClick={() => {
-            navigate("/admin/add");
-          }}
-          color="error"
-          variant="contained"
-          sx={{ marginRight: 2 }}
-        >
-          Admin panel
-        </Button>
+        {isAuth && (
+          <Button
+            onClick={() => {
+              navigate("/admin/add");
+            }}
+            color="error"
+            variant="contained"
+            sx={{ marginRight: 2 }}
+          >
+            Admin panel
+          </Button>
+        )}
         <Typography
           variant="h6"
           noWrap

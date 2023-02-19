@@ -58,8 +58,8 @@ export default function Admin() {
             orders
           </Button>
         </Toolbar>
-        <Outlet />
       </AppBar>
+      <Outlet />
     </div>
   );
 }

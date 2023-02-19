@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 import s from "./style.module.css";
 
-export default function ListCard({ data = [], addItem, removeItem }) {
+export default function ListRemove({ data = [], addItem, removeItem }) {
   const navigate = useNavigate();
 
   const hendleChecked = (e) =>
