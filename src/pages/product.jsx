@@ -1,44 +1,48 @@
 /** @format */
 
 import React from "react";
-import {
-  useAddBasketMutation,
-  useGetProductsByIdQuery,
-} from "../services/fetch";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useGetProductsByIdQuery } from "../services/fetch";
+import { setBasket } from "../redux/basket/slice";
+import useItemByBasket from "../hooks/useItemByBasket";
 
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import s from "./style.module.css";
-import { useParams } from "react-router-dom";
 
 export default function Product() {
   const { id } = useParams();
+  const { data, isLoading } = useGetProductsByIdQuery(id);
 
-  const { data } = useGetProductsByIdQuery(id);
+  const dispatch = useDispatch();
+  const { isDisable } = useItemByBasket(id);
+
   const { img, price, name, desc } = data || {};
-  const [addProduct, { isLoading }] = useAddBasketMutation();
 
-  return (
-    isLoading || (
-      <div className={s.container}>
-        <img src={img} alt="logo" className={s.img} />
+  const hendeleAddProducts = () => dispatch(setBasket(data));
 
-        <b>{name}</b>
-        <p>{desc}</p>
-        <div className={s.flex}>
-          <div className={s.prise}>
-            price: <span>{price}</span> UAH
-          </div>
-          <LoadingButton
-            onClick={() => addProduct({ product: id, qty: 1 })}
-            loading={isLoading}
-            variant="contained"
-            sx={{ marginLeft: "auto" }}
-          >
-            <span>Add to basket</span>
-          </LoadingButton>
+  return isLoading ? (
+    <div>loading</div>
+  ) : (
+    <div className={s.container}>
+      <img src={img} alt="logo" className={s.img} />
+
+      <b>{name}</b>
+      <p>{desc}</p>
+      <div className={s.flex}>
+        <div className={s.prise}>
+          price: <span>{price}</span> UAH
         </div>
+        <LoadingButton
+          onClick={hendeleAddProducts}
+          variant="contained"
+          disabled={isDisable()}
+          sx={{ marginLeft: "auto" }}
+        >
+          <span>Add to basket</span>
+        </LoadingButton>
       </div>
-    )
+    </div>
   );
 }

@@ -1,53 +1,48 @@
 /** @format */
-
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ModalCustom from "../../components/modal";
+import { removeBasket } from "../../redux/basket/slice";
 
+import ModalCustom from "../../components/modal";
 import CardBasket from "../../components/cardBasket";
 import { setButtonBasket } from "../../redux/buttton/slice";
-import {
-  useGetBasketQuery,
-  useDeleteBasketAllMutation,
-} from "../../services/fetch";
 import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
 import BacketIkon from "../../components/backetIcon";
-import { useEffect } from "react";
+import { useAddOrderMutation } from "../../services/fetch";
 
 export default function Basket() {
   const dispatch = useDispatch();
+  const basket = useSelector(({ basket }) => basket.data);
+  const isOpen = useSelector(({ button }) => button.basket);
+  const [addOrder, { isSuccess, isLoading }] = useAddOrderMutation();
 
-  const isOpen = useSelector((store) => store.button.basket);
-
-  const { isLoading: isLoadingGet, data = [] } = useGetBasketQuery();
-  const [deleteBasket] = useDeleteBasketAllMutation();
-
-  const qty = data.length;
-  const disabled = qty === 0;
+  const qty = basket.length;
+  const isClose = qty === 0;
 
   useEffect(() => {
-    if (disabled) {
+    if (isClose) {
       dispatch(setButtonBasket());
     }
-  }, [dispatch, disabled]);
+    if (isSuccess) {
+      dispatch(removeBasket());
+    }
+  }, [dispatch, isSuccess, isClose]);
 
-  const sumPrice = data
-    .map(({ qty, product }) => qty * product.price)
+  const sumPrice = basket
+    .map(({ qty, price }) => qty * price)
     .reduce((acc, v) => acc + v, 0);
 
-  const hendleClick = () => disabled || dispatch(setButtonBasket());
-  const hendleOrder = () => {
-    console.log(data);
-    deleteBasket();
-  };
+  const hendleClick = () => dispatch(setButtonBasket());
+  const hendleOrder = () => addOrder({ orders: basket });
 
   return (
     <div>
-      <BacketIkon qty={qty} onClick={hendleClick} disabled={disabled} />
+      <BacketIkon qty={qty} onClick={hendleClick} disabled={isClose} />
       <ModalCustom open={isOpen} onClick={hendleClick}>
-        {isLoadingGet ||
-          data.map((list) => <CardBasket key={list._id} data={list} />)}
+        {basket !== [] &&
+          basket.map((list) => <CardBasket key={list._id} data={list} />)}
         <div className={s.flex}>
           <b className={s.prise}>{sumPrice}</b>
           <Button

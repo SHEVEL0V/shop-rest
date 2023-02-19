@@ -1,9 +1,12 @@
 /** @format */
-import { useNavigate } from "react-router-dom";
-import Rating from "@mui/material/Rating";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useState } from "react";
-import { useAddBasketMutation } from "../../services/fetch";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setBasket } from "../../redux/basket/slice";
+import useItemByBasket from "../../hooks/useItemByBasket";
+
+import Rating from "@mui/material/Rating";
+import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
 
@@ -11,14 +14,12 @@ export default function CardProduct({ data, token }) {
   const { _id, name, price, rating, img } = data;
   const [rat, setRat] = useState(rating);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [addProduct, { isLoading }] = useAddBasketMutation();
+  const { isDisable } = useItemByBasket(_id);
 
   const hendeleClickCard = () => navigate(`/${_id}`);
-
-  const hendeleAddProducts = () => addProduct({ product: _id, qty: 1 });
-
-  const disabled = !token;
+  const hendeleAddProducts = () => dispatch(setBasket(data));
 
   return (
     <div className={s.container}>
@@ -37,15 +38,14 @@ export default function CardProduct({ data, token }) {
         <div className={s.prise}>
           price: <span>{price}</span> UAH
         </div>
-        <LoadingButton
+        <Button
           onClick={hendeleAddProducts}
-          disabled={disabled}
-          loading={isLoading}
+          disabled={isDisable()}
           variant="contained"
           sx={{ marginLeft: "auto" }}
         >
-          <span>Add to basket</span>
-        </LoadingButton>
+          <span>{!isDisable() ? "Add to basket" : "item in the basket"}</span>
+        </Button>
       </div>
     </div>
   );

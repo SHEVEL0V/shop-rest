@@ -2,6 +2,7 @@
 
 import { createBrowserRouter } from "react-router-dom";
 import AddProduct from "./modules/admin/addProduct";
+import Orders from "./modules/admin/orders";
 import UpdateProducts from "./modules/admin/updateProducts";
 import Admin from "./pages/admin";
 import Main from "./pages/main";
@@ -21,7 +22,9 @@ export const router = createBrowserRouter([
     element: <Admin />,
     children: [
       { path: "add", element: <AddProduct /> },
-      { path: "update", element: <UpdateProducts /> },
+      { path: "remove", element: <UpdateProducts /> },
+      { path: "orders", element: <Orders /> },
+      { path: "update/:id", element: <AddProduct /> },
     ],
   },
 ]);

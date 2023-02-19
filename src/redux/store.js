@@ -16,11 +16,13 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import { shopApi } from "../services/fetch";
 import button from "./buttton/slice";
 import authSlise from "./token/slice";
+import basketSlice from "./basket/slice";
 
 const auth = persistReducer({ key: "auth", storage }, authSlise);
+const basket = persistReducer({ key: "basket", storage }, basketSlice);
 
 export const store = configureStore({
-  reducer: { auth, button, [shopApi.reducerPath]: shopApi.reducer },
+  reducer: { auth, basket, button, [shopApi.reducerPath]: shopApi.reducer },
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -15,10 +15,9 @@ export const shopApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Basket", "Product"],
-
+  tagTypes: ["Product"],
   endpoints: (builder) => ({
-    //------------------------------------------------------------------------
+    //===========PRODUCTS========================================================
     getProducts: builder.query({
       query: (params) => ({
         url: "products/",
@@ -30,14 +29,6 @@ export const shopApi = createApi({
     getProductsById: builder.query({
       query: (id) => ({
         url: `products/${id}`,
-      }),
-    }),
-    //------------------------------------------------------------------------
-    addImage: builder.mutation({
-      query: (body) => ({
-        url: "images/",
-        method: "POST",
-        body,
       }),
     }),
     //------------------------------------------------------------------------
@@ -58,47 +49,52 @@ export const shopApi = createApi({
       }),
       invalidatesTags: ["Produkt"],
     }),
-
-    //==========================================================================
-    getBasket: builder.query({
-      query: (params) => ({ url: "basket/", params }),
-      providesTags: ["Basket"],
-    }),
-    //------------------------------------------------------------------------
-    addBasket: builder.mutation({
+    //=========UPLOAD-IMG============================================================
+    addImage: builder.mutation({
       query: (body) => ({
-        url: "basket/",
+        url: "images/",
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Basket"],
+    }),
+    //=========ORDER=================================================================
+    getOrder: builder.query({
+      query: (params) => ({ url: "order/", params }),
     }),
     //------------------------------------------------------------------------
-    updateBasket: builder.mutation({
-      query: ({ id, ...body }) => ({
-        url: `basket/${id}`,
-        method: "PUT",
+    addOrder: builder.mutation({
+      query: (body) => ({
+        url: "order/",
+        method: "POST",
         body,
       }),
-      invalidatesTags: ["Basket"],
     }),
     //------------------------------------------------------------------------
-    deleteBasket: builder.mutation({
-      query: (id) => ({
-        url: `basket/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["Basket"],
-    }),
-    //------------------------------------------------------------------------
-    deleteBasketAll: builder.mutation({
-      query: (id) => ({
-        url: `basket/all/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["Basket"],
-    }),
-    //==========================================================================
+    // updateBasket: builder.mutation({
+    //   query: ({ id, ...body }) => ({
+    //     url: `basket/${id}`,
+    //     method: "PUT",
+    //     body,
+    //   }),
+    //   invalidatesTags: ["Basket"],
+    // }),
+    // //------------------------------------------------------------------------
+    // deleteBasket: builder.mutation({
+    //   query: (id) => ({
+    //     url: `basket/${id}`,
+    //     method: "DELETE",
+    //   }),
+    //   invalidatesTags: ["Basket"],
+    // }),
+    // //------------------------------------------------------------------------
+    // deleteBasketAll: builder.mutation({
+    //   query: (id) => ({
+    //     url: `basket/all/${id}`,
+    //     method: "DELETE",
+    //   }),
+    //   invalidatesTags: ["Basket"],
+    // }),
+    //======USER====================================================================
     addUser: builder.mutation({
       query: (body) => ({
         url: "user/auth",
@@ -122,11 +118,8 @@ export const {
   useGetProductsByIdQuery,
   useAddProductsMutation,
   useDeletedProductsMutation,
-  useAddBasketMutation,
-  useUpdateBasketMutation,
-  useGetBasketQuery,
-  useDeleteBasketMutation,
-  useDeleteBasketAllMutation,
+  useAddOrderMutation,
+  useGetOrderQuery,
   useAddUserMutation,
   useLoginUserMutation,
   useAddImageMutation,
