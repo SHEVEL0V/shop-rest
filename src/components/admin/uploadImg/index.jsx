@@ -1,17 +1,12 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import picture from "../../../assets/img.png";
 
 import s from "./style.module.css";
 
-export default function UploadImg({ setFile }) {
-  const [urlImg, setUrlImg] = useState(picture);
-
+export default function UploadImg({ setFile, urlImg, setUrlImg }) {
   const hendleInputFile = async (e) => {
     const file = e.target.files[0];
-
     setUrlImg(URL.createObjectURL(file));
     setFile(file);
   };

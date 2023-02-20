@@ -16,7 +16,7 @@ export default function Orders() {
         flexDirection: "column",
       }}
     >
-      {isLoading || data.map((el) => <OrderCard key={el.id} data={el} />)}
+      {isLoading || data.map((el) => <OrderCard key={el._id} data={el} />)}
     </div>
   );
 }

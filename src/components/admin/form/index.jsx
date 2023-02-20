@@ -2,7 +2,6 @@
 
 import React from "react";
 import TextInput from "../../../UI/textInput";
-import UploadImg from "../uploadImg";
 
 import s from "./style.module.css";
 

@@ -33,7 +33,7 @@ export default function Admin() {
               navigate("add");
             }}
           >
-            add
+            add product
           </Button>
           <Button
             variant="contained"
@@ -44,7 +44,7 @@ export default function Admin() {
               setPage(key.remove);
             }}
           >
-            remove
+            list products
           </Button>
           <Button
             variant="contained"
@@ -55,7 +55,7 @@ export default function Admin() {
               navigate("orders");
             }}
           >
-            orders
+            all orders
           </Button>
         </Toolbar>
       </AppBar>

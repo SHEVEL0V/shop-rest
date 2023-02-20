@@ -49,14 +49,6 @@ export const shopApi = createApi({
       }),
       invalidatesTags: ["Produkt"],
     }),
-    //=========UPLOAD-IMG============================================================
-    addImage: builder.mutation({
-      query: (body) => ({
-        url: "images/",
-        method: "POST",
-        body,
-      }),
-    }),
     //=========ORDER=================================================================
     getOrder: builder.query({
       query: (params) => ({ url: "order/", params }),
@@ -122,5 +114,4 @@ export const {
   useGetOrderQuery,
   useAddUserMutation,
   useLoginUserMutation,
-  useAddImageMutation,
 } = shopApi;
