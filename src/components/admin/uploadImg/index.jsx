@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import s from "./style.module.css";
 
 export default function UploadImg({ setFile, urlImg, setUrlImg }) {
-  const hendleInputFile = async (e) => {
+  const handleInputFile = async (e) => {
     const file = e.target.files[0];
     setUrlImg(URL.createObjectURL(file));
     setFile(file);
@@ -13,7 +13,7 @@ export default function UploadImg({ setFile, urlImg, setUrlImg }) {
 
   return (
     <div className={s.upload}>
-      <img className={s.img} src={urlImg} alt="produkt"></img>
+      <img className={s.img} src={urlImg} alt="product"></img>
       <Button variant="contained" component="label">
         Upload
         <input
@@ -21,7 +21,7 @@ export default function UploadImg({ setFile, urlImg, setUrlImg }) {
           accept="image/*"
           multiple
           type="file"
-          onChange={hendleInputFile}
+          onChange={handleInputFile}
         />
       </Button>
     </div>

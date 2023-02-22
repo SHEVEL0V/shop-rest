@@ -1,16 +1,16 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import ButtonSearch from "../../../UI/buttonSearch";
-import useSearchParamsCastome from "../../../hooks/useSearchParams";
+import ButtonSearch from "../../../UI/btnSearch";
+import useSearchParamsCustom from "../../../hooks/useSearchParams";
 import s from "./style.module.css";
 
 export default function PriceSlider({ price }) {
   const [value, setValue] = useState(price);
 
-  const { setParams } = useSearchParamsCastome();
+  const { setParams } = useSearchParamsCustom();
 
   const handleChange = (event, newValue) => setValue(newValue);
 

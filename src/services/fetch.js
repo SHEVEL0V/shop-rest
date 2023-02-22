@@ -15,7 +15,7 @@ export const shopApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Product"],
+  tagTypes: ["Product", "Order"],
   endpoints: (builder) => ({
     //===========PRODUCTS========================================================
     getProducts: builder.query({
@@ -23,7 +23,7 @@ export const shopApi = createApi({
         url: "products/",
         params,
       }),
-      providesTags: ["Produkt"],
+      providesTags: ["Product"],
     }),
     //------------------------------------------------------------------------
     getProductsById: builder.query({
@@ -38,20 +38,31 @@ export const shopApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Produkt"],
+      invalidatesTags: ["Product"],
     }),
     //------------------------------------------------------------------------
+    updateProducts: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `products/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Product"],
+    }),
+    //------------------------------------------------------------------------
+
     deletedProducts: builder.mutation({
       query: (body) => ({
         url: "products/all",
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Produkt"],
+      invalidatesTags: ["Product"],
     }),
     //=========ORDER=================================================================
     getOrder: builder.query({
       query: (params) => ({ url: "order/", params }),
+      providesTags: ["Order"],
     }),
     //------------------------------------------------------------------------
     addOrder: builder.mutation({
@@ -62,14 +73,14 @@ export const shopApi = createApi({
       }),
     }),
     //------------------------------------------------------------------------
-    // updateBasket: builder.mutation({
-    //   query: ({ id, ...body }) => ({
-    //     url: `basket/${id}`,
-    //     method: "PUT",
-    //     body,
-    //   }),
-    //   invalidatesTags: ["Basket"],
-    // }),
+    updateOrder: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `order/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Order"],
+    }),
     // //------------------------------------------------------------------------
     // deleteBasket: builder.mutation({
     //   query: (id) => ({
@@ -109,9 +120,11 @@ export const {
   useGetProductsQuery,
   useGetProductsByIdQuery,
   useAddProductsMutation,
+  useUpdateProductsMutation,
   useDeletedProductsMutation,
   useAddOrderMutation,
   useGetOrderQuery,
+  useUpdateOrderMutation,
   useAddUserMutation,
   useLoginUserMutation,
 } = shopApi;

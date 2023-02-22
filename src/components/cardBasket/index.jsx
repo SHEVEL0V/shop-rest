@@ -12,29 +12,29 @@ import {
   incrementsQty,
 } from "../../redux/basket/slice";
 
-export default function CardBasket({ data, hendlePrice }) {
+export default function CardBasket({ data, handlePrice }) {
   const dispatch = useDispatch();
 
   const { _id, name, price, img, qty } = data;
 
   const finalPrice = qty * price;
 
-  const hendleCountDecrement = () => dispatch(decrementsQty(_id));
-  const hendleCountIncrement = () => dispatch(incrementsQty(_id));
-  const hendleDeleteProdukt = () => dispatch(removeBasketEl(data));
+  const handleCountDecrement = () => dispatch(decrementsQty(_id));
+  const handleCountIncrement = () => dispatch(incrementsQty(_id));
+  const handleDeleteProduct = () => dispatch(removeBasketEl(data));
 
   return (
     <div className={s.container}>
       <div className={s.flex}>
-        <img className={s.img} src={img} alt="baner" />
+        <img className={s.img} src={img} alt={name} />
         <div className={s.titleContainer}>
           <h2 className={s.title}>{name}</h2>
           <div className={s.countContainer}>
-            <button className={s.button} onClick={hendleCountDecrement}>
+            <button className={s.button} onClick={handleCountDecrement}>
               -
             </button>
             <b className={s.count}>{qty}</b>
-            <button className={s.button} onClick={hendleCountIncrement}>
+            <button className={s.button} onClick={handleCountIncrement}>
               +
             </button>
             <b className={s.price}>{finalPrice} grn</b>
@@ -44,7 +44,7 @@ export default function CardBasket({ data, hendlePrice }) {
           sx={{ marginLeft: "auto", width: 200 }}
           variant="contained"
           startIcon={<DeleteIcon />}
-          onClick={hendleDeleteProdukt}
+          onClick={handleDeleteProduct}
         >
           Delete
         </Button>

@@ -1,24 +1,24 @@
 /** @format */
-import useSearchParamsCastome from "../../../hooks/useSearchParams";
+import useSearchParamsCustom from "../../../hooks/useSearchParams";
 
-import Autocomplete from "../../../UI/avtocomplete";
+import Autocomplete from "../../../UI/autocomplete";
 
 export default function Filter({ options }) {
   const { type, brand } = options;
-  const { setParams } = useSearchParamsCastome();
+  const { setParams } = useSearchParamsCustom();
 
-  const hendleChandeType = (value) =>
+  const handleChangeType = (value) =>
     setParams(value ? { type: value } : { type: "" });
-  const hendleChandeBrand = (value) =>
+  const handleChangeBrand = (value) =>
     setParams(value ? { brand: value } : { brand: "" });
 
   return (
     <div>
-      <Autocomplete options={type} name={"type"} onChange={hendleChandeType} />
+      <Autocomplete options={type} name={"type"} onChange={handleChangeType} />
       <Autocomplete
         options={brand}
         name={"brand"}
-        onChange={hendleChandeBrand}
+        onChange={handleChangeBrand}
       />
     </div>
   );

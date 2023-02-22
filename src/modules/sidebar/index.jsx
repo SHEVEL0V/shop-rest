@@ -7,11 +7,12 @@ import Slide from "@mui/material/Slide";
 
 import SliderPrice from "../../components/sidebar/sliderPrice";
 import Filter from "../../components/sidebar/filter";
-import OptonsCard from "../../components/sidebar/optionsCard";
+import OptionsCard from "../../components/sidebar/optionsCard";
 
 import s from "./style.module.css";
+import BtnRemove from "../../UI/btnRemove";
 
-export default function Sidebar() {
+export default function Sidebar({ children }) {
   const isOpen = useSelector((store) => store.button.menu);
   const { data = [], isLoading } = useGetProductsQuery();
 
@@ -35,7 +36,8 @@ export default function Sidebar() {
             <div className={s.container}>
               <Filter options={{ type, brand }} />
               <SliderPrice price={[minPrice, maxPrice]} />
-              <OptonsCard />
+              <OptionsCard />
+              <div className={s.children}>{children}</div>
             </div>
           )}
         </Paper>

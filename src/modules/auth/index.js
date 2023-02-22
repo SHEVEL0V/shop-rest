@@ -17,46 +17,48 @@ import ModalCustom from "../../components/modal";
 export default function Auth() {
   const dispatch = useDispatch();
 
-  const [checked, setCheked] = useState(true);
-
+  const [checked, setChecked] = useState(true);
   const [form, setForm] = useState({});
-
-  const hendleInput = ({ name, value }) =>
-    setForm((state) => ({ ...state, [name]: value }));
 
   const isOpen = useSelector((store) => store.button.login);
 
-  const [addUser, { isError: isErrAuth, error: errAdd }] = useAddUserMutation();
-  const [loginUser, { isError: isErrLogin, error: errLog, isSuccess, data }] =
-    useLoginUserMutation();
+  const [addUser] = useAddUserMutation();
+  const [loginUser] = useLoginUserMutation();
 
-  useEffect(() => {
-    if (isErrAuth || isErrLogin) {
-      toast.error(errLog?.status || errAdd?.status, { theme: "dark" });
-    }
-    if (isSuccess) {
-      dispatch(setButtonLogin());
-      dispatch(setToken(data));
-      setForm({});
-    }
-  }, [data, dispatch, isSuccess, isErrAuth, isErrLogin, errLog, errAdd]);
-
-  const { name, password, email, password_egain } = form;
-
+  const { name, telephone, password, email, password_again } = form;
   const disabled = checked
     ? email?.trim() === "" || password?.trim() === ""
     : name?.trim() === "" ||
+      telephone?.trim() === "" ||
       email?.trim() === "" ||
       password?.trim() === "" ||
-      password?.trim() !== password_egain;
+      password !== password_again;
 
-  const hendleAuth = () => (checked ? loginUser(form) : addUser(form));
+  const handleInput = ({ name, value }) =>
+    setForm((state) => ({ ...state, [name]: value }));
 
-  const hendleCloseModal = () => dispatch(setButtonLogin());
+  const handleAuthSuccess = (payload) => {
+    dispatch(setButtonLogin());
+    dispatch(setToken(payload));
+    setForm({});
+  };
+
+  const handleAuth = () =>
+    checked
+      ? loginUser(form)
+          .unwrap()
+          .then((payload) => handleAuthSuccess(payload))
+          .catch(({ status }) => toast.error(status, { theme: "dark" }))
+      : addUser(form)
+          .unwrap()
+          .then((payload) => handleAuthSuccess(payload))
+          .catch(({ status }) => toast.error(status, { theme: "dark" }));
+
+  const handleCloseModal = () => dispatch(setButtonLogin());
 
   return (
     <div>
-      <ModalCustom open={isOpen} onClick={hendleCloseModal}>
+      <ModalCustom open={isOpen} onClick={handleCloseModal}>
         <button
           style={{
             width: 30,
@@ -65,32 +67,39 @@ export default function Auth() {
             marginLeft: "auto",
             borderRadius: "50%",
           }}
-          onClick={hendleCloseModal}
+          onClick={handleCloseModal}
         >
           +
         </button>
         {checked || (
-          <TextInput label="name" value={name} onChange={hendleInput} />
+          <TextInput label="name" value={name} onChange={handleInput} />
         )}
-        <TextInput label="email" value={email} onChange={hendleInput} />
-        <TextInput label="password" value={password} onChange={hendleInput} />
+        <TextInput label="email" value={email} onChange={handleInput} />
         {checked || (
           <TextInput
-            label="password_egain"
-            value={password_egain}
-            onChange={hendleInput}
+            label="telephone"
+            value={telephone}
+            onChange={handleInput}
+          />
+        )}
+        <TextInput label="password" value={password} onChange={handleInput} />
+        {checked || (
+          <TextInput
+            label="password_again"
+            value={password_again}
+            onChange={handleInput}
           />
         )}
         <Button
           disabled={disabled}
           sx={{ marginInline: 30 }}
-          onClick={hendleAuth}
+          onClick={handleAuth}
           variant="contained"
         >
           {checked ? "login" : "Auth"}
         </Button>
         <p>
-          <Switch onChange={() => setCheked((s) => !s)} /> authorization
+          <Switch onChange={() => setChecked((s) => !s)} /> authorization
         </p>
       </ModalCustom>
       <ToastContainer />

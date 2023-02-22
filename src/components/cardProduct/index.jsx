@@ -18,13 +18,13 @@ export default function CardProduct({ data, token }) {
   const navigate = useNavigate();
   const { isDisable } = useItemByBasket(_id);
 
-  const hendeleClickCard = () => navigate(`/${_id}`);
-  const hendeleAddProducts = () => dispatch(setBasket(data));
+  const handleClickCard = () => navigate(`/${_id}`);
+  const handleAddProducts = () => dispatch(setBasket(data));
 
   return (
     <div className={s.container}>
-      <img onClick={hendeleClickCard} src={img} alt="logo" className={s.img} />
-      <p>{name}</p>
+      <img onClick={handleClickCard} src={img} alt={name} className={s.img} />
+      <h2>{name}</h2>
       <b className={s.flex}>
         Rating
         <Rating
@@ -33,20 +33,17 @@ export default function CardProduct({ data, token }) {
           onChange={(e, newValue) => setRat(newValue)}
         />
       </b>
-
-      <div className={s.flex}>
-        <div className={s.prise}>
-          price: <span>{price}</span> UAH
-        </div>
-        <Button
-          onClick={hendeleAddProducts}
-          disabled={isDisable()}
-          variant="contained"
-          sx={{ marginLeft: "auto" }}
-        >
-          <span>{!isDisable() ? "Add to basket" : "item in the basket"}</span>
-        </Button>
-      </div>
+      <h3 className={s.prise}>
+        price: <span>{price}</span> UAH
+      </h3>
+      <Button
+        onClick={handleAddProducts}
+        color="secondary"
+        disabled={isDisable()}
+        variant="contained"
+      >
+        <span>{!isDisable() ? "Add to basket" : "item in the basket"}</span>
+      </Button>
     </div>
   );
 }

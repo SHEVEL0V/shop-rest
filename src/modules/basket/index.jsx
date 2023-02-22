@@ -9,14 +9,14 @@ import { setButtonBasket } from "../../redux/buttton/slice";
 import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
-import BacketIkon from "../../components/backetIcon";
+import BasketIkon from "../../components/basketIcon";
 import { useAddOrderMutation } from "../../services/fetch";
 
 export default function Basket() {
   const dispatch = useDispatch();
   const basket = useSelector(({ basket }) => basket.data);
   const isOpen = useSelector(({ button }) => button.basket);
-  const [addOrder, { isSuccess, isLoading }] = useAddOrderMutation();
+  const [addOrder, { isSuccess }] = useAddOrderMutation();
 
   const qty = basket.length;
   const isClose = qty === 0;
@@ -34,13 +34,13 @@ export default function Basket() {
     .map(({ qty, price }) => qty * price)
     .reduce((acc, v) => acc + v, 0);
 
-  const hendleClick = () => dispatch(setButtonBasket());
-  const hendleOrder = () => addOrder({ orders: basket });
+  const handleClick = () => dispatch(setButtonBasket());
+  const handleOrder = () => addOrder({ orders: basket });
 
   return (
     <div>
-      <BacketIkon qty={qty} onClick={hendleClick} disabled={isClose} />
-      <ModalCustom open={isOpen} onClick={hendleClick}>
+      <BasketIkon qty={qty} onClick={handleClick} disabled={isClose} />
+      <ModalCustom open={isOpen} onClick={handleClick}>
         {basket !== [] &&
           basket.map((list) => <CardBasket key={list._id} data={list} />)}
         <div className={s.flex}>
@@ -49,7 +49,7 @@ export default function Basket() {
             sx={{ width: 200 }}
             color="success"
             variant="contained"
-            onClick={hendleOrder}
+            onClick={handleOrder}
           >
             To order
           </Button>

@@ -9,26 +9,29 @@ import s from "./style.module.css";
 export default function ListRemove({ data = [], addItem, removeItem }) {
   const navigate = useNavigate();
 
-  const hendleChecked = (e) =>
+  const handleChecked = (e) =>
     e.target.checked ? addItem(e.target.name) : removeItem(e.target.name);
 
-  const hendleNavigate = () => navigate(`/update/:${data._id}`);
+  const handleNavigate = () => navigate(`/admin/update/${data._id}`);
 
   return (
     <div className={s.container}>
-      <img
-        src={data.img}
-        alt="baner"
-        style={{ maxHeight: "50px", marginRight: "10px" }}
-      />
-      <b>{data.brand}</b>
-      <b style={{ color: "blue", marginLeft: "10px" }}>{data.name}</b>
-      <b style={{ color: "red", marginLeft: "10px" }}>{data.price}</b>
-      <Checkbox
-        name={data._id}
-        sx={{ marginLeft: "auto" }}
-        onChange={hendleChecked}
-      />
+      <div onClick={handleNavigate} className={s.containerInfo}>
+        <div className={s.containerImg}>
+          <img src={data.img} alt={data.name} style={{ maxHeight: "50px" }} />
+        </div>
+        <b className={s.containerName}>brand:{data.brand}</b>
+        <b className={s.containerName}>{data.name}</b>
+      </div>
+
+      <b
+        className={s.containerName}
+        style={{ color: "red", marginLeft: "auto" }}
+      >
+        price:{data.price}
+      </b>
+
+      <Checkbox name={data._id} onChange={handleChecked} />
     </div>
   );
 }

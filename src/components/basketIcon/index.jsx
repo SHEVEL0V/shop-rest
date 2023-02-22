@@ -5,7 +5,7 @@ import Fab from "@mui/material/Fab";
 import Badge from "@mui/material/Badge";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
-export default function BacketIkon({ qty = 0, onClick, disabled = false }) {
+export default function BasketIkon({ qty = 0, onClick, disabled = false }) {
   return (
     <Fab
       color="secondary"

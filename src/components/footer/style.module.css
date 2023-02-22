@@ -1,11 +1,29 @@
 /** @format */
-.container {
-  display: flex;
-  justify-content: center;
-  height: 70px;
-  padding: 10px;
-  background-color: rgba(69, 104, 200, 0.655);
+
+.footer {
+  background-color: #f2f2f2;
+  color: #666;
+  font-size: 14px;
+  padding: 20px;
+  text-align: center;
 }
-.title {
-  font-size: 18px;
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerLinks li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footerLinks a {
+  color: #666;
+  text-decoration: none;
+}
+
+.footerLinks a:hover {
+  text-decoration: underline;
 }

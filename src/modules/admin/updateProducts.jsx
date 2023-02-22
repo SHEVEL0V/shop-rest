@@ -1,48 +1,48 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Form from "../../components/admin/form";
+import UploadImg from "../../components/admin/uploadImg";
+import { useParams } from "react-router-dom";
 import {
-  useGetProductsQuery,
-  useDeletedProductsMutation,
+  useGetProductsByIdQuery,
+  useUpdateProductsMutation,
 } from "../../services/fetch";
+import BtnLoading from "../../UI/btnLoading";
 
-import Button from "@mui/material/Button";
+export default function UpdateProducts() {
+  const [file, setFile] = useState(false);
+  const [form, setForm] = useState({});
+  const [urlImg, setUrlImg] = useState("");
+  const { id } = useParams();
+  const { data, isSuccess } = useGetProductsByIdQuery(id);
+  const [updateProducts] = useUpdateProductsMutation(id);
 
-import ListRemove from "../../components/admin/listRemove";
+  const handlerUpdate = () => {
+    const data = new FormData();
 
-export default function Admin() {
-  const [paramsDelete, setParamsDelete] = useState([]);
+    if (file) {
+      data.append("img", file);
+    }
 
-  const { data: res } = useGetProductsQuery();
-  const [removeProducts, { isSuccess }] = useDeletedProductsMutation();
+    Object.keys(form).map((key) => data.append(key, form[key]));
 
-  const hendleAddItem = (item) =>
-    setParamsDelete((params) => [...params, item]);
-  const hendleRemoveItem = (item) =>
-    setParamsDelete((params) => params.filter((el) => item !== el));
+    updateProducts({ id, data });
+  };
 
-  const hendleRemoveProducts = () => removeProducts({ remove: paramsDelete });
+  useEffect(() => {
+    if (isSuccess) {
+      setForm(data);
+      setUrlImg(data.img);
+      console.log(data);
+    }
+  }, [data, isSuccess]);
 
   return (
-    <div>
-      {res?.products.map((e) => (
-        <ListRemove
-          data={e}
-          key={e._id}
-          addItem={hendleAddItem}
-          removeItem={hendleRemoveItem}
-        />
-      ))}
-
-      <Button
-        variant="contained"
-        component="label"
-        sx={{ margin: "20px" }}
-        color="success"
-        onClick={hendleRemoveProducts}
-      >
-        Remove
-      </Button>
+    <div style={{ display: "flex", padding: "20px" }}>
+      <UploadImg urlImg={urlImg} setUrlImg={setUrlImg} setFile={setFile} />
+      <Form form={form} setForm={setForm} />
+      <BtnLoading onClick={handlerUpdate}>Update</BtnLoading>
     </div>
   );
 }

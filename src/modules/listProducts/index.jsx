@@ -7,13 +7,13 @@ import CardProduct from "../../components/cardProduct";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import s from "./style.module.css";
-import useSearchParamsCastome from "../../hooks/useSearchParams";
+import useSearchParamsCustom from "../../hooks/useSearchParams";
 import { useSelector } from "react-redux";
 
 export default function ListProducts() {
-  const { params } = useSearchParamsCastome();
+  const { params } = useSearchParamsCustom();
   const { token } = useSelector((store) => store.auth);
-  const { data, isLoading } = useGetProductsQuery({ ...params });
+  const { data, isLoading } = useGetProductsQuery(params);
 
   return (
     <div className={s.container}>

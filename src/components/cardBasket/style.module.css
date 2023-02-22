@@ -9,19 +9,17 @@
 }
 .titleContainer {
   box-sizing: border-box;
-  padding: 10px;
+  padding-inline: 10px;
   width: 100%;
 }
 .title {
   font-size: 18px;
   margin: 0;
-  margin-bottom: ;
+  margin-bottom: 20px;
   color: rgb(36, 36, 40);
 }
 .countContainer {
-  margin-top: auto;
   display: flex;
-
   align-items: center;
 }
 .count {

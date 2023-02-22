@@ -5,8 +5,11 @@ import s from "./style.module.css";
 
 export default function Footer() {
   return (
-    <div className={s.container}>
-      <b className={s.title}>Project 2023</b>
-    </div>
+    <footer className={s.footer}>
+      <div className={s.footerContent}>
+        <p>© 2023 Shop Company. All rights reserved.</p>
+        <ul className={s.footerList}></ul>
+      </div>
+    </footer>
   );
 }

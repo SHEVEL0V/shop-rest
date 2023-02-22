@@ -20,7 +20,7 @@ export default function Product() {
 
   const { img, price, name, desc } = data || {};
 
-  const hendeleAddProducts = () => dispatch(setBasket(data));
+  const handleAddProducts = () => dispatch(setBasket(data));
 
   return isLoading ? (
     <div>loading</div>
@@ -35,7 +35,7 @@ export default function Product() {
           price: <span>{price}</span> UAH
         </div>
         <LoadingButton
-          onClick={hendeleAddProducts}
+          onClick={handleAddProducts}
           variant="contained"
           disabled={isDisable()}
           sx={{ marginLeft: "auto" }}

@@ -5,38 +5,44 @@ import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import s from "./style.module.css";
+import { useUpdateOrderMutation } from "../../../services/fetch";
 
 export default function OrderCard({ data }) {
-  const email = data?.user?.email;
+  const { email, telephone } = data?.user;
+  const [updateOrder] = useUpdateOrderMutation();
+
+  const handleClick = () =>
+    updateOrder({ id: data._id, body: { status: "RESOLVED" } });
 
   return (
-    <Card
-      sx={{ minWidth: 275, margin: "10px", display: "flex", padding: "5px" }}
-    >
-      <Typography
-        sx={{ fontSize: 20, margin: "5px" }}
-        color="text.secondary"
-        gutterBottom
-      >
-        {email}
-      </Typography>
+    <Card className={s.container}>
+      <div className={s.emailContainer}>
+        <Typography sx={{ fontSize: 20 }} color="text.secondary">
+          {email}
+        </Typography>
+        <Typography sx={{ fontSize: 16 }} color="text.secondary">
+          tel:{telephone}
+        </Typography>
+        <Typography sx={{ fontSize: 16 }} color="text.secondary">
+          status:{data.status}
+        </Typography>
+      </div>
+
       <div className={s.orderContainer}>
         {data?.orders?.map((el) => (
-          <div className={s.itemOrder} key={el._id}>
-            <img src={el.img} alt="baner" style={{ maxHeight: "40px" }} />
-            <div style={{ marginInline: "10px" }}>
-              <b>{el.name}</b>
-              <div>
-                brand : <b>{el.brand}</b>
-              </div>
+          <div className={s.itemOrderContainer} key={el._id}>
+            <div className={s.itemOrder} style={{ minWidth: "150px" }}>
+              brand: <b>{el.brand}</b>
             </div>
-            <div>
-              <div>
-                price : <b style={{ color: "red" }}>{el.price}</b>
-              </div>
-              <div>
-                qty :<b>{el.qty}</b>
-              </div>
+            <b className={s.itemOrder} style={{ width: "100%" }}>
+              {el.name}
+            </b>
+
+            <div className={s.itemOrder}>
+              price: <b style={{ color: "red" }}>{el.price}</b>
+            </div>
+            <div className={s.itemOrder}>
+              qty:<b>{el.qty}</b>
             </div>
           </div>
         ))}
@@ -44,7 +50,7 @@ export default function OrderCard({ data }) {
       <Button
         variant="contained"
         sx={{ marginLeft: "auto" }}
-        onClick={() => console.log("Status in the road")}
+        onClick={handleClick}
       >
         in the road
       </Button>

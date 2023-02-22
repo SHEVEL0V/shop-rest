@@ -8,3 +8,19 @@
 
   background-color: var(--bg-color-tho);
 }
+.containerInfo {
+  display: flex;
+  align-items: center;
+}
+
+.containerImg {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+}
+.containerName {
+  margin-inline: 3px;
+  padding: 5px;
+  border: 1px solid rgb(67, 65, 65);
+  border-radius: 2px;
+}
