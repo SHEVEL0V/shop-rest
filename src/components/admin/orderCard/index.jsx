@@ -2,18 +2,17 @@
 
 import React from "react";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import s from "./style.module.css";
-import { useUpdateOrderMutation } from "../../../services/fetch";
+import Checkbox from "@mui/material/Checkbox";
 
-export default function OrderCard({ data }) {
+import s from "./style.module.css";
+
+export default function OrderCard({ data, addItem, removeItem }) {
   const { user, status, orders } = data;
   const { email, telephone } = user;
-  const [updateOrder] = useUpdateOrderMutation();
 
-  const handleClick = () =>
-    updateOrder({ id: data._id, body: { status: "PENDING" } });
+  const handleChecked = (e) =>
+    e.target.checked ? addItem(e.target.name) : removeItem(e.target.name);
 
   return (
     <Card
@@ -58,13 +57,7 @@ export default function OrderCard({ data }) {
           </div>
         ))}
       </div>
-      <Button
-        variant="contained"
-        sx={{ marginLeft: "auto" }}
-        onClick={handleClick}
-      >
-        in the road
-      </Button>
+      <Checkbox name={data._id} onChange={handleChecked} />
     </Card>
   );
 }

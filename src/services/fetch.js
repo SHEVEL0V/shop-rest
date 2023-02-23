@@ -74,8 +74,8 @@ export const shopApi = createApi({
     }),
     //------------------------------------------------------------------------
     updateOrder: builder.mutation({
-      query: ({ id, body }) => ({
-        url: `order/${id}`,
+      query: (body) => ({
+        url: "order/",
         method: "PUT",
         body,
       }),

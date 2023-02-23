@@ -10,21 +10,19 @@ import ListRemove from "../../components/admin/listRemove";
 import Sidebar from "../sidebar";
 import BtnRemove from "../../UI/btnRemove";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
+import useCheckBox from "../../hooks/useCheckBox";
 
 export default function ListProductsAdmin() {
-  const [paramsDelete, setParamsDelete] = useState([]);
   const { params } = useSearchParamsCustom();
+  const [options, setOptions] = useState([]);
+
+  const { addId, removeId } = useCheckBox(setOptions);
 
   const { data, isLoading } = useGetProductsQuery(params);
   const [removeProducts, { isLoading: isLoadingDelete }] =
     useDeletedProductsMutation();
 
-  const handleAddItem = (item) =>
-    setParamsDelete((params) => [...params, item]);
-  const handleRemoveItem = (item) =>
-    setParamsDelete((params) => params.filter((el) => item !== el));
-
-  const handleRemoveProducts = () => removeProducts({ remove: paramsDelete });
+  const handleRemoveProducts = () => removeProducts({ options });
 
   return (
     <div style={{ display: "flex" }}>
@@ -39,8 +37,8 @@ export default function ListProductsAdmin() {
             <ListRemove
               data={e}
               key={e._id}
-              addItem={handleAddItem}
-              removeItem={handleRemoveItem}
+              addItem={addId}
+              removeItem={removeId}
             />
           ))
         )}
