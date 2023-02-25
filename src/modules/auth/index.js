@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../../redux/token/slice";
+import { setUser } from "../../redux/auth/slice";
 import { setButtonLogin } from "../../redux/buttton/slice";
 import { useAddUserMutation, useLoginUserMutation } from "../../services/fetch";
 
@@ -39,7 +39,7 @@ export default function Auth() {
 
   const handleAuthSuccess = (payload) => {
     dispatch(setButtonLogin());
-    dispatch(setToken(payload));
+    dispatch(setUser(payload));
     setForm({});
   };
 

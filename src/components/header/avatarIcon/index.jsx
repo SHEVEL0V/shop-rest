@@ -12,7 +12,7 @@ import {
   Box,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../../redux/token/slice";
+import { setUser } from "../../../redux/auth/slice";
 
 export default function AvatarIcon() {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -46,7 +46,7 @@ export default function AvatarIcon() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={() => dispatch(setToken(false))}>
+        <MenuItem onClick={() => dispatch(setUser({}))}>
           <Typography textAlign="center">Logout</Typography>
         </MenuItem>
       </Menu>

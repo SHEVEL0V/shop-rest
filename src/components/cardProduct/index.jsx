@@ -1,5 +1,4 @@
 /** @format */
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setBasket } from "../../redux/basket/slice";
@@ -13,7 +12,6 @@ import { useAddRatingMutation } from "../../services/fetch";
 
 export default function CardProduct({ data, token }) {
   const { _id, name, price, rating, img } = data;
-  const [rat, setRat] = useState(rating);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,7 +33,7 @@ export default function CardProduct({ data, token }) {
         Rating
         <Rating
           sx={{ marginBottom: 1, marginLeft: 1 }}
-          value={rat}
+          value={rating}
           onChange={handleUpdateRating}
         />
       </b>

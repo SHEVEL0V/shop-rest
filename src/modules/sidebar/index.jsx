@@ -10,7 +10,6 @@ import Filter from "../../components/sidebar/filter";
 import OptionsCard from "../../components/sidebar/optionsCard";
 
 import s from "./style.module.css";
-import BtnRemove from "../../UI/btnRemove";
 
 export default function Sidebar({ children }) {
   const isOpen = useSelector((store) => store.button.menu);

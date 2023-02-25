@@ -15,7 +15,7 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 
 import { shopApi } from "../services/fetch";
 import button from "./buttton/slice";
-import authSlise from "./token/slice";
+import authSlise from "./auth/slice";
 import basketSlice from "./basket/slice";
 
 const auth = persistReducer({ key: "auth", storage }, authSlise);

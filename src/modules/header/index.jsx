@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SearchAppBar() {
   const isAuth = useSelector((s) => s.auth.token);
+  const isAdmin = useSelector((s) => s.auth?.user?.role === "admin");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ export default function SearchAppBar() {
     <AppBar position="sticky">
       <Toolbar>
         <MenuButton />
-        {isAuth && (
+        {isAdmin && (
           <Button
             onClick={() => {
               navigate("/admin/add");

@@ -15,7 +15,7 @@ export const shopApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Product", "Order"],
+  tagTypes: ["Product", "Order", "Rating"],
   endpoints: (builder) => ({
     //===========PRODUCTS========================================================
     getProducts: builder.query({
@@ -23,7 +23,7 @@ export const shopApi = createApi({
         url: "products/",
         params,
       }),
-      providesTags: ["Product"],
+      providesTags: ["Product", "Rating"],
     }),
     //------------------------------------------------------------------------
     getProductsById: builder.query({
@@ -86,10 +86,7 @@ export const shopApi = createApi({
         method: "POST",
         body,
       }),
-    }),
-    //------------------------------------------------------------------------
-    getRating: builder.query({
-      query: (id) => `rating/${id}`,
+      invalidatesTags: ["Rating"],
     }),
     //======USER====================================================================
     addUser: builder.mutation({
@@ -120,7 +117,6 @@ export const {
   useGetOrderQuery,
   useUpdateOrderMutation,
   useAddRatingMutation,
-  useGetRatingQuery,
   useAddUserMutation,
   useLoginUserMutation,
 } = shopApi;
