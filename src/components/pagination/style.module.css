@@ -1,0 +1,8 @@
+/** @format */
+
+.container {
+  width: 350px;
+  padding: 10px;
+
+  margin-inline: auto;
+}

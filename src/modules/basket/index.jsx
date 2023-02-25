@@ -2,15 +2,16 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBasket } from "../../redux/basket/slice";
+import { setButtonBasket } from "../../redux/button/slice";
+import { useAddOrderMutation } from "../../services/fetch";
 
 import ModalCustom from "../../components/modal";
 import CardBasket from "../../components/cardBasket";
-import { setButtonBasket } from "../../redux/buttton/slice";
+import BasketIkon from "../../components/basketIcon";
+
 import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
-import BasketIkon from "../../components/basketIcon";
-import { useAddOrderMutation } from "../../services/fetch";
 
 export default function Basket() {
   const dispatch = useDispatch();

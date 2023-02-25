@@ -11,13 +11,13 @@ import s from "./style.module.css";
 import { useAddRatingMutation } from "../../services/fetch";
 
 export default function CardProduct({ data, token }) {
-  const { _id, name, price, rating, img } = data;
+  const { _id, name, price, rating, img, brand } = data;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isDisable } = useItemByBasket(_id);
 
-  const handleClickCard = () => navigate(`/${_id}`);
+  const handleClickCard = () => navigate(`/${brand}/${_id}`);
   const handleAddProducts = () => dispatch(setBasket(data));
 
   const [addRating] = useAddRatingMutation();

@@ -4,23 +4,23 @@ import { createBrowserRouter } from "react-router-dom";
 import AddProduct from "./modules/admin/addProduct";
 import Orders from "./modules/admin/orders";
 import ListProductsAdmin from "./modules/admin/listProducts";
-import Admin from "./pages/admin";
-import Main from "./pages/main";
-import Product from "./pages/product";
+import AdminPage from "./pages/admin";
+import MainPage from "./pages/main";
+import ProductPage from "./pages/product";
 import UpdateProducts from "./modules/admin/updateProducts";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <MainPage />,
   },
   {
-    path: ":id",
-    element: <Product />,
+    path: ":brand/:id",
+    element: <ProductPage />,
   },
   {
     path: "/admin",
-    element: <Admin />,
+    element: <AdminPage />,
     children: [
       { path: "add", element: <AddProduct /> },
       { path: "remove", element: <ListProductsAdmin /> },

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/auth/slice";
-import { setButtonLogin } from "../../redux/buttton/slice";
+import { setButtonLogin } from "../../redux/button/slice";
 import { useAddUserMutation, useLoginUserMutation } from "../../services/fetch";
 
 import Switch from "@mui/material/Switch";

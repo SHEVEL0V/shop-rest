@@ -9,6 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import s from "./style.module.css";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 import { useSelector } from "react-redux";
+import PaginationItem from "../../components/pagination";
 
 export default function ListProducts() {
   const { params } = useSearchParamsCustom();
@@ -16,14 +17,17 @@ export default function ListProducts() {
   const { data, isLoading } = useGetProductsQuery(params);
 
   return (
-    <div className={s.container}>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        data?.products?.map((el) => (
-          <CardProduct key={el._id} data={el} token={token} />
-        ))
-      )}
+    <div>
+      <div className={s.container}>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          data?.products?.map((el) => (
+            <CardProduct key={el._id} data={el} token={token} />
+          ))
+        )}
+      </div>
+      <PaginationItem count={data?.count} />
     </div>
   );
 }

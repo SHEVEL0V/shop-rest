@@ -2,9 +2,10 @@
 .container {
   box-sizing: border-box;
   display: block;
+  max-width: 800px;
+  margin-inline: auto;
 
-  height: 100vh;
-  padding: 100px;
+  padding: 50px;
 
   background-color: var(--bg-color-one);
   transition: all 350ms ease-out;
@@ -13,7 +14,7 @@
 .img {
   display: block;
   width: 100%;
-  max-height: 300px;
+  max-height: 60vh;
   object-fit: contain;
 }
 .prise {

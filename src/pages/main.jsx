@@ -5,7 +5,7 @@ import Basket from "../modules/basket";
 import Header from "../modules/header";
 import Auth from "../modules/auth";
 
-export default function Main() {
+export default function MainPage() {
   return (
     <>
       <Header />

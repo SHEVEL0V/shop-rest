@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setButtonLogin } from "../../redux/buttton/slice";
+import { setButtonLogin } from "../../redux/button/slice";
 
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";

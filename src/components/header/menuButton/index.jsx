@@ -3,7 +3,7 @@ import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useDispatch } from "react-redux";
-import { setButtonMenu } from "../../../redux/buttton/slice";
+import { setButtonMenu } from "../../../redux/button/slice";
 
 export default function MenuButton() {
   const dispatch = useDispatch();
