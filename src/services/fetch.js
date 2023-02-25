@@ -27,9 +27,7 @@ export const shopApi = createApi({
     }),
     //------------------------------------------------------------------------
     getProductsById: builder.query({
-      query: (id) => ({
-        url: `products/${id}`,
-      }),
+      query: (id) => `products/${id}`,
     }),
     //------------------------------------------------------------------------
     addProducts: builder.mutation({
@@ -81,22 +79,18 @@ export const shopApi = createApi({
       }),
       invalidatesTags: ["Order"],
     }),
-    // //------------------------------------------------------------------------
-    // deleteBasket: builder.mutation({
-    //   query: (id) => ({
-    //     url: `basket/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["Basket"],
-    // }),
-    // //------------------------------------------------------------------------
-    // deleteBasketAll: builder.mutation({
-    //   query: (id) => ({
-    //     url: `basket/all/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["Basket"],
-    // }),
+    //=========RATING=================================================================
+    addRating: builder.mutation({
+      query: (body) => ({
+        url: "rating/",
+        method: "POST",
+        body,
+      }),
+    }),
+    //------------------------------------------------------------------------
+    getRating: builder.query({
+      query: (id) => `rating/${id}`,
+    }),
     //======USER====================================================================
     addUser: builder.mutation({
       query: (body) => ({
@@ -125,6 +119,8 @@ export const {
   useAddOrderMutation,
   useGetOrderQuery,
   useUpdateOrderMutation,
+  useAddRatingMutation,
+  useGetRatingQuery,
   useAddUserMutation,
   useLoginUserMutation,
 } = shopApi;

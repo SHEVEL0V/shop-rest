@@ -7,12 +7,9 @@ import Checkbox from "@mui/material/Checkbox";
 
 import s from "./style.module.css";
 
-export default function OrderCard({ data, addItem, removeItem }) {
+export default function OrderCard({ data, handleCheckBox }) {
   const { user, status, orders } = data;
   const { email, telephone } = user;
-
-  const handleChecked = (e) =>
-    e.target.checked ? addItem(e.target.name) : removeItem(e.target.name);
 
   return (
     <Card
@@ -57,7 +54,7 @@ export default function OrderCard({ data, addItem, removeItem }) {
           </div>
         ))}
       </div>
-      <Checkbox name={data._id} onChange={handleChecked} />
+      <Checkbox name={data._id} onChange={handleCheckBox} />
     </Card>
   );
 }

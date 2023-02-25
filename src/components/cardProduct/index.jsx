@@ -9,6 +9,7 @@ import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
+import { useAddRatingMutation } from "../../services/fetch";
 
 export default function CardProduct({ data, token }) {
   const { _id, name, price, rating, img } = data;
@@ -21,6 +22,11 @@ export default function CardProduct({ data, token }) {
   const handleClickCard = () => navigate(`/${_id}`);
   const handleAddProducts = () => dispatch(setBasket(data));
 
+  const [addRating] = useAddRatingMutation();
+
+  const handleUpdateRating = (e, value) =>
+    addRating({ itemId: _id, rate: value });
+
   return (
     <div className={s.container}>
       <img onClick={handleClickCard} src={img} alt={name} className={s.img} />
@@ -30,7 +36,7 @@ export default function CardProduct({ data, token }) {
         <Rating
           sx={{ marginBottom: 1, marginLeft: 1 }}
           value={rat}
-          onChange={(e, newValue) => setRat(newValue)}
+          onChange={handleUpdateRating}
         />
       </b>
       <h3 className={s.prise}>

@@ -6,11 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 import s from "./style.module.css";
 
-export default function ListRemove({ data = [], addItem, removeItem }) {
+export default function ListRemove({ data = [], handleCheckBox }) {
   const navigate = useNavigate();
-
-  const handleChecked = (e) =>
-    e.target.checked ? addItem(e.target.name) : removeItem(e.target.name);
 
   const handleNavigate = () => navigate(`/admin/update/${data._id}`);
 
@@ -31,7 +28,7 @@ export default function ListRemove({ data = [], addItem, removeItem }) {
         price:{data.price}
       </b>
 
-      <Checkbox name={data._id} onChange={handleChecked} />
+      <Checkbox name={data._id} onChange={handleCheckBox} />
     </div>
   );
 }
