@@ -41,7 +41,9 @@ export default function PriceSlider({ price }) {
         />
         <ButtonSearch
           onClick={() => setParams({ price: `${value[0]}-${value[1]}` })}
-        />
+        >
+          Ok
+        </ButtonSearch>
       </div>
 
       <Slider

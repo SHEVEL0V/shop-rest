@@ -7,7 +7,7 @@ import Slide from "@mui/material/Slide";
 
 import SliderPrice from "../../components/sidebar/sliderPrice";
 import Filter from "../../components/sidebar/filter";
-import OptionsCard from "../../components/sidebar/optionsCard";
+import Options from "../../components/sidebar/options";
 
 import s from "./style.module.css";
 
@@ -35,7 +35,7 @@ export default function Sidebar({ children }) {
             <div className={s.container}>
               <Filter options={{ type, brand }} />
               <SliderPrice price={[minPrice, maxPrice]} />
-              <OptionsCard />
+              <Options />
               <div className={s.children}>{children}</div>
             </div>
           )}

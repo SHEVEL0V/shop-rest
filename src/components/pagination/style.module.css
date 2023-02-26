@@ -1,8 +1,6 @@
 /** @format */
 
 .container {
-  width: 350px;
   padding: 10px;
-
-  margin-inline: auto;
+  background-color: var(--bg-color-tho);
 }
