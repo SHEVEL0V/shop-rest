@@ -28,7 +28,7 @@ export default function ListRemove({ data = [], handleCheckBox }) {
         price:{data.price}
       </b>
 
-      <Checkbox name={data._id} onChange={handleCheckBox} />
+      <Checkbox value={data._id} onChange={handleCheckBox} />
     </div>
   );
 }

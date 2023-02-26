@@ -54,7 +54,7 @@ export default function OrderCard({ data, handleCheckBox }) {
           </div>
         ))}
       </div>
-      <Checkbox name={data._id} onChange={handleCheckBox} />
+      <Checkbox value={data._id} onChange={handleCheckBox} />
     </Card>
   );
 }

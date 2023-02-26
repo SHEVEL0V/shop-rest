@@ -13,7 +13,7 @@ export default function Orders() {
 
   const { data, isLoading } = useGetOrderQuery(search);
 
-  const { handleCheckBox } = useCheckBox(setOptions);
+  const { handleCheckBoxArray } = useCheckBox(setOptions);
 
   const [updateOrder] = useUpdateOrderMutation();
 
@@ -33,7 +33,11 @@ export default function Orders() {
       />
       {isLoading ||
         data?.map((el) => (
-          <OrderCard key={el._id} data={el} handleCheckBox={handleCheckBox} />
+          <OrderCard
+            key={el._id}
+            data={el}
+            handleCheckBox={handleCheckBoxArray}
+          />
         ))}
     </div>
   );

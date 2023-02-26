@@ -6,9 +6,9 @@ import Pagination from "@mui/material/Pagination";
 import s from "./style.module.css";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 
-export default function PaginationItem({ count = 1 }) {
+export default function PaginationItem({ count }) {
   const limit = 10;
-  const countPage = Math.ceil(count / limit);
+  const countPage = Math.ceil(count / limit) || 1;
 
   const { setParams } = useSearchParamsCustom();
 

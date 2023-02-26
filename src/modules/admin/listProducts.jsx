@@ -16,7 +16,7 @@ export default function ListProductsAdmin() {
   const { params } = useSearchParamsCustom();
   const [options, setOptions] = useState([]);
 
-  const { handleCheckBox } = useCheckBox(setOptions);
+  const { handleCheckBoxArray } = useCheckBox(setOptions);
 
   const { data, isLoading } = useGetProductsQuery(params);
   const [removeProducts, { isLoading: isLoadingDelete }] =
@@ -34,7 +34,11 @@ export default function ListProductsAdmin() {
           <h1>loading</h1>
         ) : (
           data?.products.map((e) => (
-            <ListRemove data={e} key={e._id} handleCheckBox={handleCheckBox} />
+            <ListRemove
+              data={e}
+              key={e._id}
+              handleCheckBox={handleCheckBoxArray}
+            />
           ))
         )}
       </div>

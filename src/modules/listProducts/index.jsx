@@ -27,7 +27,7 @@ export default function ListProducts() {
           ))
         )}
       </div>
-      <PaginationItem count={data?.count} />
+      {isLoading || <PaginationItem count={data?.count} />}
     </div>
   );
 }
