@@ -5,7 +5,7 @@ import TextInput from "../../../UI/textInput";
 
 import s from "./style.module.css";
 
-export default function FormAdmin({ form = {}, setForm, setFile }) {
+export default function FormAdmin({ form = {}, setForm }) {
   const handleInput = ({ name, value }) =>
     setForm((state) => ({ ...state, [name]: value }));
 

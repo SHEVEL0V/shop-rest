@@ -24,6 +24,15 @@ export default function SearchAppBar() {
     <AppBar position="sticky">
       <Toolbar>
         <MenuButton />
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+        >
+          SHOP
+        </Typography>
+        <SearchInput />
         {isAdmin && (
           <Button
             onClick={() => {
@@ -36,16 +45,6 @@ export default function SearchAppBar() {
             Admin panel
           </Button>
         )}
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-        >
-          SHOP
-        </Typography>
-
-        <SearchInput />
         {isAuth ? (
           <AvatarIcon />
         ) : (

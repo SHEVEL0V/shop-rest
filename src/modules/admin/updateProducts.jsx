@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import Form from "../../components/admin/form";
+import FormMain from "../../components/admin/formMain";
 import UploadImg from "../../components/admin/uploadImg";
 import { useParams } from "react-router-dom";
 import {
@@ -41,7 +41,7 @@ export default function UpdateProducts() {
   return (
     <div style={{ display: "flex", padding: "20px" }}>
       <UploadImg urlImg={urlImg} setUrlImg={setUrlImg} setFile={setFile} />
-      <Form form={form} setForm={setForm} />
+      <FormMain form={form} setForm={setForm} />
       <BtnLoading onClick={handlerUpdate}>Update</BtnLoading>
     </div>
   );

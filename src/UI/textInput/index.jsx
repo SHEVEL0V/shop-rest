@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 export default function TextInput({ label = "text", value = "", onChange }) {
   return (
     <TextField
-      sx={{ marginBottom: 2 }}
+      sx={{ marginBottom: 2, width: "100%" }}
       label={label}
       value={value}
       name={label}

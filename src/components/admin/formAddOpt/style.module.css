@@ -1,0 +1,15 @@
+/** @format */
+
+.container {
+  width: 100%;
+  padding: 10px;
+
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.container:hover {
+  border-color: black;
+}
+.itemContainer {
+  display: flex;
+}

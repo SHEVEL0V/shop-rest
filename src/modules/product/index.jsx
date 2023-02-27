@@ -18,9 +18,11 @@ export default function Product() {
   const dispatch = useDispatch();
   const { isDisable } = useItemByBasket(id);
 
-  const { img, price, name, desc } = data || {};
+  const { img, price, name, desc, options } = data || {};
 
   const handleAddProducts = () => dispatch(setBasket(data));
+
+  const optionsPars = JSON.parse(options);
 
   return isLoading ? (
     <div>loading</div>
@@ -43,6 +45,16 @@ export default function Product() {
         >
           <span>Add to basket</span>
         </LoadingButton>
+      </div>
+      <div>
+        {optionsPars?.map((e, i) => (
+          <div key={i}>
+            <p>
+              {e.name}
+              <b>{e.value}</b>
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

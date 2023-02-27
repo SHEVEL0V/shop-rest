@@ -2,9 +2,10 @@
 
 .container {
   box-sizing: content-box;
+  max-width: 1000px;
   display: block;
   padding: 20px;
-  margin-inline: auto;
+
   display: flex;
   flex-wrap: wrap;
   border-radius: 5px;

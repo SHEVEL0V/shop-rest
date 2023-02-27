@@ -3,6 +3,15 @@
 .upload {
   display: flex;
   flex-direction: column;
-  width: 300px;
+
   margin: 10px;
+}
+.img {
+  max-height: 300px;
+}
+
+@media screen and (max-width: 700px) {
+  .img {
+    height: calc(60% - 50px);
+  }
 }
