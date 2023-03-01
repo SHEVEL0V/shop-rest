@@ -12,7 +12,7 @@ import s from "./style.module.css";
 
 export default function According({ title, children }) {
   return (
-    <Accordion className={s.container}>
+    <Accordion className={s.container} sx={{ backgroundColor: "transparent" }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>{title}</Typography>
       </AccordionSummary>

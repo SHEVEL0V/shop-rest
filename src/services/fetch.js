@@ -30,6 +30,10 @@ export const shopApi = createApi({
       query: (id) => `products/${id}`,
     }),
     //------------------------------------------------------------------------
+    getProductsOptions: builder.query({
+      query: () => "products/options",
+    }),
+    //------------------------------------------------------------------------
     addProducts: builder.mutation({
       query: (body) => ({
         url: "products/",
@@ -113,6 +117,7 @@ export const {
   useAddProductsMutation,
   useUpdateProductsMutation,
   useDeletedProductsMutation,
+  useGetProductsOptionsQuery,
   useAddOrderMutation,
   useGetOrderQuery,
   useUpdateOrderMutation,

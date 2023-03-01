@@ -7,7 +7,7 @@ import ButtonSearch from "../../../UI/btnSearch";
 import useSearchParamsCustom from "../../../hooks/useSearchParams";
 import s from "./style.module.css";
 
-export default function PriceSlider({ price }) {
+export default function PriceSlider({ price = [0, 0] }) {
   const [value, setValue] = useState(price);
 
   const { setParams } = useSearchParamsCustom();
@@ -24,6 +24,8 @@ export default function PriceSlider({ price }) {
     setValue((preValue) => [preValue[0], value]);
   };
 
+  const handleSearch = () => setParams({ price: `${value[0]}-${value[1]}` });
+
   return (
     <Box>
       <div className={s.container}>
@@ -39,11 +41,7 @@ export default function PriceSlider({ price }) {
           value={value[1]}
           onChange={handleInputMax}
         />
-        <ButtonSearch
-          onClick={() => setParams({ price: `${value[0]}-${value[1]}` })}
-        >
-          Ok
-        </ButtonSearch>
+        <ButtonSearch onClick={handleSearch}>Ok</ButtonSearch>
       </div>
 
       <Slider

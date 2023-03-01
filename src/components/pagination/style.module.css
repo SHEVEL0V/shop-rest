@@ -1,6 +1,9 @@
 /** @format */
 
 .container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   padding: 10px;
   background-color: var(--bg-color-tho);
 }

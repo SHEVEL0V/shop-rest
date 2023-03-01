@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import BtnSearch from "../../../UI/btnSearch";
 
-import CardOptions from "../cardOptions";
+import CardOptions from "../accordingList";
 import According from "../../../UI/according";
 import useCheckBox from "../../../hooks/useCheckBox";
 

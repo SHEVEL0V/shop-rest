@@ -22,8 +22,6 @@ export default function Product() {
 
   const handleAddProducts = () => dispatch(setBasket(data));
 
-  const optionsPars = JSON.parse(options);
-
   return isLoading ? (
     <div>loading</div>
   ) : (
@@ -47,7 +45,7 @@ export default function Product() {
         </LoadingButton>
       </div>
       <div>
-        {optionsPars?.map((e, i) => (
+        {options?.map((e, i) => (
           <div key={i}>
             <p>
               {e.name}

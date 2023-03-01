@@ -14,7 +14,7 @@ export default function BtnLoading({
     <LoadingButton
       loading={loading}
       variant="contained"
-      sx={{ margin: "20px", width: "100%" }}
+      sx={{ width: "100%" }}
       color="success"
       onClick={onClick}
     >

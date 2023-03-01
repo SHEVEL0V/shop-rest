@@ -6,7 +6,7 @@ export default function useSearchParamsCustom() {
 
   const params = Object.fromEntries([...searchParams]);
 
-  const setParams = (value) => setSearchParams({ ...params, ...value });
+  const setParams = (obg) => setSearchParams({ ...params, ...obg });
 
   return { setParams, params };
 }
