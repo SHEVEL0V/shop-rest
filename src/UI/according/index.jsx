@@ -10,9 +10,12 @@ import Typography from "@mui/material/Typography";
 
 import s from "./style.module.css";
 
-export default function According({ title, children }) {
+export default function According({ title, children, bgColor }) {
   return (
-    <Accordion className={s.container} sx={{ backgroundColor: "transparent" }}>
+    <Accordion
+      className={s.container}
+      sx={{ backgroundColor: bgColor ? "#a2cf6e" : "#35baf6" }}
+    >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>{title}</Typography>
       </AccordionSummary>

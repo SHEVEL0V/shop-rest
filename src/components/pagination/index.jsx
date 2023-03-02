@@ -8,7 +8,7 @@ import useSearchParamsCustom from "../../hooks/useSearchParams";
 import s from "./style.module.css";
 
 export default function PaginationItem({ count }) {
-  const defaultLimit = "9";
+  const defaultLimit = "12";
   const optionsLimit = ["20", "50", "100", "200"];
 
   const { params, setParams } = useSearchParamsCustom();
@@ -17,12 +17,9 @@ export default function PaginationItem({ count }) {
   const limit = params.limit || defaultLimit;
   const countPagination = Math.ceil(count / limit) || 1;
 
-  const handleChange = (_, value) => setParams({ page: value });
+  const handleChange = (_, page) => setParams({ page });
 
-  const handlerChangeLimit = (v) =>
-    v !== null
-      ? setParams({ limit: v, page: 1 })
-      : setParams({ limit: defaultLimit });
+  const handlerChangeLimit = (limit) => setParams({ page: 1, limit });
 
   return (
     <div className={s.container}>

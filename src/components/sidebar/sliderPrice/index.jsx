@@ -8,6 +8,7 @@ import useSearchParamsCustom from "../../../hooks/useSearchParams";
 import s from "./style.module.css";
 
 export default function PriceSlider({ price = [0, 0] }) {
+  const title = "price";
   const [value, setValue] = useState(price);
 
   const { setParams } = useSearchParamsCustom();
@@ -24,7 +25,7 @@ export default function PriceSlider({ price = [0, 0] }) {
     setValue((preValue) => [preValue[0], value]);
   };
 
-  const handleSearch = () => setParams({ price: `${value[0]}-${value[1]}` });
+  const handleSearch = () => setParams({ [title]: value });
 
   return (
     <Box>
