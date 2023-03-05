@@ -23,7 +23,6 @@ export default function Orders() {
         minHeight: "100vh",
         backgroundColor: "white",
         display: "flex",
-        flexDirection: "column",
       }}
     >
       <FilterOrder
@@ -31,14 +30,16 @@ export default function Orders() {
         updateOrder={updateOrder}
         options={options}
       />
-      {isLoading ||
-        data?.map((el) => (
-          <OrderCard
-            key={el._id}
-            data={el}
-            handleCheckBox={handleCheckBoxArray}
-          />
-        ))}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {isLoading ||
+          data?.map((el) => (
+            <OrderCard
+              key={el._id}
+              data={el}
+              handleCheckBox={handleCheckBoxArray}
+            />
+          ))}
+      </div>
     </div>
   );
 }

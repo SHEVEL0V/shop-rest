@@ -18,7 +18,7 @@ export default function AccordingList({ data = [], title }) {
 
   const handleChecked = (value) => options.includes(value);
 
-  const handlerClickSearch = () => setParams({ [title]: options });
+  const handlerClickSearch = () => setParams({ page: 1, [title]: options });
 
   return (
     <According title={title} bgColor={options.length !== 0}>

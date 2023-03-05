@@ -24,11 +24,11 @@ export default function Sidebar({ children }) {
       unmountOnExit
     >
       {
-        <Paper>
+        <Paper className={s.container}>
           {isLoading ? (
-            <div className={s.container}>loading</div>
+            <div>loading</div>
           ) : (
-            <div className={s.container}>
+            <div>
               <AccordingList title="type" data={data?.type} />
               <AccordingList title="brand" data={data?.brand} />
               <SliderPrice price={data?.price} />

@@ -5,7 +5,6 @@ import {
   useGetProductsQuery,
   useDeletedProductsMutation,
 } from "../../services/fetch";
-
 import ListRemove from "../../components/admin/listRemove";
 import Sidebar from "../sidebar";
 import BtnRemove from "../../UI/btnRemove";

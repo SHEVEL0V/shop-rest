@@ -1,15 +1,14 @@
 /** @format */
 
 import React from "react";
+import { useSelector } from "react-redux";
 import { useGetProductsQuery } from "../../services/fetch";
-
 import CardProduct from "../../components/cardProduct";
 import CircularProgress from "@mui/material/CircularProgress";
+import PaginationItem from "../../components/pagination";
+import useSearchParamsCustom from "../../hooks/useSearchParams";
 
 import s from "./style.module.css";
-import useSearchParamsCustom from "../../hooks/useSearchParams";
-import { useSelector } from "react-redux";
-import PaginationItem from "../../components/pagination";
 
 export default function ListProducts() {
   const { params } = useSearchParamsCustom();

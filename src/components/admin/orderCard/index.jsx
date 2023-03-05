@@ -4,11 +4,12 @@ import React from "react";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
+import getTime from "../../../helpers/getTime";
 
 import s from "./style.module.css";
 
 export default function OrderCard({ data, handleCheckBox }) {
-  const { user, status, orders } = data;
+  const { user, status, orders, createdAt } = data;
   const { email, telephone } = user;
 
   return (
@@ -24,7 +25,10 @@ export default function OrderCard({ data, handleCheckBox }) {
       }}
     >
       <div className={s.emailContainer}>
-        <Typography sx={{ fontSize: 20 }} color="text.secondary">
+        <Typography sx={{ fontSize: 16 }} color="text.primary">
+          date:{getTime(createdAt)}
+        </Typography>
+        <Typography sx={{ fontSize: 18 }} color="text.secondary">
           {email}
         </Typography>
         <Typography sx={{ fontSize: 16 }} color="text.secondary">

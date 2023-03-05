@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React from "react";
 import Pagination from "@mui/material/Pagination";
 import Autocomplete from "../../UI/autocomplete";
 import useSearchParamsCustom from "../../hooks/useSearchParams";

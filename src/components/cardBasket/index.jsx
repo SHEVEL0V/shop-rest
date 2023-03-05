@@ -1,16 +1,16 @@
 /** @format */
 
 import React from "react";
-import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
-
-import s from "./style.module.css";
 import { useDispatch } from "react-redux";
 import {
   removeBasketEl,
   decrementsQty,
   incrementsQty,
 } from "../../redux/basket/slice";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import s from "./style.module.css";
 
 export default function CardBasket({ data, handlePrice }) {
   const dispatch = useDispatch();

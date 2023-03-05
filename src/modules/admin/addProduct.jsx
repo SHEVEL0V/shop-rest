@@ -6,10 +6,10 @@ import { useAddProductsMutation } from "../../services/fetch";
 import FormMain from "../../components/admin/formMain";
 import UploadImg from "../../components/admin/uploadImg";
 import picture from "../../assets/img.png";
-
-import s from "./style.module.css";
 import BtnLoading from "../../UI/btnLoading";
 import FormAddOpt from "../../components/admin/formAddOpt";
+
+import s from "./style.module.css";
 
 export default function AddProduct() {
   const [file, setFile] = useState("");
