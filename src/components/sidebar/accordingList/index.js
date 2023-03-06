@@ -5,14 +5,16 @@ import Checkbox from "@mui/material/Checkbox";
 import According from "../../../UI/according";
 import BtnLoading from "../../../UI/btnLoading";
 import useCheckBox from "../../../hooks/useCheckBox";
-import useSearchParamsCustom from "../../../hooks/useSearchParams";
 
 import s from "./style.module.css";
 
-export default function AccordingList({ data = [], title }) {
-  const { setParams, getParams } = useSearchParamsCustom();
-
-  const [options, setOptions] = useState(getParams(title));
+export default function AccordingList({
+  data = [],
+  title,
+  getParams,
+  setParams,
+}) {
+  const [options, setOptions] = useState("");
 
   const { handleCheckBoxArray } = useCheckBox(setOptions);
 
