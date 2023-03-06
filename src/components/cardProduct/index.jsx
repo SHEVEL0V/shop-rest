@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
 import { useAddRatingMutation } from "../../services/fetch";
+import { Card } from "@mui/material";
 
 export default function CardProduct({ data, token }) {
   const { _id, name, price, rating, img, brand } = data;
@@ -26,7 +27,7 @@ export default function CardProduct({ data, token }) {
     addRating({ itemId: _id, rate: value });
 
   return (
-    <div className={s.container}>
+    <Card className={s.container} sx={{ transition: "all 350ms ease-in-out;" }}>
       <img onClick={handleClickCard} src={img} alt={name} className={s.img} />
       <h2>{name}</h2>
       <b className={s.flex}>
@@ -48,6 +49,6 @@ export default function CardProduct({ data, token }) {
       >
         <span>{!isDisable() ? "Add to basket" : "item in the basket"}</span>
       </Button>
-    </div>
+    </Card>
   );
 }

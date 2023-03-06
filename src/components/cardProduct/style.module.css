@@ -6,7 +6,7 @@
   padding: 10px;
 
   background-color: var(--bg-color-one);
-  transition: all 350ms ease-in-out;
+  /* transition: all 350ms ease-in-out; */
 }
 .container:hover {
   scale: 105%;
