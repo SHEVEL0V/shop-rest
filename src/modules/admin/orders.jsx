@@ -6,16 +6,20 @@ import { useUpdateOrderMutation } from "../../services/fetch";
 import { useGetOrderQuery } from "../../services/fetch";
 import useCheckBox from "../../hooks/useCheckBox";
 import FilterOrder from "../../components/admin/filterOrder";
+import useSearchParamsCustom from "../../hooks/useSearchParams";
 
 export default function Orders() {
   const [options, setOptions] = useState([]);
-  const [search, setSearch] = useState({});
+  // const [search, setSearch] = useState({});
 
-  const { data, isLoading } = useGetOrderQuery(search);
+  const { setParams, params } = useSearchParamsCustom();
+
+  const { data, isLoading } = useGetOrderQuery(params);
 
   const { handleCheckBoxArray } = useCheckBox(setOptions);
-
   const [updateOrder] = useUpdateOrderMutation();
+
+  const handleUpdateOrder = (status) => updateOrder({ options, status });
 
   return (
     <div
@@ -25,11 +29,7 @@ export default function Orders() {
         display: "flex",
       }}
     >
-      <FilterOrder
-        setSearch={setSearch}
-        updateOrder={updateOrder}
-        options={options}
-      />
+      <FilterOrder setParams={setParams} updateOrder={handleUpdateOrder} />
       <div style={{ display: "flex", flexDirection: "column" }}>
         {isLoading ||
           data?.map((el) => (

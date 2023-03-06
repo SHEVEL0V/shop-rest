@@ -7,6 +7,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 export default function ComboBox({ options, name, onChange, size = "medium" }) {
   return (
     <Autocomplete
+      sx={{ marginTop: "10px" }}
       disablePortal
       options={options}
       size={size}

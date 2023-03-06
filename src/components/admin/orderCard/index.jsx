@@ -12,18 +12,10 @@ export default function OrderCard({ data, handleCheckBox }) {
   const { user, status, orders, createdAt } = data;
   const { email, telephone } = user;
 
+  const totalPrice = orders.reduce((acc, e) => acc + e.price, 0);
+
   return (
-    <Card
-      className={s.container}
-      style={{
-        backgroundColor:
-          status === "PENDING"
-            ? "#3fb1d5"
-            : status === "RESOLVED"
-            ? "#e3ffcc"
-            : "#e1e6e2",
-      }}
-    >
+    <Card className={s.container}>
       <div className={s.emailContainer}>
         <Typography sx={{ fontSize: 16 }} color="text.primary">
           date:{getTime(createdAt)}
@@ -34,8 +26,21 @@ export default function OrderCard({ data, handleCheckBox }) {
         <Typography sx={{ fontSize: 16 }} color="text.secondary">
           tel:{telephone}
         </Typography>
-        <Typography sx={{ fontSize: 16 }} color="text.secondary">
-          status:{status}
+        <Typography
+          sx={{ fontSize: 16 }}
+          style={{
+            borderRadius: "3px",
+            marginRight: "5px",
+            backgroundColor:
+              status === "PENDING"
+                ? "#96F095"
+                : status === "RESOLVED"
+                ? "#81BCDB"
+                : "#FF927B",
+          }}
+          color="text.secondary"
+        >
+          _status:{status}
         </Typography>
       </div>
 
@@ -50,15 +55,23 @@ export default function OrderCard({ data, handleCheckBox }) {
             </b>
 
             <div className={s.itemOrder}>
-              price: <b style={{ color: "red" }}>{el.price}</b>
+              price:
+              <b style={{ width: "60px", marginLeft: "2px" }}>{el.price}</b>
             </div>
             <div className={s.itemOrder}>
               qty:<b>{el.qty}</b>
             </div>
           </div>
         ))}
+        <div style={{ marginTop: "auto", marginLeft: "auto" }}>
+          total price:<b style={{ color: "#FF0530" }}>{totalPrice}</b>
+        </div>
       </div>
-      <Checkbox value={data._id} onChange={handleCheckBox} />
+      <Checkbox
+        value={data._id}
+        onChange={handleCheckBox}
+        sx={{ height: "50px", marginTop: "auto", marginBottom: "auto" }}
+      />
     </Card>
   );
 }

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Card from "@mui/material/Card";
 
 import Checkbox from "@mui/material/Checkbox";
 import s from "./style.module.css";
@@ -12,23 +13,32 @@ export default function ListRemove({ data = [], handleCheckBox }) {
   const handleNavigate = () => navigate(`/admin/update/${data._id}`);
 
   return (
-    <div className={s.container}>
+    <Card className={s.container}>
       <div onClick={handleNavigate} className={s.containerInfo}>
         <div className={s.containerImg}>
           <img src={data.img} alt={data.name} style={{ maxHeight: "50px" }} />
         </div>
-        <b className={s.containerName}>brand:{data.brand}</b>
-        <b className={s.containerName}>{data.name}</b>
+        <span className={s.containerName}>
+          brand:<b>{data.brand}</b>
+        </span>
+        <span className={s.containerName}>
+          name: <b>{data.name}</b>
+        </span>
       </div>
 
-      <b
+      <span
         className={s.containerName}
-        style={{ color: "red", marginLeft: "auto" }}
+        style={{
+          display: "flex",
+
+          marginLeft: "auto",
+          width: "110px",
+        }}
       >
-        price:{data.price}
-      </b>
+        price:<b style={{ marginLeft: "auto", color: "red" }}>{data.price}</b>
+      </span>
 
       <Checkbox value={data._id} onChange={handleCheckBox} />
-    </div>
+    </Card>
   );
 }
