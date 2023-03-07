@@ -10,7 +10,6 @@ import useSearchParamsCustom from "../../hooks/useSearchParams";
 
 export default function Orders() {
   const [options, setOptions] = useState([]);
-  // const [search, setSearch] = useState({});
 
   const { setParams, params } = useSearchParamsCustom();
 

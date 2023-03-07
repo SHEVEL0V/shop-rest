@@ -20,7 +20,7 @@ export default function UpdateProducts({ boolean }) {
   const [file, setFile] = useState(false);
   const [form, setForm] = useState({});
   const [urlImg, setUrlImg] = useState(picture);
-
+  const formData = new FormData();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -39,32 +39,34 @@ export default function UpdateProducts({ boolean }) {
     }
   }, [boolean, data, isSuccess]);
 
-  const handlerUpdate = () => {
-    const data = new FormData();
+  const handleAddProducts = () =>
+    addProduct(formData)
+      .unwrap()
+      .then(() => {
+        setForm({});
+        setUrlImg(picture);
+        toast.success("success add", { theme: "dark" });
+      });
 
+  const handleUpdateProduct = () =>
+    updateProducts({ id, body: formData })
+      .unwrap()
+      .then(() => {
+        setTimeout(() => navigate(-1), 2000);
+        toast.success("success update", { theme: "dark" });
+      });
+
+  const handlerClickButton = () => {
+    if (file) {
+      formData.append("img", file);
+    }
     Object.keys(form).map((key) =>
       key === "options"
-        ? data.append(key, JSON.stringify(form.options))
-        : data.append(key, form[key])
+        ? formData.append(key, JSON.stringify(form.options))
+        : formData.append(key, form[key])
     );
 
-    if (file) {
-      data.append("img", file);
-    }
-
-    boolean
-      ? updateProducts({ id, data })
-          .unwrap()
-          .then(() => {
-            setTimeout(() => navigate(-1), 2000);
-            toast.success("success", { theme: "dark" });
-          })
-      : addProduct(data)
-          .unwrap()
-          .then(() => {
-            setForm({});
-            setUrlImg(picture);
-          });
+    boolean ? handleUpdateProduct(formData) : handleAddProducts(formData);
   };
 
   return (
@@ -73,12 +75,11 @@ export default function UpdateProducts({ boolean }) {
         <UploadImg setFile={setFile} urlImg={urlImg} setUrlImg={setUrlImg} />
         <FormMain form={form} setForm={setForm} />
       </div>
-
       <FormAddOpt form={form} setForm={setForm} />
-
-      <BtnLoading loading={isLoading} onClick={handlerUpdate}>
+      <BtnLoading loading={isLoading} onClick={handlerClickButton}>
         {boolean ? "UPDATE" : "ADD"}
       </BtnLoading>
+      <ToastContainer />
     </div>
   );
 }
