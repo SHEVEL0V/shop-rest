@@ -1,6 +1,5 @@
 /** @format */
 .container {
-  box-sizing: border-box;
   display: block;
   max-height: 470px;
   padding: 10px;

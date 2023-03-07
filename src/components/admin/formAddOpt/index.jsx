@@ -5,20 +5,22 @@ import TextInput from "../../../UI/textInput";
 import Button from "@mui/material/Button";
 import s from "./style.module.css";
 
-export default function FormAddOpt({ options, setOptions }) {
-  const handleChangeInput = (value, index, key) => {
-    setOptions((state) =>
-      state.map((el, i) => (i === index ? { ...el, [key]: value } : el))
+export default function FormAddOpt({ form, setForm }) {
+  const options = form?.options || [];
+
+  const setOptions = (value) =>
+    setForm((state) => ({ ...state, options: value }));
+
+  const handleChangeInput = (value, index, key) =>
+    setOptions(
+      options.map((el, i) => (i === index ? { ...el, [key]: value } : el))
     );
-  };
 
   const handleAddOptions = () =>
-    setOptions((state) => [...state, { name: "", value: "" }]);
+    setOptions([...options, { name: "", value: "" }]);
 
   const handleDeleteOptions = (index) =>
-    setOptions((state) => state.filter((_, i) => index !== i));
-
-  console.log(options);
+    setOptions(options.filter((_, i) => index !== i));
 
   return (
     <div className={s.container}>
@@ -44,7 +46,6 @@ export default function FormAddOpt({ options, setOptions }) {
           </Button>
         </div>
       ))}
-
       <Button variant="contained" onClick={handleAddOptions}>
         ADD options
       </Button>

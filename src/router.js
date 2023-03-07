@@ -1,7 +1,6 @@
 /** @format */
 
 import { createBrowserRouter } from "react-router-dom";
-import AddProduct from "./modules/admin/addProduct";
 import Orders from "./modules/admin/orders";
 import ListProductsAdmin from "./modules/admin/listProducts";
 import AdminPage from "./pages/admin";
@@ -22,10 +21,10 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPage />,
     children: [
-      { path: "add", element: <AddProduct /> },
+      { path: "add", element: <UpdateProducts boolean={false} /> },
       { path: "remove", element: <ListProductsAdmin /> },
       { path: "orders", element: <Orders /> },
-      { path: "update/:id", element: <UpdateProducts /> },
+      { path: "update/:id", element: <UpdateProducts boolean={true} /> },
     ],
   },
 ]);

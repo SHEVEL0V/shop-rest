@@ -1,6 +1,7 @@
 /** @format */
 
 .container {
+  box-sizing: border-box;
   min-height: calc(100vh);
   width: 100%;
   padding: 20px;

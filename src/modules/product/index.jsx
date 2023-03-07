@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { useGetProductsByIdQuery } from "../../services/fetch";
 import { setBasket } from "../../redux/basket/slice";
 import useItemByBasket from "../../hooks/useItemByBasket";
-
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import s from "./style.module.css";
@@ -19,6 +18,7 @@ export default function Product() {
   const { isDisable } = useItemByBasket(id);
 
   const { img, price, name, desc, options } = data || {};
+  console.log(options);
 
   const handleAddProducts = () => dispatch(setBasket(data));
 

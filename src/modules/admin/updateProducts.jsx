@@ -2,47 +2,83 @@
 
 import React, { useEffect, useState } from "react";
 import FormMain from "../../components/admin/formMain";
+import FormAddOpt from "../../components/admin/formAddOpt";
 import UploadImg from "../../components/admin/uploadImg";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   useGetProductsByIdQuery,
   useUpdateProductsMutation,
+  useAddProductsMutation,
 } from "../../services/fetch";
 import BtnLoading from "../../UI/btnLoading";
+import picture from "../../assets/img.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import s from "./style.module.css";
 
-export default function UpdateProducts() {
+export default function UpdateProducts({ boolean }) {
   const [file, setFile] = useState(false);
   const [form, setForm] = useState({});
-  const [urlImg, setUrlImg] = useState("");
+  const [urlImg, setUrlImg] = useState(picture);
+
   const { id } = useParams();
-  const { data, isSuccess } = useGetProductsByIdQuery(id);
+  const navigate = useNavigate();
+
+  const { data, isSuccess } = useGetProductsByIdQuery(id, { skip: !boolean });
   const [updateProducts] = useUpdateProductsMutation(id);
+  const [addProduct, { isLoading }] = useAddProductsMutation();
+
+  useEffect(() => {
+    if (!boolean) {
+      setForm({});
+      setUrlImg(picture);
+    }
+    if (boolean && isSuccess) {
+      setForm(data);
+      setUrlImg(data.img);
+    }
+  }, [boolean, data, isSuccess]);
 
   const handlerUpdate = () => {
     const data = new FormData();
+
+    Object.keys(form).map((key) =>
+      key === "options"
+        ? data.append(key, JSON.stringify(form.options))
+        : data.append(key, form[key])
+    );
 
     if (file) {
       data.append("img", file);
     }
 
-    Object.keys(form).map((key) => data.append(key, form[key]));
-
-    updateProducts({ id, data });
+    boolean
+      ? updateProducts({ id, data })
+          .unwrap()
+          .then(() => {
+            setTimeout(() => navigate(-1), 2000);
+            toast.success("success", { theme: "dark" });
+          })
+      : addProduct(data)
+          .unwrap()
+          .then(() => {
+            setForm({});
+            setUrlImg(picture);
+          });
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      setForm(data);
-      setUrlImg(data.img);
-      console.log(data);
-    }
-  }, [data, isSuccess]);
-
   return (
-    <div style={{ display: "flex", padding: "20px" }}>
-      <UploadImg urlImg={urlImg} setUrlImg={setUrlImg} setFile={setFile} />
-      <FormMain form={form} setForm={setForm} />
-      <BtnLoading onClick={handlerUpdate}>Update</BtnLoading>
+    <div className={s.container}>
+      <div style={{ display: "flex", width: "100%" }}>
+        <UploadImg setFile={setFile} urlImg={urlImg} setUrlImg={setUrlImg} />
+        <FormMain form={form} setForm={setForm} />
+      </div>
+
+      <FormAddOpt form={form} setForm={setForm} />
+
+      <BtnLoading loading={isLoading} onClick={handlerUpdate}>
+        {boolean ? "UPDATE" : "ADD"}
+      </BtnLoading>
     </div>
   );
 }

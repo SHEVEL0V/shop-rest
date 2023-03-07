@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetProductsOptionsQuery } from "../../services/fetch";
-import ComboBox from "../../UI/autocomplete";
 import Paper from "@mui/material/Paper";
 import Slide from "@mui/material/Slide";
 import SliderPrice from "../../components/sidebar/sliderPrice";
@@ -11,17 +10,13 @@ import AccordingList from "../../components/sidebar/accordingList";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 
 import s from "./style.module.css";
+import Sort from "../../components/sidebar/sort";
 
 export default function Sidebar({ children }) {
-  // const [sort, setSort] = useState("");
   const isOpen = useSelector((store) => store.button.menu);
   const { setParams, getParams } = useSearchParamsCustom();
 
   const { data, isLoading } = useGetProductsOptionsQuery();
-
-  const filter = ["minPrice", "maxPrice", "newProduct", "oldProduct"];
-
-  const handleSort = (sort) => setParams({ sort });
 
   return (
     <Slide
@@ -36,20 +31,20 @@ export default function Sidebar({ children }) {
             <div>loading</div>
           ) : (
             <div>
-              <ComboBox options={filter} name="sort" onChange={handleSort} />
               <AccordingList
                 title="type"
                 data={data?.type}
                 setParams={setParams}
                 getParams={getParams}
               />
+              <Sort onSort={setParams} />
+              <SliderPrice price={data?.price} />
               <AccordingList
                 title="brand"
                 data={data?.brand}
                 setParams={setParams}
                 getParams={getParams}
               />
-              <SliderPrice price={data?.price} />
               <Options />
               <div className={s.children}>{children}</div>
             </div>

@@ -8,12 +8,7 @@ import useCheckBox from "../../../hooks/useCheckBox";
 
 import s from "./style.module.css";
 
-export default function AccordingList({
-  data = [],
-  title,
-  getParams,
-  setParams,
-}) {
+export default function AccordingList({ data = [], title, setParams }) {
   const [options, setOptions] = useState("");
 
   const { handleCheckBoxArray } = useCheckBox(setOptions);

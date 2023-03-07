@@ -30,7 +30,6 @@ export default function PaginationItem({ count }) {
         onChange={handleChange}
       />
       <Autocomplete
-        value="none"
         size="small"
         name="limit"
         options={optionsLimit}

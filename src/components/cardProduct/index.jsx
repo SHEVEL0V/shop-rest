@@ -11,7 +11,7 @@ import s from "./style.module.css";
 import { useAddRatingMutation } from "../../services/fetch";
 import { Card } from "@mui/material";
 
-export default function CardProduct({ data, token }) {
+export default function CardProduct({ data }) {
   const { _id, name, price, rating, img, brand } = data;
 
   const dispatch = useDispatch();
@@ -27,7 +27,14 @@ export default function CardProduct({ data, token }) {
     addRating({ itemId: _id, rate: value });
 
   return (
-    <Card className={s.container} sx={{ transition: "all 350ms ease-in-out;" }}>
+    <Card
+      className={s.container}
+      sx={{
+        transition: "all 350ms ease-in-out",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <img onClick={handleClickCard} src={img} alt={name} className={s.img} />
       <h2>{name}</h2>
       <b className={s.flex}>
@@ -42,6 +49,7 @@ export default function CardProduct({ data, token }) {
         price: <span>{price}</span> UAH
       </h3>
       <Button
+        sx={{ marginTop: "auto" }}
         onClick={handleAddProducts}
         color="secondary"
         disabled={isDisable()}
