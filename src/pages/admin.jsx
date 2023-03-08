@@ -1,13 +1,11 @@
 /** @format */
 
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import AppBarAdmin from "../components/admin/appBar";
+import MainPage from "./main";
 
 export default function AdminPage() {
-  return (
-    <div>
-      <AppBarAdmin />
-      <Outlet />
-    </div>
-  );
+  const isAuthAdmin = useSelector((s) => s.auth?.user?.role === "admin");
+
+  return <>{isAuthAdmin ? <Outlet /> : <MainPage />}</>;
 }

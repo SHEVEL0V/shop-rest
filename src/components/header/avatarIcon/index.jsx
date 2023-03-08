@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Typography,
@@ -17,6 +17,8 @@ import { setUser } from "../../../redux/auth/slice";
 export default function AvatarIcon() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -24,7 +26,7 @@ export default function AvatarIcon() {
     setAnchorElUser(null);
   };
   return (
-    <Box sx={{ flexGrow: 0, marginLeft: 10 }}>
+    <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -46,6 +48,9 @@ export default function AvatarIcon() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
+        <MenuItem onClick={() => navigate("user")}>
+          <Typography textAlign="center">Setting</Typography>
+        </MenuItem>
         <MenuItem onClick={() => dispatch(setUser({}))}>
           <Typography textAlign="center">Logout</Typography>
         </MenuItem>
