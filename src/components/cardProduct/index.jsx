@@ -36,7 +36,7 @@ export default function CardProduct({ data }) {
       }}
     >
       <img onClick={handleClickCard} src={img} alt={name} className={s.img} />
-      <h2>{name}</h2>
+      <h2 className={s.title}>{name}</h2>
       <b className={s.flex}>
         Rating
         <Rating
@@ -49,7 +49,6 @@ export default function CardProduct({ data }) {
         price: <span>{price}</span> UAH
       </h3>
       <Button
-        sx={{ marginTop: "auto" }}
         onClick={handleAddProducts}
         color="secondary"
         disabled={isDisable()}

@@ -42,9 +42,11 @@ export default function Basket() {
     <div>
       <BasketIkon qty={qty} onClick={handleClick} disabled={isClose} />
       <ModalCustom open={isOpen} onClick={handleClick}>
-        {basket !== [] &&
-          basket.map((list) => <CardBasket key={list._id} data={list} />)}
-        <div className={s.flex}>
+        <div className={s.container}>
+          {basket !== [] &&
+            basket.map((list) => <CardBasket key={list._id} data={list} />)}
+        </div>
+        <div className={s.priceContainer}>
           <b className={s.prise}>{sumPrice}</b>
           <Button
             sx={{ width: 200 }}
