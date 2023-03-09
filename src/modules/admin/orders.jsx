@@ -23,7 +23,6 @@ export default function Orders() {
   return (
     <div
       style={{
-        minHeight: "100vh",
         backgroundColor: "white",
         display: "flex",
       }}

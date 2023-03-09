@@ -26,7 +26,10 @@ export default function Sidebar({ children }) {
       unmountOnExit
     >
       {
-        <Paper className={s.container}>
+        <Paper
+          className={s.container}
+          sx={{ boxShadow: "inset -3px -3px 29px -15px rgba(67, 67, 71, 1)" }}
+        >
           {isLoading ? (
             <div>loading</div>
           ) : (

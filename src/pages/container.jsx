@@ -9,7 +9,7 @@ export default function Container() {
   return (
     <>
       <Header />
-      <div style={{ height: "100vh" }}>
+      <div style={{ minHeight: "100vh" }}>
         <Outlet />
       </div>
       <Footer />

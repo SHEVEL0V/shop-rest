@@ -10,7 +10,7 @@ import {
   useUpdateProductsMutation,
   useAddProductsMutation,
 } from "../../services/fetch";
-import BtnLoading from "../../UI/btnLoading";
+import Btn from "../../UI/btn";
 import picture from "../../assets/img.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -76,9 +76,9 @@ export default function UpdateProducts({ boolean }) {
         <FormMain form={form} setForm={setForm} />
       </div>
       <FormAddOpt form={form} setForm={setForm} />
-      <BtnLoading loading={isLoading} onClick={handlerClickButton}>
+      <Btn loading={isLoading} onClick={handlerClickButton}>
         {boolean ? "UPDATE" : "ADD"}
-      </BtnLoading>
+      </Btn>
       <ToastContainer />
     </div>
   );

@@ -7,9 +7,10 @@ import {
 } from "../../services/fetch";
 import ListRemove from "../../components/admin/listRemove";
 import Sidebar from "../sidebar";
-import BtnRemove from "../../UI/btnRemove";
+import Btn from "../../UI/btn";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 import useCheckBox from "../../hooks/useCheckBox";
+import Pagination from "../../components/pagination";
 
 export default function ListProductsAdmin() {
   const { params } = useSearchParamsCustom();
@@ -26,7 +27,9 @@ export default function ListProductsAdmin() {
   return (
     <div style={{ display: "flex" }}>
       <Sidebar>
-        <BtnRemove onClick={handleRemoveProducts} loading={isLoadingDelete} />
+        <Btn onClick={handleRemoveProducts} loading={isLoadingDelete}>
+          remove
+        </Btn>
       </Sidebar>
       <div style={{ width: "100%", height: "100vh", overflow: "auto" }}>
         {isLoading ? (
@@ -40,6 +43,7 @@ export default function ListProductsAdmin() {
             />
           ))
         )}
+        <Pagination count={20} />
       </div>
     </div>
   );

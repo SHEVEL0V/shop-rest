@@ -10,8 +10,9 @@ import SearchInput from "../../components/header/search";
 import MenuButton from "../../components/header/menuButton";
 import AvatarIcon from "../../components/header/avatarIcon";
 import Title from "../../UI/title";
-import BtnNav from "../../UI/btnNav";
+import Btn from "../../UI/btn";
 import BtnBack from "../../UI/btnBack";
+import s from "./style.module.css";
 
 export default function Header() {
   const isAuth = useSelector((s) => s.auth.token);
@@ -20,7 +21,8 @@ export default function Header() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  const isPathAdmin = pathname.split("/")[1] === "admin";
+  const visibilityAdmin = pathname.split("/")[1] === "admin";
+  const visibilityUser = pathname.split("/")[1] === "user";
 
   const handleColorButton = (value) =>
     pathname === value ? "warning" : "info";
@@ -28,39 +30,50 @@ export default function Header() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        {isPathAdmin && <BtnBack onClick={() => navigate("/")}>shop</BtnBack>}
-        {!isPathAdmin && <MenuButton />}
-        <Title>@SHOP</Title>
-        {!isPathAdmin && <SearchInput />}
-        {isPathAdmin && (
-          <>
-            <BtnNav
+        {visibilityAdmin || visibilityUser ? (
+          <BtnBack onClick={() => navigate("/")}>home</BtnBack>
+        ) : (
+          ""
+        )}
+        {!visibilityAdmin && !visibilityUser && <MenuButton />}
+        <Title>SHOP</Title>
+        {!visibilityAdmin && <SearchInput />}
+        {visibilityAdmin && (
+          <div className={s.navContainer}>
+            <Btn
               color={handleColorButton("/admin/add")}
-              onClick={() => navigate("add")}
+              onClick={() => navigate("/admin/add")}
             >
               add product
-            </BtnNav>
-            <BtnNav
+            </Btn>
+            <Btn
               color={handleColorButton("/admin/remove")}
-              onClick={() => navigate("remove")}
+              onClick={() => navigate("/admin/remove")}
             >
               list products
-            </BtnNav>
-            <BtnNav
+            </Btn>
+            <Btn
               color={handleColorButton("/admin/orders")}
-              onClick={() => navigate("orders")}
+              onClick={() => navigate("/admin/orders")}
             >
               all orders
-            </BtnNav>
-          </>
+            </Btn>
+          </div>
         )}
-        {isAuthAdmin && !isPathAdmin && (
-          <BtnNav onClick={() => navigate("/admin/add")}>Admin panel</BtnNav>
+        {isAuthAdmin && !visibilityAdmin && (
+          <Btn onClick={() => navigate("/admin/add")} style={{ width: "none" }}>
+            Admin panel
+          </Btn>
         )}
         {isAuth ? (
           <AvatarIcon />
         ) : (
-          <BtnNav onClick={() => dispatch(setButtonLogin())}>Login</BtnNav>
+          <Btn
+            style={{ width: "none" }}
+            onClick={() => dispatch(setButtonLogin())}
+          >
+            Login
+          </Btn>
         )}
       </Toolbar>
     </AppBar>

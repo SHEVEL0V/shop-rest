@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useGetProductsQuery } from "../../services/fetch";
 import CardProduct from "../../components/cardProduct";
 import CircularProgress from "@mui/material/CircularProgress";
-import PaginationItem from "../../components/pagination";
+import Pagination from "../../components/pagination";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 
 import s from "./style.module.css";
@@ -26,7 +26,7 @@ export default function ListProducts() {
           ))
         )}
       </div>
-      {isLoading || <PaginationItem count={data?.count} />}
+      {isLoading || <Pagination count={data?.count} />}
     </div>
   );
 }

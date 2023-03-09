@@ -14,7 +14,7 @@ export default function According({ title, children, bgColor }) {
   return (
     <Accordion
       className={s.container}
-      sx={{ backgroundColor: bgColor ? "#42a5f5" : "#d6dfe2" }}
+      sx={{ minHeight: "55px", backgroundColor: bgColor ? "#42a5f5" : "none" }}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>{title}</Typography>

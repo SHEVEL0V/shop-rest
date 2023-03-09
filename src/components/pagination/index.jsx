@@ -1,13 +1,13 @@
 /** @format */
 
 import React from "react";
-import Pagination from "@mui/material/Pagination";
+import P from "@mui/material/Pagination";
 import Autocomplete from "../../UI/autocomplete";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 
 import s from "./style.module.css";
 
-export default function PaginationItem({ count }) {
+export default function Pagination({ count }) {
   const defaultLimit = "12";
   const optionsLimit = ["20", "50", "100", "200"];
 
@@ -23,7 +23,7 @@ export default function PaginationItem({ count }) {
 
   return (
     <div className={s.container}>
-      <Pagination
+      <P
         page={page}
         count={countPagination}
         color="primary"

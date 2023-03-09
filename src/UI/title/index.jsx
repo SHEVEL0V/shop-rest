@@ -9,7 +9,11 @@ export default function Title({ children }) {
       variant="h6"
       noWrap
       component="div"
-      sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+      sx={{
+        flexGrow: 1,
+        minWidth: "100px",
+        display: { xs: "none", sm: "block" },
+      }}
     >
       {children}
     </Typography>

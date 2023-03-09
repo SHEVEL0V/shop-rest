@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 
 import s from "./style.module.css";
 import BtbClean from "../../../UI/btnClean";
+import Btn from "../../../UI/btn";
 
 export default function FilterOrder({ setParams, updateOrder }) {
   const [date, setDate] = useState({});
@@ -27,7 +28,7 @@ export default function FilterOrder({ setParams, updateOrder }) {
 
   return (
     <div className={s.container}>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", marginBottom: "15px" }}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             value={date}
@@ -57,29 +58,13 @@ export default function FilterOrder({ setParams, updateOrder }) {
         Change status:
       </Typography>
       <div style={{ display: "flex" }}>
-        <Button
-          sx={{ width: "100%" }}
-          variant="contained"
-          color="success"
-          onClick={() => handleClickButton("PENDING")}
-        >
+        <Btn color="primary" onClick={() => handleClickButton("PENDING")}>
           pen
-        </Button>
-        <Button
-          sx={{ marginLeft: "5px", width: "100%" }}
-          variant="contained"
-          onClick={() => handleClickButton("RESOLVED")}
-        >
-          res
-        </Button>
-        <Button
-          sx={{ marginLeft: "5px", width: "100%" }}
-          variant="contained"
-          color="error"
-          onClick={() => handleClickButton("REJECTED")}
-        >
+        </Btn>
+        <Btn onClick={() => handleClickButton("RESOLVED")}>res</Btn>
+        <Btn color="error" onClick={() => handleClickButton("REJECTED")}>
           rej
-        </Button>
+        </Btn>
       </div>
     </div>
   );

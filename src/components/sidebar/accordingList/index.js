@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import According from "../../../UI/according";
-import BtnLoading from "../../../UI/btnLoading";
+import Btn from "../../../UI/btn";
 import useCheckBox from "../../../hooks/useCheckBox";
 
 import s from "./style.module.css";
@@ -30,7 +30,7 @@ export default function AccordingList({ data = [], title, setParams }) {
           />
         </div>
       ))}
-      <BtnLoading onClick={handlerClickSearch}>search</BtnLoading>
+      <Btn onClick={handlerClickSearch}>search</Btn>
     </According>
   );
 }

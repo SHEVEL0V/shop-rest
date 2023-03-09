@@ -1,5 +1,6 @@
 /** @format */
 
-.search {
-  margin-right: 40px;
+.navContainer {
+  display: flex;
+  height: 60px;
 }

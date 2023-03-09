@@ -2,17 +2,23 @@
 
 import LoadingButton from "@mui/lab/LoadingButton";
 
-export default function BtnRemove({ onClick, loading = false }) {
+export default function Btn({
+  onClick,
+  children,
+  color = "success",
+  loading = false,
+  style,
+}) {
   return (
     <LoadingButton
-      sx={{ width: "100%" }}
+      sx={{ width: "100%", margin: "5px", ...style }}
       variant="contained"
       component="label"
-      color="success"
+      color={color}
       onClick={onClick}
       loading={loading}
     >
-      Remove
+      {children}
     </LoadingButton>
   );
 }
