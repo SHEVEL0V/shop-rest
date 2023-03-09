@@ -13,6 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import TextInput from "../../UI/textInput";
 import ModalCustom from "../../components/modal";
+import GoogleAuth from "./googleAuth";
+
+import s from "./style.module.css";
 
 export default function Auth() {
   const dispatch = useDispatch();
@@ -59,18 +62,9 @@ export default function Auth() {
   return (
     <div>
       <ModalCustom open={isOpen} onClick={handleCloseModal}>
-        <button
-          style={{
-            width: 30,
-            height: 30,
-            marginBottom: 10,
-            marginLeft: "auto",
-            borderRadius: "50%",
-          }}
-          onClick={handleCloseModal}
-        >
-          +
-        </button>
+        <div className={s.auth}>
+          <GoogleAuth />
+        </div>
         {checked || (
           <TextInput label="name" value={name} onChange={handleInput} />
         )}
@@ -98,9 +92,7 @@ export default function Auth() {
         >
           {checked ? "login" : "Auth"}
         </Button>
-        <p>
-          <Switch onChange={() => setChecked((s) => !s)} /> authorization
-        </p>
+        <Switch onChange={() => setChecked((s) => !s)} /> authorization{" "}
       </ModalCustom>
       <ToastContainer />
     </div>

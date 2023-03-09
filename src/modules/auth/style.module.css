@@ -13,3 +13,7 @@
 
   background-color: var(--bg-color-tho);
 }
+
+.auth {
+  margin-bottom: 20px;
+}
