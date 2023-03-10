@@ -1,5 +1,4 @@
 /** @format */
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetProductsOptionsQuery } from "../../services/fetch";
 import Paper from "@mui/material/Paper";

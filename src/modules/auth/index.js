@@ -1,19 +1,21 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/auth/slice";
 import { setButtonLogin } from "../../redux/button/slice";
-import { useAddUserMutation, useLoginUserMutation } from "../../services/fetch";
-
+import {
+  useAddUserMutation,
+  useLoginUserMutation,
+  useLoginGoogleMutation,
+} from "../../services/fetch";
 import Switch from "@mui/material/Switch";
-import Button from "@mui/material/Button";
+import Btn from "../../UI/btn";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import TextInput from "../../UI/textInput";
 import ModalCustom from "../../components/modal";
-import GoogleAuth from "./googleAuth";
+import GoogleLogin from "./googleAuth";
 
 import s from "./style.module.css";
 
@@ -27,6 +29,7 @@ export default function Auth() {
 
   const [addUser] = useAddUserMutation();
   const [loginUser] = useLoginUserMutation();
+  const [loginGoogle] = useLoginGoogleMutation();
 
   const { name, telephone, password, email, password_again } = form;
   const disabled = checked
@@ -37,6 +40,8 @@ export default function Auth() {
       password?.trim() === "" ||
       password !== password_again;
 
+  const renderInfo = (value = "info") => toast.error(value, { theme: "dark" });
+
   const handleInput = ({ name, value }) =>
     setForm((state) => ({ ...state, [name]: value }));
 
@@ -46,16 +51,22 @@ export default function Auth() {
     setForm({});
   };
 
-  const handleAuth = () =>
+  const handleAuthGoogle = (value) =>
+    loginGoogle(value)
+      .unwrap()
+      .then((payload) => handleAuthSuccess(payload))
+      .catch(({ status }) => renderInfo(status));
+
+  const handleAuth = (value = form) =>
     checked
-      ? loginUser(form)
+      ? loginUser(value)
           .unwrap()
           .then((payload) => handleAuthSuccess(payload))
-          .catch(({ status }) => toast.error(status, { theme: "dark" }))
-      : addUser(form)
+          .catch(({ status }) => renderInfo(status))
+      : addUser(value)
           .unwrap()
           .then((payload) => handleAuthSuccess(payload))
-          .catch(({ status }) => toast.error(status, { theme: "dark" }));
+          .catch(({ status }) => renderInfo(status));
 
   const handleCloseModal = () => dispatch(setButtonLogin());
 
@@ -63,7 +74,7 @@ export default function Auth() {
     <div>
       <ModalCustom open={isOpen} onClick={handleCloseModal}>
         <div className={s.auth}>
-          <GoogleAuth />
+          <GoogleLogin auth={handleAuthGoogle}>google</GoogleLogin>
         </div>
         {checked || (
           <TextInput label="name" value={name} onChange={handleInput} />
@@ -84,14 +95,9 @@ export default function Auth() {
             onChange={handleInput}
           />
         )}
-        <Button
-          disabled={disabled}
-          sx={{ marginInline: 30 }}
-          onClick={handleAuth}
-          variant="contained"
-        >
+        <Btn disabled={disabled} style={{}} onClick={handleAuth}>
           {checked ? "login" : "Auth"}
-        </Button>
+        </Btn>
         <Switch onChange={() => setChecked((s) => !s)} /> authorization{" "}
       </ModalCustom>
       <ToastContainer />

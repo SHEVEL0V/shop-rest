@@ -8,6 +8,7 @@ export default function Btn({
   color = "success",
   loading = false,
   style,
+  disabled = false,
 }) {
   return (
     <LoadingButton
@@ -17,6 +18,7 @@ export default function Btn({
       color={color}
       onClick={onClick}
       loading={loading}
+      disabled={disabled}
     >
       {children}
     </LoadingButton>

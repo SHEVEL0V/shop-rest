@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3003/shop/",
+    baseUrl: process.env.REACT_APP_BASE_URL,
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
@@ -108,6 +108,14 @@ export const shopApi = createApi({
         body,
       }),
     }),
+    //------------------------------------------------------------------------
+    loginGoogle: builder.mutation({
+      query: (body) => ({
+        url: "user/login/google",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -124,4 +132,5 @@ export const {
   useAddRatingMutation,
   useAddUserMutation,
   useLoginUserMutation,
+  useLoginGoogleMutation,
 } = shopApi;
