@@ -1,21 +1,27 @@
 /** @format */
 
 import React from "react";
-import TextInput from "../../../UI/textInput";
+import TextField from "@mui/material/TextField";
 
 import s from "./style.module.css";
 
-export default function FormAdmin({ form = {}, setForm }) {
-  const handleInput = ({ name, value }) =>
-    setForm((state) => ({ ...state, [name]: value }));
+export default function FormMain({ form = [], data, setForm }) {
+  const handleInput = (e) =>
+    setForm((state) => ({ ...state, [e.target.name]: e.target.value }));
 
   return (
     <div className={s.textInput}>
-      <TextInput label="type" value={form.type} onChange={handleInput} />
-      <TextInput label="brand" value={form.brand} onChange={handleInput} />
-      <TextInput label="name" value={form.name} onChange={handleInput} />
-      <TextInput label="price" value={form.price} onChange={handleInput} />
-      <TextInput label="desc" value={form.desc} onChange={handleInput} />
+      {form?.map((item, index) => (
+        <TextField
+          sx={{ marginBottom: "10px" }}
+          key={index}
+          name={item}
+          label={item}
+          variant="outlined"
+          value={data[item] || ""}
+          onChange={handleInput}
+        />
+      ))}
     </div>
   );
 }

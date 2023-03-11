@@ -2,24 +2,26 @@
 
 .container {
   box-sizing: content-box;
-  max-width: 600px;
+  max-width: 1000px;
+  display: block;
   padding: 20px;
-  margin-inline: auto;
 
   display: flex;
-  flex-direction: column;
-
+  flex-wrap: wrap;
   border-radius: 5px;
-
   background-color: var(--bg-color-tho);
 }
 
-.authContainer {
-  margin-top: 20px;
+.upload {
   display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 10px;
 }
-.switch {
+
+.textInput {
+  width: 500px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin-right: auto;
 }

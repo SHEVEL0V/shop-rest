@@ -6,7 +6,9 @@
 }
 
 .emailContainer {
-  min-width: 155px;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
 }
 .orderContainer {
   display: flex;

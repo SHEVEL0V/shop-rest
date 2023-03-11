@@ -1,11 +1,8 @@
 /** @format */
 
 import React from "react";
+import UpdateProfile from "../modules/updateProfile";
 
 export default function User() {
-  return (
-    <>
-      <h1>User Page</h1>
-    </>
-  );
+  return <UpdateProfile />;
 }

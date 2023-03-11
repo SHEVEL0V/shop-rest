@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -18,6 +19,9 @@ export default function AvatarIcon() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const url = useSelector((store) => store.auth.user.picture);
+
+  const avatar = url || "/static/images/avatar/2.jpg";
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -29,12 +33,11 @@ export default function AvatarIcon() {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar alt="avatar" src={avatar} />
         </IconButton>
       </Tooltip>
       <Menu
         sx={{ mt: "45px" }}
-        id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
           vertical: "top",

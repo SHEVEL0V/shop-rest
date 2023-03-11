@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import TextInput from "../../../UI/textInput";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import s from "./style.module.css";
 
@@ -26,19 +26,20 @@ export default function FormAddOpt({ form, setForm }) {
     <div className={s.container}>
       {options?.map((item, i) => (
         <div key={i} className={s.itemContainer}>
-          <TextInput
+          <TextField
             label={"name"}
-            value={item.name}
-            onChange={({ value }) => handleChangeInput(value, i, "name")}
+            value={item.name || ""}
+            onChange={(e) => handleChangeInput(e.target.value, i, "name")}
           />
-          <div style={{ width: "20px" }}></div>
-          <TextInput
+
+          <TextField
+            sx={{ width: "100%", marginLeft: "10px" }}
             label={"value"}
-            value={item.value}
-            onChange={({ value }) => handleChangeInput(value, i, "value")}
+            value={item.value || ""}
+            onChange={(e) => handleChangeInput(e.target.value, i, "value")}
           />
           <Button
-            sx={{ marginBottom: "20px", marginLeft: "10px" }}
+            sx={{ marginLeft: "10px" }}
             variant="contained"
             onClick={() => handleDeleteOptions(i)}
           >
@@ -46,7 +47,11 @@ export default function FormAddOpt({ form, setForm }) {
           </Button>
         </div>
       ))}
-      <Button variant="contained" onClick={handleAddOptions}>
+      <Button
+        sx={{ marginTop: "10px" }}
+        variant="contained"
+        onClick={handleAddOptions}
+      >
         ADD options
       </Button>
     </div>

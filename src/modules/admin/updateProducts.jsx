@@ -20,9 +20,10 @@ export default function UpdateProducts({ boolean }) {
   const [file, setFile] = useState(false);
   const [form, setForm] = useState({});
   const [urlImg, setUrlImg] = useState(picture);
-  const formData = new FormData();
   const { id } = useParams();
   const navigate = useNavigate();
+  const formData = new FormData();
+  const FORM = ["type", "brand", "name", "price", "desc"];
 
   const { data, isSuccess } = useGetProductsByIdQuery(id, { skip: !boolean });
   const [updateProducts] = useUpdateProductsMutation(id);
@@ -73,7 +74,7 @@ export default function UpdateProducts({ boolean }) {
     <div className={s.container}>
       <div style={{ display: "flex", width: "100%" }}>
         <UploadImg setFile={setFile} urlImg={urlImg} setUrlImg={setUrlImg} />
-        <FormMain form={form} setForm={setForm} />
+        <FormMain data={form} form={FORM} setForm={setForm} />
       </div>
       <FormAddOpt form={form} setForm={setForm} />
       <Btn loading={isLoading} onClick={handlerClickButton}>

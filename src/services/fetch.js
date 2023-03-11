@@ -116,6 +116,14 @@ export const shopApi = createApi({
         body,
       }),
     }),
+    //------------------------------------------------------------------------
+    updateUser: builder.mutation({
+      query: (body) => ({
+        url: "user/update",
+        method: "PUT",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -133,4 +141,5 @@ export const {
   useAddUserMutation,
   useLoginUserMutation,
   useLoginGoogleMutation,
+  useUpdateUserMutation,
 } = shopApi;
