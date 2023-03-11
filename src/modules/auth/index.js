@@ -32,106 +32,55 @@ export default function Auth() {
   const [loginUser] = useLoginUserMutation();
   const [loginGoogle] = useLoginGoogleMutation();
 
-  console.log(form);
+  const formSingIn = ["email", "password"];
+  const formSingUp = [
+    "name",
+    "email",
+    "telephone",
+    "password",
+    "password_again",
+  ];
 
-  const { name, telephone, password, email, password_again } = form;
-  // const disabled = checked
-  //   ? email?.trim() === "" || password?.trim() === ""
-  //   : name?.trim() === "" ||
-  //     telephone?.trim() === "" ||
-  //     email?.trim() === "" ||
-  //     password?.trim() === "" ||
-  //     password !== password_again;
+  const mainForm = checked ? formSingIn : formSingUp;
 
-  const renderInfo = (value = "info") => toast.error(value, { theme: "dark" });
+  const renderError = ({ status }) => toast.error(status, { theme: "dark" });
 
   const handleInput = (event) => {
     const { name, value } = event.target;
     setForm((state) => ({ ...state, [name]: value }));
   };
 
-  const handleAuthSuccess = (payload) => {
-    dispatch(setButtonLogin());
-    dispatch(setUser(payload));
-    setForm({});
-  };
+  const handleAuthSuccess = (payload) =>
+    dispatch(setButtonLogin()) && dispatch(setUser(payload)) && setForm({});
 
   const handleAuthGoogle = (value) =>
-    loginGoogle(value)
-      .unwrap()
-      .then((payload) => handleAuthSuccess(payload))
-      .catch(({ status }) => renderInfo(status));
+    loginGoogle(value).unwrap().then(handleAuthSuccess).catch(renderError);
 
-  const handleAuth = () =>
+  const handleClickButtonAuth = () =>
     checked
-      ? loginUser(form)
-          .unwrap()
-          .then((payload) => handleAuthSuccess(payload))
-          .catch(({ status }) => renderInfo(status))
-      : addUser(form)
-          .unwrap()
-          .then((payload) => handleAuthSuccess(payload))
-          .catch(({ status }) => renderInfo(status));
+      ? loginUser(form).unwrap().then(handleAuthSuccess).catch(renderError)
+      : addUser(form).unwrap().then(handleAuthSuccess).catch(renderError);
 
   const handleCloseModal = () => dispatch(setButtonLogin());
 
   return (
     <div>
       <ModalCustom open={isOpen} onClick={handleCloseModal}>
-        {checked || (
+        {mainForm.map((item, index) => (
           <TextField
+            key={index}
             margin="normal"
             required
             fullWidth
-            label="name"
-            value={name}
+            label={item}
+            name={item}
+            type={item}
+            value={form[item] || ""}
             onChange={handleInput}
           />
-        )}
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          label="Email Address"
-          name="email"
-          autoFocus
-          value={email}
-          onChange={handleInput}
-        />
-        {checked || (
-          <TextField
-            margin="normal"
-            fullWidth
-            required
-            label="telephone"
-            value={telephone}
-            onChange={handleInput}
-          />
-        )}
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          value={password}
-          onChange={handleInput}
-        />
-        {checked || (
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            type="password"
-            label="password_again"
-            value={password_again}
-            onChange={handleInput}
-          />
-        )}
+        ))}
 
-        <Btn disabled={false} onClick={handleAuth}>
+        <Btn disabled={false} onClick={handleClickButtonAuth}>
           {checked ? "sing in" : "sing up"}
         </Btn>
         <div className={s.authContainer}>
@@ -143,7 +92,9 @@ export default function Auth() {
                 : "Already have an account? Sign in"}
             </Typography>
           </div>
-          <GoogleLogin auth={handleAuthGoogle}>google</GoogleLogin>
+          <GoogleLogin auth={handleAuthGoogle} error={renderError}>
+            google
+          </GoogleLogin>
         </div>
       </ModalCustom>
       <ToastContainer />

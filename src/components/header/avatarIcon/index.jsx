@@ -29,6 +29,11 @@ export default function AvatarIcon() {
   const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+    dispatch(setUser({}));
+    navigate("/");
+  };
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
@@ -54,7 +59,7 @@ export default function AvatarIcon() {
         <MenuItem onClick={() => navigate("user")}>
           <Typography textAlign="center">Setting</Typography>
         </MenuItem>
-        <MenuItem onClick={() => dispatch(setUser({}))}>
+        <MenuItem onClick={handleLogout}>
           <Typography textAlign="center">Logout</Typography>
         </MenuItem>
       </Menu>

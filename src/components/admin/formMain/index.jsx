@@ -17,7 +17,6 @@ export default function FormMain({ form = [], data, setForm }) {
           key={index}
           name={item}
           label={item}
-          variant="outlined"
           value={data[item] || ""}
           onChange={handleInput}
         />

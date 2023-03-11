@@ -7,7 +7,7 @@ export default function GoogleAuth({ auth, error }) {
   return (
     <GoogleLogin
       onSuccess={(res) => auth({ token: res.credential })}
-      onError={() => console.error("Login Failed")}
+      onError={(error) => error(error.message)}
       useOneTap
     />
   );

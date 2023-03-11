@@ -12,6 +12,8 @@ import useSearchParamsCustom from "../../hooks/useSearchParams";
 import useCheckBox from "../../hooks/useCheckBox";
 import Pagination from "../../components/pagination";
 
+import s from "./style.module.css";
+
 export default function ListProductsAdmin() {
   const { params } = useSearchParamsCustom();
   const [options, setOptions] = useState([]);
@@ -31,7 +33,7 @@ export default function ListProductsAdmin() {
           remove
         </Btn>
       </Sidebar>
-      <div style={{ width: "100%", height: "100vh", overflow: "auto" }}>
+      <div className={s.containerLists}>
         {isLoading ? (
           <h1>loading</h1>
         ) : (

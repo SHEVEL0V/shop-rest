@@ -1,5 +1,6 @@
 /** @format */
 .container {
+  box-sizing: border-box;
   padding-inline: 15px;
   padding-top: 30px;
   background-color: aquamarine;
@@ -13,4 +14,13 @@
   box-sizing: border-box;
   width: 100%;
   margin-top: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
 }
