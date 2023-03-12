@@ -41,12 +41,11 @@ export default function CardBasket({ data, handlePrice }) {
           </div>
         </div>
         <Button
-          sx={{ marginLeft: "auto", width: 200 }}
+          sx={{ minWidth: "100px" }}
           variant="contained"
-          startIcon={<DeleteIcon />}
           onClick={handleDeleteProduct}
         >
-          Delete
+          <DeleteIcon /> Delete
         </Button>
       </div>
     </div>

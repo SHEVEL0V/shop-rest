@@ -4,8 +4,8 @@
   width: 100%;
   margin-bottom: 10px;
   border-radius: 5px;
-  padding: 5px;
-  overflow: hidden;
+  padding: 10px;
+  /* overflow: hidden; */
   background-color: var(--bg-color-one);
 }
 .titleContainer {
@@ -16,12 +16,12 @@
 .title {
   font-size: 18px;
   margin: 0;
-  margin-bottom: 20px;
   color: rgb(36, 36, 40);
 }
 .countContainer {
   display: flex;
   align-items: center;
+  margin: 5px;
 }
 .count {
   display: flex;
@@ -47,7 +47,9 @@
 }
 
 .img {
-  height: 80px;
+  height: 100%;
+  max-width: 100px;
+  margin-inline: auto;
 }
 
 .price {
@@ -60,4 +62,11 @@
 }
 .flex {
   display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 480px) {
+  .flex {
+    flex-direction: row;
+  }
 }

@@ -11,6 +11,7 @@ import picture from "../../assets/img.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import s from "./style.module.css";
+import { TextField } from "@mui/material";
 
 export default function UpdateProfile() {
   const user = useSelector((store) => store.auth.user);
@@ -19,13 +20,8 @@ export default function UpdateProfile() {
   const [urlImg, setUrlImg] = useState(user?.picture || picture);
   const dispatch = useDispatch();
 
-  const FORM = [
-    "name",
-    "telephone",
-    "delivery",
-    "new password",
-    "again password",
-  ];
+  const errorPassword = form.password === form.password2;
+  const FORM = ["name", "telephone", "delivery"];
 
   const formData = new FormData();
   const [updateUser] = useUpdateUserMutation();
@@ -43,17 +39,41 @@ export default function UpdateProfile() {
     if (file) {
       formData.append("img", file);
     }
-
     handleUpdateUser();
   };
+
+  const handleInput = (e) =>
+    setForm((state) => ({ ...state, [e.target.name]: e.target.value }));
 
   return (
     <div className={s.container}>
       <div style={{ display: "flex", width: "100%" }}>
         <UploadImg setFile={setFile} urlImg={urlImg} setUrlImg={setUrlImg} />
-        <FormMain data={form} form={FORM} setForm={setForm} />
+        <div>
+          <FormMain data={form} form={FORM} setForm={setForm} />
+          <TextField
+            sx={{ marginBottom: "10px", width: "100%" }}
+            label="new password"
+            name="password"
+            value={form.password || ""}
+            onChange={handleInput}
+            error={!errorPassword}
+          />
+          <TextField
+            sx={{ marginBottom: "10px", width: "100%" }}
+            label="again password"
+            name="password2"
+            value={form.password2 || ""}
+            onChange={handleInput}
+            error={!errorPassword}
+          />
+        </div>
       </div>
-      <Btn loading={false} onClick={handlerClickButton}>
+      <Btn
+        disabled={!errorPassword}
+        loading={false}
+        onClick={handlerClickButton}
+      >
         UPDATE PROFILE
       </Btn>
       <ToastContainer />
