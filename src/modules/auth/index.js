@@ -72,6 +72,7 @@ export default function Auth() {
             margin="normal"
             required
             fullWidth
+            error={item === "password_again" && form[item] !== form.password}
             label={item}
             name={item}
             type={item}

@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import s from "./style.module.css";
 import { TextField } from "@mui/material";
 
-export default function UpdateProfile() {
+export default function UpdateUser() {
   const user = useSelector((store) => store.auth.user);
   const [file, setFile] = useState(false);
   const [form, setForm] = useState(user);

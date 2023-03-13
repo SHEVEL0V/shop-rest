@@ -3,12 +3,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Orders from "./modules/admin/orders";
 import ListProductsAdmin from "./modules/admin/listProducts";
-import AdminPage from "./pages/admin";
-import MainPage from "./pages/main";
-import ProductPage from "./pages/product";
-import UserPage from "./pages/user";
-import Container from "./pages/container";
+import ListProducts from "./modules/list";
+import Product from "./modules/product";
+import UpdateUser from "./modules/user";
+import Container from "./pages/main";
 import UpdateProducts from "./modules/admin/updateProducts";
+import PrivateRoute from "./helpers/privateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -17,19 +17,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MainPage />,
+        element: <ListProducts />,
       },
       {
         path: "user",
-        element: <UserPage />,
+        element: <UpdateUser />,
       },
       {
         path: ":brand/:id",
-        element: <ProductPage />,
+        element: <Product />,
       },
       {
         path: "admin",
-        element: <AdminPage />,
+        element: <PrivateRoute />,
         children: [
           { path: "add", element: <UpdateProducts boolean={false} /> },
           { path: "remove", element: <ListProductsAdmin /> },

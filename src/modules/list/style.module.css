@@ -1,6 +1,9 @@
 /** @format */
-
 .container {
+  display: flex;
+  width: 100%;
+}
+.containerListItem {
   box-sizing: border-box;
 
   width: 100%;
@@ -13,23 +16,23 @@
   background-color: var(--bg-color-tho);
 }
 @media screen and (min-width: 480px) {
-  .container {
+  .containerListItem {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 @media screen and (min-width: 600px) {
-  .container {
+  .containerListItem {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media screen and (min-width: 900px) {
-  .container {
+  .containerListItem {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .container {
+  .containerListItem {
     grid-template-columns: repeat(4, 1fr);
   }
 }
