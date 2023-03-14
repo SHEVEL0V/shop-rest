@@ -9,8 +9,10 @@ import {
   useGetProductsByIdQuery,
   useUpdateProductsMutation,
   useAddProductsMutation,
+  useGetProductsOptionsQuery,
 } from "../../services/fetch";
 import Btn from "../../UI/btn";
+import Autocomplete from "../../UI/autocomplete";
 import picture from "../../assets/img.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,8 +25,8 @@ export default function UpdateProducts({ boolean }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const formData = new FormData();
-  const FORM = ["type", "brand", "name", "price", "desc"];
 
+  const { data: options } = useGetProductsOptionsQuery();
   const { data, isSuccess } = useGetProductsByIdQuery(id, { skip: !boolean });
   const [updateProducts] = useUpdateProductsMutation(id);
   const [addProduct, { isLoading }] = useAddProductsMutation();
@@ -74,7 +76,29 @@ export default function UpdateProducts({ boolean }) {
     <div className={s.container}>
       <div style={{ display: "flex", width: "100%" }}>
         <UploadImg setFile={setFile} urlImg={urlImg} setUrlImg={setUrlImg} />
-        <FormMain data={form} form={FORM} setForm={setForm} />
+        <div style={{ width: "100%" }}>
+          <Autocomplete
+            options={options?.type}
+            name="type"
+            freeSolo={true}
+            onChange={(value) =>
+              setForm((state) => ({ ...state, type: value }))
+            }
+          />
+          <Autocomplete
+            options={options?.brand}
+            name="brand"
+            freeSolo={true}
+            onChange={(value) =>
+              setForm((state) => ({ ...state, brand: value }))
+            }
+          />
+          <FormMain
+            data={form}
+            form={["name", "price", "desc"]}
+            setForm={setForm}
+          />
+        </div>
       </div>
       <FormAddOpt form={form} setForm={setForm} />
       <Btn loading={isLoading} onClick={handlerClickButton}>

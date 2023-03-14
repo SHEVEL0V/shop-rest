@@ -9,10 +9,12 @@ export default function Autocomplete({
   name,
   onChange,
   size = "medium",
+  freeSolo = false,
 }) {
   return (
     <AutoComp
       sx={{ marginBottom: "10px" }}
+      freeSolo={freeSolo}
       disablePortal
       options={options}
       isOptionEqualToValue={(option, value) => option.label === value.label}

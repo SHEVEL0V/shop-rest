@@ -47,11 +47,7 @@ export default function FormAddOpt({ form, setForm }) {
           </Button>
         </div>
       ))}
-      <Button
-        sx={{ marginTop: "10px" }}
-        variant="contained"
-        onClick={handleAddOptions}
-      >
+      <Button variant="contained" onClick={handleAddOptions}>
         ADD options
       </Button>
     </div>

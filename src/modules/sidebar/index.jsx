@@ -4,7 +4,6 @@ import { useGetProductsOptionsQuery } from "../../services/fetch";
 import Paper from "@mui/material/Paper";
 import Slide from "@mui/material/Slide";
 import SliderPrice from "../../components/sidebar/sliderPrice";
-import Options from "../../components/sidebar/options";
 import AccordingList from "../../components/sidebar/accordingList";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 
@@ -50,7 +49,6 @@ export default function Sidebar({ children }) {
                 setParams={setParams}
                 getParams={getParams}
               />
-              <Options />
               <div className={s.children}>{children}</div>
             </div>
           )}
