@@ -9,10 +9,11 @@ import useSearchParamsCustom from "../../hooks/useSearchParams";
 
 import s from "./style.module.css";
 import Sort from "../../components/sidebar/sort";
+import Options from "../../components/sidebar/options";
 
-export default function Sidebar({ children }) {
+export default function Sidebar({ children, options }) {
   const isOpen = useSelector((store) => store.button.menu);
-  const { setParams, getParams } = useSearchParamsCustom();
+  const { setParams } = useSearchParamsCustom();
 
   const { data, isLoading } = useGetProductsOptionsQuery();
 
@@ -34,20 +35,11 @@ export default function Sidebar({ children }) {
             <div>loading</div>
           ) : (
             <div>
-              <AccordingList
-                title="type"
-                data={data?.type}
-                setParams={setParams}
-                getParams={getParams}
-              />
+              <AccordingList title="type" data={data?.type} />
               <Sort onSort={setParams} />
               <SliderPrice price={data?.price} />
-              <AccordingList
-                title="brand"
-                data={data?.brand}
-                setParams={setParams}
-                getParams={getParams}
-              />
+              <AccordingList title="brand" data={data?.brand} />
+              <Options options={options} />
               <div className={s.children}>{children}</div>
             </div>
           )}

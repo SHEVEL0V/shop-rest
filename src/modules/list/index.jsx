@@ -15,10 +15,10 @@ export default function ListProducts() {
   const { params } = useSearchParams();
   const { token } = useSelector((store) => store.auth);
   const { data, isLoading } = useGetProductsQuery(params);
-
+  console.log(data?.options);
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar />
+      <Sidebar options={data?.options} />
       <div className={s.container}>
         <div className={s.containerListItem}>
           {isLoading ? (

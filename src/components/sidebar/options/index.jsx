@@ -2,35 +2,40 @@
 
 import React, { useState } from "react";
 import BtnSearch from "../../../UI/btnSearch";
-
-import CardOptions from "../accordingList";
+import Checkbox from "@mui/material/Checkbox";
 import According from "../../../UI/according";
 import useCheckBox from "../../../hooks/useCheckBox";
+import useSearchParamsCustom from "../../../hooks/useSearchParams";
 
-// import s from "./style.module.css";
+import s from "./style.module.css";
 
-export default function Options() {
+export default function Options({ options }) {
   const [form, setForm] = useState({});
 
-  const memoryValue = [32, 64, 128, 256, 512];
-  const ramValue = [4, 6, 8, 12];
+  const items = Object.keys(options || {});
 
-  const handelSearch = () => console.log("Search:", form);
+  const { setParams } = useSearchParamsCustom();
+
+  const handelSearch = () => setParams(form);
 
   const { handleCheckBoxObject } = useCheckBox(setForm);
 
   return (
     <According title="options">
-      <CardOptions
-        title="Memory"
-        data={memoryValue}
-        onChange={handleCheckBoxObject}
-      />
-      <CardOptions
-        title="Ram"
-        data={ramValue}
-        onChange={handleCheckBoxObject}
-      />
+      {items?.map((item, key) => (
+        <According key={key} title={item} bgColor={form[item]?.length || false}>
+          {options[item].map((value) => (
+            <div key={value} className={s.container}>
+              <span className={s.name}>{value}</span>
+              <Checkbox
+                name={item}
+                value={value}
+                onChange={handleCheckBoxObject}
+              />
+            </div>
+          ))}
+        </According>
+      ))}
       <p></p>
       <BtnSearch onClick={handelSearch}>Search</BtnSearch>
     </According>

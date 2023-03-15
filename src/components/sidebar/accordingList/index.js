@@ -7,13 +7,13 @@ import Btn from "../../../UI/btn";
 import useCheckBox from "../../../hooks/useCheckBox";
 
 import s from "./style.module.css";
+import useSearchParamsCustom from "../../../hooks/useSearchParams";
 
-export default function AccordingList({ data = [], title, setParams }) {
-  const [options, setOptions] = useState("");
+export default function AccordingList({ data = [], title }) {
+  const { setParams, getParams } = useSearchParamsCustom();
+  const [options, setOptions] = useState(getParams(title));
 
   const { handleCheckBoxArray } = useCheckBox(setOptions);
-
-  const handleChecked = (value) => options.includes(value);
 
   const handlerClickSearch = () => setParams({ page: 1, [title]: options });
 
@@ -26,7 +26,7 @@ export default function AccordingList({ data = [], title, setParams }) {
             name={title}
             value={value}
             onChange={handleCheckBoxArray}
-            checked={handleChecked(value)}
+            checked={options.includes(value)}
           />
         </div>
       ))}
