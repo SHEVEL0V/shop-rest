@@ -2,10 +2,8 @@
 
 .container {
   box-sizing: content-box;
-  max-width: 1000px;
   display: block;
   padding: 20px;
-
   display: flex;
   flex-wrap: wrap;
   border-radius: 5px;
@@ -20,14 +18,12 @@
 }
 
 .textInput {
-  width: 500px;
   display: flex;
   flex-direction: column;
   margin-right: auto;
 }
 
 .containerLists {
+  box-sizing: border-box;
   width: 100%;
-  height: 100v;
-  overflow: auto;
 }

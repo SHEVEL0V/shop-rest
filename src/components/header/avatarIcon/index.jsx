@@ -35,7 +35,7 @@ export default function AvatarIcon() {
     navigate("/");
   };
   return (
-    <Box sx={{ flexGrow: 0 }}>
+    <Box sx={{ flexGrow: 0, marginLeft: "auto" }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar alt="avatar" src={avatar} />

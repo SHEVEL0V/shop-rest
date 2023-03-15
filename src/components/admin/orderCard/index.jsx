@@ -2,7 +2,7 @@
 
 import React from "react";
 import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
+import Text from "../../../UI/text";
 import Checkbox from "@mui/material/Checkbox";
 import getTime from "../../../helpers/getTime";
 
@@ -14,57 +14,47 @@ export default function OrderCard({ data, handleCheckBox }) {
 
   const totalPrice = orders.reduce((acc, e) => acc + e.price, 0);
 
+  const styleStatus = {
+    display: "flex",
+    borderRadius: "3px",
+    marginRight: "5px",
+    backgroundColor:
+      status === "PENDING"
+        ? "#96F095"
+        : status === "RESOLVED"
+        ? "#81BCDB"
+        : "#FF927B",
+  };
+
   return (
     <Card className={s.container}>
       <div className={s.emailContainer}>
-        <Typography sx={{ fontSize: 16 }} color="text.primary">
-          date:{getTime(createdAt)}
-        </Typography>
-        <Typography sx={{ fontSize: 18 }} color="text.secondary">
-          {email}
-        </Typography>
-        <Typography sx={{ fontSize: 16 }} color="text.secondary">
+        <Text>date:{getTime(createdAt)}</Text>
+        <Text weight="bold">{email}</Text>
+        <Text sx={{ fontSize: 16 }} color="text.secondary">
           tel:{telephone}
-        </Typography>
-        <Typography
-          sx={{ fontSize: 16 }}
-          style={{
-            borderRadius: "3px",
-            marginRight: "5px",
-            backgroundColor:
-              status === "PENDING"
-                ? "#96F095"
-                : status === "RESOLVED"
-                ? "#81BCDB"
-                : "#FF927B",
-          }}
-          color="text.secondary"
-        >
-          _status:{status}
-        </Typography>
+        </Text>
+        <div style={styleStatus}>
+          <Text>status: {status}</Text>
+        </div>
       </div>
 
       <div className={s.orderContainer}>
         {orders?.map((el) => (
           <div className={s.itemOrderContainer} key={el._id}>
-            <div className={s.itemOrder} style={{ minWidth: "150px" }}>
-              brand: <b>{el.brand}</b>
+            <div className={s.brand}>
+              <Text> brand: {el.brand}</Text>
             </div>
-            <b className={s.itemOrder} style={{ width: "100%" }}>
-              {el.name}
-            </b>
-
-            <div className={s.itemOrder}>
-              price:
-              <b style={{ width: "60px", marginLeft: "2px" }}>{el.price}</b>
+            <div className={s.title}>
+              <Text weight="bold"> {el.name}</Text>
             </div>
-            <div className={s.itemOrder}>
-              qty:<b>{el.qty}</b>
+            <div className={s.price}>
+              <Text>{`price: ${el.price} qty:${el.qty}`}</Text>
             </div>
           </div>
         ))}
         <div style={{ marginTop: "auto", marginLeft: "auto" }}>
-          total price:<b style={{ color: "#FF0530" }}>{totalPrice}</b>
+          <Text weight="bold">total price:{totalPrice}</Text>
         </div>
       </div>
       <Checkbox

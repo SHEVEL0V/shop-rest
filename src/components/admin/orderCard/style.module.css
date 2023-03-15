@@ -1,15 +1,17 @@
 /** @format */
 .container {
   display: flex;
-  margin: 10px;
+  margin: 5px;
   padding: 5px;
 }
 
 .emailContainer {
   display: flex;
   flex-direction: column;
-  min-width: 200px;
+  width: 40%;
+  overflow: auto;
 }
+
 .orderContainer {
   display: flex;
   flex-direction: column;
@@ -20,11 +22,16 @@
 }
 .itemOrderContainer {
   display: flex;
-}
-
-.itemOrder {
-  display: flex;
-
   padding: 3px;
   border-bottom: 1px solid rgb(60, 60, 60);
+}
+
+.brand {
+  min-width: 150px;
+}
+.title {
+  width: 100%;
+}
+.price {
+  width: 60%;
 }

@@ -28,7 +28,6 @@ export default function Sidebar({ children }) {
           className={s.container}
           sx={{
             boxShadow: "inset -3px -3px 29px -15px rgba(67, 67, 71, 1)",
-            height: "100%",
           }}
         >
           {isLoading ? (

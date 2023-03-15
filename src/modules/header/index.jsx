@@ -13,6 +13,7 @@ import Title from "../../UI/title";
 import Btn from "../../UI/btn";
 import BtnBack from "../../UI/btnBack";
 import s from "./style.module.css";
+import { Button } from "@mui/material";
 
 export default function Header() {
   const isAuth = useSelector((s) => s.auth.token);
@@ -21,8 +22,11 @@ export default function Header() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  const visibilityAdmin = pathname.split("/")[1] === "admin";
-  const visibilityUser = pathname.split("/")[1] === "user";
+  const path = pathname.split("/");
+
+  const visibilityAdmin = path[1] === "admin";
+  const visibilityMenu = path[2] === "remove" || path[1] === "";
+  const visibilityBtnBack = path[1] !== "";
 
   const handleColorButton = (value) =>
     pathname === value ? "warning" : "info";
@@ -30,34 +34,41 @@ export default function Header() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        {visibilityAdmin || visibilityUser ? (
+        {visibilityMenu && <MenuButton />}
+        {visibilityBtnBack && (
           <BtnBack onClick={() => navigate("/")}>home</BtnBack>
-        ) : (
-          ""
         )}
-        {!visibilityAdmin && !visibilityUser && <MenuButton />}
+
         <Title>SHOP</Title>
         {!visibilityAdmin && <SearchInput />}
         {visibilityAdmin && (
           <div className={s.navContainer}>
-            <Btn
+            <Button
+              className={s.btn}
+              variant="contained"
               color={handleColorButton("/admin/add")}
               onClick={() => navigate("/admin/add")}
             >
-              add product
-            </Btn>
-            <Btn
+              add
+            </Button>
+            <Button
+              className={s.btn}
+              sx={{ marginInline: "5px" }}
+              variant="contained"
               color={handleColorButton("/admin/remove")}
               onClick={() => navigate("/admin/remove")}
             >
-              list products
-            </Btn>
-            <Btn
+              list
+            </Button>
+            <Button
+              className={s.btn}
+              sx={{ marginRight: "5px" }}
+              variant="contained"
               color={handleColorButton("/admin/orders")}
               onClick={() => navigate("/admin/orders")}
             >
-              all orders
-            </Btn>
+              orders
+            </Button>
           </div>
         )}
         {isAuthAdmin && !visibilityAdmin && (

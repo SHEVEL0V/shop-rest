@@ -23,12 +23,16 @@ export default function Orders() {
   return (
     <div
       style={{
-        backgroundColor: "white",
         display: "flex",
       }}
     >
       <FilterOrder setParams={setParams} updateOrder={handleUpdateOrder} />
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {isLoading ||
           data?.map((el) => (
             <OrderCard

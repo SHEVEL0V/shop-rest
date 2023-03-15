@@ -9,7 +9,7 @@ export default function BtnBack({ children, onClick }) {
       color="inherit"
       variant="text"
       startIcon={<ArrowBackIcon />}
-      sx={{ margin: "5px" }}
+      sx={{ marginInline: "5px" }}
       onClick={onClick}
     >
       {children}

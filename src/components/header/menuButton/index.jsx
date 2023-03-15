@@ -20,7 +20,6 @@ export default function MenuButton() {
       edge="start"
       color="inherit"
       aria-label="open drawer"
-      sx={{ mr: 2 }}
       onClick={() => dispatch(setButtonMenu())}
     >
       <MenuIcon />

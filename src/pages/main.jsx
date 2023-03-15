@@ -11,12 +11,17 @@ export default function Main() {
   return (
     <>
       <Header />
-      <div style={{ minHeight: "calc(100vh - 150px)", display: "flex" }}>
+      <div
+        style={{
+          display: "flex",
+          minHeight: "calc(100vh - 150px)",
+        }}
+      >
         <Outlet />
-        <Basket />
-        <Auth />
       </div>
       <Footer />
+      <Basket />
+      <Auth />
     </>
   );
 }

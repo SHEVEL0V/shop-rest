@@ -6,14 +6,14 @@ import ListProductsAdmin from "./modules/admin/listProducts";
 import ListProducts from "./modules/list";
 import Product from "./modules/product";
 import UpdateUser from "./modules/user";
-import Container from "./pages/main";
+import Main from "./pages/main";
 import UpdateProducts from "./modules/admin/updateProducts";
 import PrivateRoute from "./helpers/privateRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Container />,
+    element: <Main />,
     children: [
       {
         index: true,

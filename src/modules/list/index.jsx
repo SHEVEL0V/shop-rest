@@ -17,9 +17,9 @@ export default function ListProducts() {
   const { data, isLoading } = useGetProductsQuery(params);
 
   return (
-    <div className={s.container}>
+    <div style={{ display: "flex" }}>
       <Sidebar />
-      <div>
+      <div className={s.container}>
         <div className={s.containerListItem}>
           {isLoading ? (
             <CircularProgress />
