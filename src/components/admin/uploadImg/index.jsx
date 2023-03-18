@@ -14,7 +14,7 @@ export default function UploadImg({ setFile, urlImg, setUrlImg }) {
   return (
     <div className={s.upload}>
       <img className={s.img} src={urlImg} alt="product"></img>
-      <Button variant="contained" component="label">
+      <Button variant="contained" component="label" >
         Upload
         <input
           hidden

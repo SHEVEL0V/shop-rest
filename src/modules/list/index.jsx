@@ -15,16 +15,16 @@ export default function ListProducts() {
   const { params } = useSearchParams();
   const { token } = useSelector((store) => store.auth);
   const { data, isLoading } = useGetProductsQuery(params);
-  console.log(data?.options);
+
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar options={data?.options} />
+      <Sidebar options={data?.desc} isLoading={isLoading} />
       <div className={s.container}>
         <div className={s.containerListItem}>
           {isLoading ? (
             <CircularProgress />
           ) : (
-            data?.products?.map((el) => (
+            data?.results?.map((el) => (
               <CardProduct key={el._id} data={el} token={token} />
             ))
           )}

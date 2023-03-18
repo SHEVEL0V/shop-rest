@@ -1,6 +1,6 @@
 /** @format */
 
-import * as React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import AutoComp from "@mui/material/Autocomplete";
 
@@ -8,18 +8,20 @@ export default function Autocomplete({
   options = [],
   name,
   onChange,
+  value,
   size = "medium",
   freeSolo = false,
 }) {
   return (
     <AutoComp
+      freeSolo={true}
       sx={{ marginBottom: "10px" }}
-      freeSolo={freeSolo}
-      disablePortal
       options={options}
-      isOptionEqualToValue={(option, value) => option.label === value.label}
+      inputValue={value}
+      onInputChange={onChange}
+      // getOptionLabel={(option) => option[name] || ""}
+      // isOptionEqualToValue={(option, value) => option[name] === value[name]}
       size={size}
-      onChange={(_, value) => onChange(value)}
       renderInput={(params) => <TextField {...params} label={name} />}
     />
   );

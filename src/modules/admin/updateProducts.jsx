@@ -9,7 +9,6 @@ import {
   useGetProductsByIdQuery,
   useUpdateProductsMutation,
   useAddProductsMutation,
-  useGetProductsOptionsQuery,
 } from "../../services/fetch";
 import Btn from "../../UI/btn";
 import Autocomplete from "../../UI/autocomplete";
@@ -26,7 +25,6 @@ export default function UpdateProducts({ boolean }) {
   const navigate = useNavigate();
   const formData = new FormData();
 
-  const { data: options } = useGetProductsOptionsQuery();
   const { data, isSuccess } = useGetProductsByIdQuery(id, { skip: !boolean });
   const [updateProducts] = useUpdateProductsMutation(id);
   const [addProduct, { isLoading }] = useAddProductsMutation();
@@ -59,7 +57,7 @@ export default function UpdateProducts({ boolean }) {
         toast.success("success update", { theme: "dark" });
       });
 
-  const handlerClickButton = () => {
+  const handlerFetch = () => {
     if (file) {
       formData.append("img", file);
     }
@@ -72,26 +70,26 @@ export default function UpdateProducts({ boolean }) {
     boolean ? handleUpdateProduct(formData) : handleAddProducts(formData);
   };
 
+  const handleSetForm = (value) => setForm((state) => ({ ...state, ...value }));
+
+  const disabled = Object.values(form).length > 3;
+  console.log(form);
   return (
     <div className={s.container}>
       <div style={{ display: "flex", width: "100%" }}>
         <UploadImg setFile={setFile} urlImg={urlImg} setUrlImg={setUrlImg} />
         <div style={{ width: "100%" }}>
           <Autocomplete
-            options={options?.type}
+            options={["notebook"]}
             name="type"
-            freeSolo={true}
-            onChange={(value) =>
-              setForm((state) => ({ ...state, type: value }))
-            }
+            onChange={(_, v) => handleSetForm({ type: v })}
+            value={form.type || ""}
           />
           <Autocomplete
-            options={options?.brand}
+            options={["iphone", "samsung"]}
             name="brand"
-            freeSolo={true}
-            onChange={(value) =>
-              setForm((state) => ({ ...state, brand: value }))
-            }
+            onChange={(_, v) => handleSetForm({ brand: v })}
+            value={form.brand || ""}
           />
           <FormMain
             data={form}
@@ -101,7 +99,7 @@ export default function UpdateProducts({ boolean }) {
         </div>
       </div>
       <FormAddOpt form={form} setForm={setForm} />
-      <Btn loading={isLoading} onClick={handlerClickButton}>
+      <Btn loading={isLoading} onClick={handlerFetch} disabled={!disabled}>
         {boolean ? "UPDATE" : "ADD"}
       </Btn>
       <ToastContainer />

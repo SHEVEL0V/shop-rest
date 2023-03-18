@@ -19,8 +19,8 @@ export default function AccordingList({ data = [], title }) {
 
   return (
     <According title={title} bgColor={options.length !== 0}>
-      {data.map((value) => (
-        <div key={value} className={s.container}>
+      {data.map((value, ind) => (
+        <div key={ind} className={s.container}>
           <span className={s.name}>{value}</span>
           <Checkbox
             name={title}

@@ -19,7 +19,7 @@ export default function ListRemove({ data = [], handleCheckBox }) {
         <div className={s.containerImg}>
           <img src={data.img} alt={data.name} className={s.img} />
         </div>
-        <Text>brand: {data.brand}</Text>
+        <Text>brand: {data?.brand}</Text>
         <Text>
           name: <b>{data.name}</b>
         </Text>

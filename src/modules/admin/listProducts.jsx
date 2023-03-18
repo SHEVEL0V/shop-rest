@@ -28,7 +28,7 @@ export default function ListProductsAdmin() {
 
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar>
+      <Sidebar options={data?.desc} isLoading={isLoading}>
         <Btn onClick={handleRemoveProducts} loading={isLoadingDelete}>
           remove
         </Btn>
@@ -37,7 +37,7 @@ export default function ListProductsAdmin() {
         {isLoading ? (
           <h1>loading</h1>
         ) : (
-          data?.products.map((e) => (
+          data?.results.map((e) => (
             <ListRemove
               data={e}
               key={e._id}
@@ -45,7 +45,7 @@ export default function ListProductsAdmin() {
             />
           ))
         )}
-        <Pagination count={20} />
+        <Pagination count={data?.desc?.count} />
       </div>
     </div>
   );

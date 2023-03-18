@@ -1,6 +1,5 @@
 /** @format */
 import { useSelector } from "react-redux";
-import { useGetProductsOptionsQuery } from "../../services/fetch";
 import Paper from "@mui/material/Paper";
 import Slide from "@mui/material/Slide";
 import SliderPrice from "../../components/sidebar/sliderPrice";
@@ -11,11 +10,9 @@ import s from "./style.module.css";
 import Sort from "../../components/sidebar/sort";
 import Options from "../../components/sidebar/options";
 
-export default function Sidebar({ children, options }) {
+export default function Sidebar({ children, options, isLoading }) {
   const isOpen = useSelector((store) => store.button.menu);
   const { setParams } = useSearchParamsCustom();
-
-  const { data, isLoading } = useGetProductsOptionsQuery();
 
   return (
     <Slide
@@ -35,11 +32,11 @@ export default function Sidebar({ children, options }) {
             <div>loading</div>
           ) : (
             <div>
-              <AccordingList title="type" data={data?.type} />
+              <AccordingList title="type" data={options?.type} />
               <Sort onSort={setParams} />
-              <SliderPrice price={data?.price} />
-              <AccordingList title="brand" data={data?.brand} />
-              <Options options={options} />
+              <SliderPrice price={options?.price} />
+              <AccordingList title="brand" data={options?.brand} />
+              <Options options={options?.params} />
               <div className={s.children}>{children}</div>
             </div>
           )}

@@ -6,10 +6,10 @@ import Button from "@mui/material/Button";
 import s from "./style.module.css";
 
 export default function FormAddOpt({ form, setForm }) {
-  const options = form?.options || [];
+  const options = form?.params || [];
 
   const setOptions = (value) =>
-    setForm((state) => ({ ...state, options: value }));
+    setForm((state) => ({ ...state, params: value }));
 
   const handleChangeInput = (value, index, key) =>
     setOptions(

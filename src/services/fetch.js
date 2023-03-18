@@ -17,6 +17,22 @@ export const shopApi = createApi({
   }),
   tagTypes: ["Product", "Order", "Rating"],
   endpoints: (builder) => ({
+    //===========TYPE========================================================
+    addType: builder.mutation({
+      query: (body) => ({
+        url: "type/",
+        method: "POST",
+        body,
+      }),
+    }),
+    //===========BRAND========================================================
+    addBrand: builder.mutation({
+      query: (body) => ({
+        url: "brand/",
+        method: "POST",
+        body,
+      }),
+    }),
     //===========PRODUCTS========================================================
     getProducts: builder.query({
       query: (params) => ({
@@ -133,7 +149,6 @@ export const {
   useAddProductsMutation,
   useUpdateProductsMutation,
   useDeletedProductsMutation,
-  useGetProductsOptionsQuery,
   useAddOrderMutation,
   useGetOrderQuery,
   useUpdateOrderMutation,
