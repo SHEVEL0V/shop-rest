@@ -25,3 +25,16 @@
   flex-direction: column;
   margin-right: auto;
 }
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  padding-inline: 20px;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+.buttonContainer:hover {
+  border-color: black;
+}

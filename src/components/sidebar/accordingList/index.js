@@ -18,7 +18,7 @@ export default function AccordingList({ data = [], title }) {
   const handlerClickSearch = () => setParams({ page: 1, [title]: options });
 
   return (
-    <According title={title} bgColor={options.length !== 0}>
+    <According title={title} border={options.length !== 0}>
       {data.map((value, ind) => (
         <div key={ind} className={s.container}>
           <span className={s.name}>{value}</span>

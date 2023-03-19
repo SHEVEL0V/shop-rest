@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import AutoComp from "@mui/material/Autocomplete";
 
@@ -10,12 +10,13 @@ export default function Autocomplete({
   onChange,
   value,
   size = "medium",
-  freeSolo = false,
+  freeSolo = true,
+  style = { marginBottom: "10px" },
 }) {
   return (
     <AutoComp
-      freeSolo={true}
-      sx={{ marginBottom: "10px" }}
+      freeSolo={freeSolo}
+      sx={style}
       options={options}
       inputValue={value}
       onInputChange={onChange}

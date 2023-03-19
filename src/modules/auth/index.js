@@ -11,14 +11,13 @@ import {
 } from "../../services/fetch";
 import Switch from "@mui/material/Switch";
 import Btn from "../../UI/btn";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import TextField from "@mui/material/TextField";
 import ModalCustom from "../../components/modal";
 import GoogleLogin from "./googleAuth";
 
 import s from "./style.module.css";
 import { Typography } from "@mui/material";
+import { renderInfo } from "../../redux/info/slice";
 
 export default function Auth() {
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ export default function Auth() {
 
   const mainForm = checked ? formSingIn : formSingUp;
 
-  const renderError = ({ status }) => toast.error(status, { theme: "dark" });
+  const renderError = ({ status }) => dispatch(renderInfo(status));
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -98,7 +97,6 @@ export default function Auth() {
           </GoogleLogin>
         </div>
       </ModalCustom>
-      <ToastContainer />
     </div>
   );
 }

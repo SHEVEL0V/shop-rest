@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeBasket } from "../../redux/basket/slice";
 import { setButtonBasket } from "../../redux/button/slice";
 import { useAddOrderMutation } from "../../services/fetch";
-
+import { renderInfo } from "../../redux/info/slice";
 import ModalCustom from "../../components/modal";
 import CardBasket from "../../components/cardBasket";
 import BasketIkon from "../../components/basketIcon";
@@ -17,7 +17,7 @@ export default function Basket() {
   const dispatch = useDispatch();
   const basket = useSelector(({ basket }) => basket.data);
   const isOpen = useSelector(({ button }) => button.basket);
-  const [addOrder, { isSuccess }] = useAddOrderMutation();
+  const [addOrder, { isSuccess, isError }] = useAddOrderMutation();
 
   const qty = basket.length;
   const isClose = qty === 0;
@@ -29,7 +29,10 @@ export default function Basket() {
     if (isSuccess) {
       dispatch(removeBasket());
     }
-  }, [dispatch, isSuccess, isClose]);
+    if (isError) {
+      dispatch(renderInfo("Please authorize"));
+    }
+  }, [dispatch, isSuccess, isClose, isError]);
 
   const sumPrice = basket
     .map(({ qty, price }) => qty * price)

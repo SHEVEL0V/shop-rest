@@ -1,21 +1,23 @@
 /** @format */
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { RouterProvider } from "react-router-dom";
+import { setDesc } from "./redux/options/slice";
 import { router } from "./router";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { persistor, store } from "./redux/store";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+import { useGetProductsDescQuery } from "./services/fetch";
 
 function App() {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_ID}>
-          <RouterProvider router={router} />
-        </GoogleOAuthProvider>
-      </PersistGate>
-    </Provider>
-  );
+  const dispatch = useDispatch();
+
+  const { data, isSuccess } = useGetProductsDescQuery();
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setDesc(data));
+    }
+  }, [data, dispatch, isSuccess]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,7 +1,7 @@
 /** @format */
 
 import { createBrowserRouter } from "react-router-dom";
-import Orders from "./modules/admin/orders";
+import Orders from "./modules/admin/listOrders";
 import ListProductsAdmin from "./modules/admin/listProducts";
 import ListProducts from "./modules/list";
 import Product from "./modules/product";

@@ -12,5 +12,5 @@ export default function useMedia(width = 768) {
       });
   }, [width]);
 
-  return { boolean };
+  return boolean;
 }

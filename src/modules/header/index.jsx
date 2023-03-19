@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { Button } from "@mui/material";
 import { setButtonLogin } from "../../redux/button/slice";
 import SearchInput from "../../components/header/search";
 import MenuButton from "../../components/header/menuButton";
@@ -12,8 +13,9 @@ import AvatarIcon from "../../components/header/avatarIcon";
 import Title from "../../UI/title";
 import Btn from "../../UI/btn";
 import BtnBack from "../../UI/btnBack";
+import useMedia from "../../hooks/useMedia";
+
 import s from "./style.module.css";
-import { Button } from "@mui/material";
 
 export default function Header() {
   const isAuth = useSelector((s) => s.auth.token);
@@ -21,6 +23,7 @@ export default function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const boolean = useMedia(768);
 
   const path = pathname.split("/");
 
@@ -34,7 +37,7 @@ export default function Header() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        {visibilityMenu && <MenuButton />}
+        {visibilityMenu && !boolean && <MenuButton />}
         {visibilityBtnBack && (
           <BtnBack onClick={() => navigate("/")}>home</BtnBack>
         )}

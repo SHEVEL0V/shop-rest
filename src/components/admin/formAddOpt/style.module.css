@@ -1,8 +1,10 @@
 /** @format */
 
 .container {
+  box-sizing: border-box;
   width: 100%;
   padding: 10px;
+  margin-bottom: 10px;
 
   border: 1px solid gray;
   border-radius: 5px;
@@ -12,5 +14,6 @@
 }
 .itemContainer {
   display: flex;
+  align-items: center;
   margin-bottom: 10px;
 }

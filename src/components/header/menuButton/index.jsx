@@ -8,7 +8,7 @@ import useMedia from "../../../hooks/useMedia";
 
 export default function MenuButton() {
   const dispatch = useDispatch();
-  const { boolean } = useMedia(480);
+  const boolean = useMedia(480);
 
   useEffect(() => {
     dispatch(setButtonMenu());

@@ -10,9 +10,9 @@ import Sidebar from "../sidebar";
 import Btn from "../../UI/btn";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 import useCheckBox from "../../hooks/useCheckBox";
-import Pagination from "../../components/pagination";
 
 import s from "./style.module.css";
+import ListContainer from "../../components/listContainer";
 
 export default function ListProductsAdmin() {
   const { params } = useSearchParamsCustom();
@@ -27,26 +27,21 @@ export default function ListProductsAdmin() {
   const handleRemoveProducts = () => removeProducts({ options });
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className={s.containerList}>
       <Sidebar options={data?.desc} isLoading={isLoading}>
         <Btn onClick={handleRemoveProducts} loading={isLoadingDelete}>
           remove
         </Btn>
       </Sidebar>
-      <div className={s.containerLists}>
-        {isLoading ? (
-          <h1>loading</h1>
-        ) : (
-          data?.results.map((e) => (
-            <ListRemove
-              data={e}
-              key={e._id}
-              handleCheckBox={handleCheckBoxArray}
-            />
-          ))
-        )}
-        <Pagination count={data?.desc?.count} />
-      </div>
+      <ListContainer isLoading={isLoading} count={data?.count}>
+        {data?.results.map((e) => (
+          <ListRemove
+            data={e}
+            key={e._id}
+            handleCheckBox={handleCheckBoxArray}
+          />
+        ))}
+      </ListContainer>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default function Options({ options }) {
   return (
     <According title="options">
       {items?.map((item, key) => (
-        <According key={key} title={item} bgColor={form[item]?.length || false}>
+        <According key={key} title={item} border={form[item]?.length || false}>
           {options[item].map((value) => (
             <div key={value} className={s.container}>
               <span className={s.name}>{value}</span>

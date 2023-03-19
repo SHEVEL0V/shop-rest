@@ -3,34 +3,29 @@
 .container {
   box-sizing: content-box;
   display: block;
+  width: 800px;
   padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
   border-radius: 5px;
   background-color: var(--bg-color-tho);
 }
 
-.upload {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  margin: 10px;
-}
-
-.textInput {
-  display: flex;
-  flex-direction: column;
-  margin-right: auto;
-}
-
-.containerLists {
+.containerList {
   box-sizing: border-box;
+  display: flex;
   width: 100%;
+  padding-right: 20px;
 }
 
-.containerItem {
-  display: flex;
-  flex-direction: column;
+.buttonContainer {
   box-sizing: border-box;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  padding-inline: 20px;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+.buttonContainer:hover {
+  border-color: black;
 }

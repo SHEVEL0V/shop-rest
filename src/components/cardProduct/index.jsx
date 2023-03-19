@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setBasket } from "../../redux/basket/slice";
 import useItemByBasket from "../../hooks/useItemByBasket";
-
+import { renderInfo } from "../../redux/info/slice";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 
@@ -24,7 +24,10 @@ export default function CardProduct({ data }) {
   const [addRating] = useAddRatingMutation();
 
   const handleUpdateRating = (e, value) =>
-    addRating({ itemId: _id, rate: value });
+    addRating({ itemId: _id, rate: value })
+      .unwrap()
+      .then(() => dispatch(renderInfo("rating updated")))
+      .catch((err) => dispatch(renderInfo("error updating rating")));
 
   return (
     <Card

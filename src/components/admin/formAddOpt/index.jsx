@@ -2,10 +2,11 @@
 
 import React from "react";
 import TextField from "@mui/material/TextField";
+import Autocomplete from "../../../UI/autocomplete";
 import Button from "@mui/material/Button";
 import s from "./style.module.css";
 
-export default function FormAddOpt({ form, setForm }) {
+export default function FormAddOpt({ form, setForm, params }) {
   const options = form?.params || [];
 
   const setOptions = (value) =>
@@ -22,14 +23,18 @@ export default function FormAddOpt({ form, setForm }) {
   const handleDeleteOptions = (index) =>
     setOptions(options.filter((_, i) => index !== i));
 
+  const autocomplete = Object.keys(params);
+
   return (
     <div className={s.container}>
       {options?.map((item, i) => (
         <div key={i} className={s.itemContainer}>
-          <TextField
-            label={"name"}
-            value={item.name || ""}
-            onChange={(e) => handleChangeInput(e.target.value, i, "name")}
+          <Autocomplete
+            style={{ width: "50%" }}
+            options={autocomplete}
+            name="name"
+            onChange={(_, v) => handleChangeInput(v, i, "name")}
+            value={form.brand || ""}
           />
 
           <TextField
@@ -39,7 +44,7 @@ export default function FormAddOpt({ form, setForm }) {
             onChange={(e) => handleChangeInput(e.target.value, i, "value")}
           />
           <Button
-            sx={{ marginLeft: "10px" }}
+            sx={{ marginLeft: "10px", height: "55px" }}
             variant="contained"
             onClick={() => handleDeleteOptions(i)}
           >

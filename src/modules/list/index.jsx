@@ -5,11 +5,10 @@ import { useSelector } from "react-redux";
 import { useGetProductsQuery } from "../../services/fetch";
 import Sidebar from "../sidebar";
 import CardProduct from "../../components/cardProduct";
-import CircularProgress from "@mui/material/CircularProgress";
-import Pagination from "../../components/pagination";
 import useSearchParams from "../../hooks/useSearchParams";
 
 import s from "./style.module.css";
+import ListContainer from "../../components/listContainer";
 
 export default function ListProducts() {
   const { params } = useSearchParams();
@@ -17,20 +16,15 @@ export default function ListProducts() {
   const { data, isLoading } = useGetProductsQuery(params);
 
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar options={data?.desc} isLoading={isLoading} />
-      <div className={s.container}>
-        <div className={s.containerListItem}>
-          {isLoading ? (
-            <CircularProgress />
-          ) : (
-            data?.results?.map((el) => (
-              <CardProduct key={el._id} data={el} token={token} />
-            ))
-          )}
+    <div className={s.container}>
+      <Sidebar options={data?.desc} />
+      <ListContainer count={data?.count} isLoading={isLoading}>
+        <div className={s.containerProducts}>
+          {data?.results?.map((el) => (
+            <CardProduct key={el._id} data={el} token={token} />
+          ))}
         </div>
-        {isLoading || <Pagination count={data?.count} />}
-      </div>
+      </ListContainer>
     </div>
   );
 }

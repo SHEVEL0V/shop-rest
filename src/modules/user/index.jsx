@@ -6,12 +6,13 @@ import FormMain from "../../components/admin/formMain";
 import UploadImg from "../../components/admin/uploadImg";
 import { setUser } from "../../redux/auth/slice";
 import { useUpdateUserMutation } from "../../services/fetch";
+import { TextField } from "@mui/material";
 import Btn from "../../UI/btn";
 import picture from "../../assets/img.png";
 import { ToastContainer, toast } from "react-toastify";
+import Text from "../../UI/text";
 import "react-toastify/dist/ReactToastify.css";
 import s from "./style.module.css";
-import { TextField } from "@mui/material";
 
 export default function UpdateUser() {
   const user = useSelector((store) => store.auth.user);
@@ -20,8 +21,12 @@ export default function UpdateUser() {
   const [urlImg, setUrlImg] = useState(user?.picture || picture);
   const dispatch = useDispatch();
 
-  const errorPassword = form.password === form.password2;
   const FORM = ["name", "telephone", "delivery"];
+  const emptyFields = Object.keys(form).some(
+    (key) => FORM.includes(key) && form[key] === ""
+  );
+  const errorPassword = form.password === form.password2;
+  const disabled = emptyFields || !errorPassword;
 
   const formData = new FormData();
   const [updateUser] = useUpdateUserMutation();
@@ -49,8 +54,8 @@ export default function UpdateUser() {
     <div className={s.container}>
       <div style={{ display: "flex", width: "100%" }}>
         <UploadImg setFile={setFile} urlImg={urlImg} setUrlImg={setUrlImg} />
-        <div>
-          <FormMain data={form} form={FORM} setForm={setForm} />
+        <div style={{ width: "100%" }}>
+          <FormMain data={form} form={FORM} setForm={setForm} required={true} />
           <TextField
             sx={{ marginBottom: "10px", width: "100%" }}
             label="new password"
@@ -69,13 +74,19 @@ export default function UpdateUser() {
           />
         </div>
       </div>
-      <Btn
-        disabled={!errorPassword}
-        loading={false}
-        onClick={handlerClickButton}
-      >
-        UPDATE PROFILE
-      </Btn>
+      <div className={s.buttonContainer}>
+        <Text>Update user profile</Text>
+
+        <Btn
+          style={{ width: "200px", marginLeft: "auto" }}
+          disabled={disabled}
+          loading={false}
+          onClick={handlerClickButton}
+        >
+          UPDATE
+        </Btn>
+      </div>
+
       <ToastContainer />
     </div>
   );
