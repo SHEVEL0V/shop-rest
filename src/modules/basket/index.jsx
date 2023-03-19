@@ -16,7 +16,7 @@ export default function Basket() {
   const dispatch = useDispatch();
   const basket = useSelector(({ basket }) => basket.data);
   const isOpen = useSelector(({ button }) => button.basket);
-  const [addOrder, { isSuccess, isError }] = useAddOrderMutation();
+  const [addOrder] = useAddOrderMutation();
 
   const qty = basket.length;
   const isClose = qty === 0;
@@ -25,13 +25,7 @@ export default function Basket() {
     if (isClose) {
       dispatch(setButtonBasket());
     }
-    if (isSuccess) {
-      dispatch(removeBasket());
-    }
-    if (isError) {
-      toast.error("Error order ,please authorize");
-    }
-  }, [dispatch, isSuccess, isClose, isError]);
+  }, [dispatch, isClose]);
 
   const sumPrice = basket
     .map(({ qty, price }) => qty * price)
@@ -41,7 +35,10 @@ export default function Basket() {
   const handleOrder = () =>
     addOrder({ orders: basket })
       .unwrap()
-      .then(() => toast.sasses("Order accepted"))
+      .then(() => {
+        dispatch(removeBasket());
+        toast.sasses("Order accepted");
+      })
       .catch((err) => toast.error(err));
 
   return (
