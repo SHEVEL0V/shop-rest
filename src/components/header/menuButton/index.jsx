@@ -4,15 +4,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useDispatch } from "react-redux";
 import { setButtonMenu } from "../../../redux/button/slice";
-import useMedia from "../../../hooks/useMedia";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function MenuButton() {
   const dispatch = useDispatch();
-  const boolean = useMedia(480);
+  const matches = useMediaQuery("(min-width:480px)");
 
   useEffect(() => {
     dispatch(setButtonMenu());
-  }, [dispatch, boolean]);
+  }, [dispatch, matches]);
 
   return (
     <IconButton

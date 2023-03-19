@@ -13,8 +13,7 @@ import AvatarIcon from "../../components/header/avatarIcon";
 import Title from "../../UI/title";
 import Btn from "../../UI/btn";
 import BtnBack from "../../UI/btnBack";
-import useMedia from "../../hooks/useMedia";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
 import s from "./style.module.css";
 
 export default function Header() {
@@ -23,7 +22,8 @@ export default function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const boolean = useMedia(768);
+
+  const matches = useMediaQuery("(min-width:768px)");
 
   const path = pathname.split("/");
 
@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        {visibilityMenu && !boolean && <MenuButton />}
+        {visibilityMenu && !matches && <MenuButton />}
         {visibilityBtnBack && (
           <BtnBack onClick={() => navigate("/")}>home</BtnBack>
         )}
