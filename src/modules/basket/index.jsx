@@ -4,11 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeBasket } from "../../redux/basket/slice";
 import { setButtonBasket } from "../../redux/button/slice";
 import { useAddOrderMutation } from "../../services/fetch";
-import { renderInfo } from "../../redux/info/slice";
 import ModalCustom from "../../components/modal";
 import CardBasket from "../../components/cardBasket";
 import BasketIkon from "../../components/basketIcon";
-
+import { toast } from "react-toastify";
 import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
@@ -30,7 +29,7 @@ export default function Basket() {
       dispatch(removeBasket());
     }
     if (isError) {
-      dispatch(renderInfo("Please authorize"));
+      toast.error("Error order ,please authorize");
     }
   }, [dispatch, isSuccess, isClose, isError]);
 
@@ -39,7 +38,11 @@ export default function Basket() {
     .reduce((acc, v) => acc + v, 0);
 
   const handleClick = () => dispatch(setButtonBasket());
-  const handleOrder = () => addOrder({ orders: basket });
+  const handleOrder = () =>
+    addOrder({ orders: basket })
+      .unwrap()
+      .then(() => toast.sasses("Order accepted"))
+      .catch((err) => toast.error(err));
 
   return (
     <div>

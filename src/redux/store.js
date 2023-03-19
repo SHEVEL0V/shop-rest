@@ -15,7 +15,6 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 
 import { shopApi } from "../services/fetch";
 import button from "./button/slice";
-import info from "./info/slice";
 import authSlice from "./auth/slice";
 import basketSlice from "./basket/slice";
 import optionsSlice from "./options/slice";
@@ -29,7 +28,6 @@ export const store = configureStore({
     auth,
     basket,
     button,
-    info,
     options,
     [shopApi.reducerPath]: shopApi.reducer,
   },

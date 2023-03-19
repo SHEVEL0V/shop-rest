@@ -1,7 +1,6 @@
 /** @format */
 
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import OrderCard from "../../components/admin/orderCard";
 import { useUpdateOrderMutation } from "../../services/fetch";
 import { useGetOrderQuery } from "../../services/fetch";
@@ -9,12 +8,11 @@ import useCheckBox from "../../hooks/useCheckBox";
 import FilterOrder from "../../components/admin/filterOrder";
 import useSearchParamsCustom from "../../hooks/useSearchParams";
 import ListContainer from "../../components/listContainer";
-import { renderInfo } from "../../redux/info/slice";
+import { toast } from "react-toastify";
 
 import s from "./style.module.css";
 
 export default function Orders() {
-  const dispatch = useDispatch();
   const [options, setOptions] = useState([]);
 
   const { setParams, params } = useSearchParamsCustom();
@@ -27,8 +25,8 @@ export default function Orders() {
   const handleUpdateOrder = (status) =>
     updateOrder({ options, status })
       .unwrap()
-      .then(() => dispatch(renderInfo("success update order")))
-      .catch((err) => dispatch(renderInfo(err.message)));
+      .then(() => toast.sasses("success update order"))
+      .catch((err) => toast.error("error update order"));
 
   return (
     <div className={s.containerList}>

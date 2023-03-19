@@ -14,10 +14,9 @@ import Btn from "../../UI/btn";
 import TextField from "@mui/material/TextField";
 import ModalCustom from "../../components/modal";
 import GoogleLogin from "./googleAuth";
-
-import s from "./style.module.css";
 import { Typography } from "@mui/material";
-import { renderInfo } from "../../redux/info/slice";
+import { toast } from "react-toastify";
+import s from "./style.module.css";
 
 export default function Auth() {
   const dispatch = useDispatch();
@@ -42,7 +41,7 @@ export default function Auth() {
 
   const mainForm = checked ? formSingIn : formSingUp;
 
-  const renderError = ({ status }) => dispatch(renderInfo(status));
+  const renderError = ({ status }) => toast.error(status);
 
   const handleInput = (event) => {
     const { name, value } = event.target;

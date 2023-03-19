@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   useGetProductsByIdQuery,
@@ -15,7 +15,7 @@ import Btn from "../../UI/btn";
 import Autocomplete from "../../UI/autocomplete";
 import picture from "../../assets/img.png";
 import Text from "../../UI/text";
-import { renderInfo } from "../../redux/info/slice";
+import { toast } from "react-toastify";
 
 import s from "./style.module.css";
 
@@ -26,7 +26,6 @@ export default function UpdateProducts({ boolean }) {
   const desc = useSelector((store) => store.options.desc);
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const formData = new FormData();
   const disabled = Object.values(form).length > 3;
@@ -53,16 +52,18 @@ export default function UpdateProducts({ boolean }) {
       .then(() => {
         setForm({});
         setUrlImg(picture);
-        dispatch(renderInfo("success add product"));
-      });
+        toast.success("Product added successfully");
+      })
+      .catch(() => toast.error("Product added error"));
 
   const handleUpdateProduct = () =>
     updateProducts({ id, body: formData })
       .unwrap()
       .then(() => {
         setTimeout(() => navigate(-1), 2000);
-        dispatch(renderInfo("success update product"));
-      });
+        toast.success("Product updated successfully");
+      })
+      .catch(() => toast.error("Product updated error"));
 
   const handlerFetch = () => {
     if (file) {

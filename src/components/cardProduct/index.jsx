@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setBasket } from "../../redux/basket/slice";
 import useItemByBasket from "../../hooks/useItemByBasket";
-import { renderInfo } from "../../redux/info/slice";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
-
-import s from "./style.module.css";
 import { useAddRatingMutation } from "../../services/fetch";
 import { Card } from "@mui/material";
+import { toast } from "react-toastify";
+
+import s from "./style.module.css";
 
 export default function CardProduct({ data }) {
   const { _id, name, price, rating, img, brand } = data;
@@ -26,8 +26,8 @@ export default function CardProduct({ data }) {
   const handleUpdateRating = (e, value) =>
     addRating({ itemId: _id, rate: value })
       .unwrap()
-      .then(() => dispatch(renderInfo("rating updated")))
-      .catch((err) => dispatch(renderInfo("error updating rating")));
+      .then(() => toast.success("Rating updated"))
+      .catch((err) => toast.error("Error updating rating"));
 
   return (
     <Card
