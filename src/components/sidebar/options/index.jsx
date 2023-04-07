@@ -9,10 +9,8 @@ import useSearchParamsCustom from "../../../hooks/useSearchParams";
 
 import s from "./style.module.css";
 
-export default function Options({ options }) {
+export default function Options({ options = [] }) {
   const [form, setForm] = useState({});
-
-  const items = Object.keys(options) || [];
 
   const { setParams } = useSearchParamsCustom();
 
@@ -22,14 +20,18 @@ export default function Options({ options }) {
 
   return (
     <According title="options">
-      {items?.map((item, key) => (
-        <According key={key} title={item} border={form[item]?.length || false}>
-          {options[item].map((value) => (
-            <div key={value} className={s.container}>
-              <span className={s.name}>{value}</span>
+      {options?.map((item, ind) => (
+        <According
+          key={ind}
+          title={item?.name}
+          border={form[item]?.length || false}
+        >
+          {item?.value?.map((el, ind) => (
+            <div key={el} className={s.container}>
+              <span className={s.name}>{el}</span>
               <Checkbox
-                name={item}
-                value={value}
+                name={item?.name}
+                value={el}
                 onChange={handleCheckBoxObject}
               />
             </div>
