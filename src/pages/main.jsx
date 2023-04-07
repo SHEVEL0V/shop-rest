@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Footer from "../components/footer";
 import Header from "../modules/header";
 import Basket from "../modules/basket";
@@ -12,7 +11,6 @@ import { ToastContainer } from "react-toastify";
 import s from "./style.module.css";
 
 export default function Main() {
-  const isOpen = useSelector(({ button }) => button.basket);
   return (
     <>
       <Header />
@@ -20,7 +18,7 @@ export default function Main() {
         <Outlet />
       </div>
       <Footer />
-      {isOpen && <Basket />}
+      <Basket />
       <Auth />
       <ToastContainer />
     </>
