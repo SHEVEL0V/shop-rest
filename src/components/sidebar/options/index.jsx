@@ -12,7 +12,7 @@ import s from "./style.module.css";
 export default function Options({ options }) {
   const [form, setForm] = useState({});
 
-  const items = Object.keys(options || {});
+  const items = Object.keys(options) || [];
 
   const { setParams } = useSearchParamsCustom();
 
