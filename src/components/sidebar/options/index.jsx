@@ -20,7 +20,7 @@ export default function Options({ options = [] }) {
 
   return (
     <According title="options">
-      {options?.map((item, ind) => (
+      {options.map((item, ind) => (
         <According
           key={ind}
           title={item?.name}
