@@ -34,7 +34,7 @@ export default function FormAddOpt({ form, setForm, params }) {
             options={autocomplete}
             name="name"
             onChange={(_, v) => handleChangeInput(v, i, "name")}
-            value={form.brand || ""}
+            value={item.name || ""}
           />
 
           <TextField

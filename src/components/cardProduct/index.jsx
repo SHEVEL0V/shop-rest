@@ -27,7 +27,7 @@ export default function CardProduct({ data }) {
     addRating({ itemId: _id, rate: value })
       .unwrap()
       .then(() => toast.success("Rating updated"))
-      .catch((err) => toast.error("Error updating rating"));
+      .catch((err) => toast.error("Rating update error, please log in"));
 
   return (
     <Card

@@ -19,18 +19,20 @@ export default function Orders() {
 
   const { data, isLoading } = useGetOrderQuery(params);
 
+  const disabled = options.length === 0;
+
   const { handleCheckBoxArray } = useCheckBox(setOptions);
   const [updateOrder] = useUpdateOrderMutation();
 
-  const handleUpdateOrder = (status) =>
-    updateOrder({ options, status })
-      .unwrap()
-      .then(() => toast.sasses("success update order"))
-      .catch((err) => toast.error("error update order"));
+  const handleUpdateOrder = (status) => updateOrder({ options, status });
 
   return (
     <div className={s.containerList}>
-      <FilterOrder setParams={setParams} updateOrder={handleUpdateOrder} />
+      <FilterOrder
+        setParams={setParams}
+        updateOrder={handleUpdateOrder}
+        disabled={disabled}
+      />
       <ListContainer isLoading={isLoading}>
         {data?.map((el) => (
           <OrderCard
