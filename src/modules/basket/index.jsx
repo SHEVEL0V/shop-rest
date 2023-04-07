@@ -44,25 +44,23 @@ export default function Basket() {
   return (
     <div>
       <BasketIkon qty={qty} onClick={handleClick} disabled={isClose} />
-      {isOpen && (
-        <ModalCustom open={isOpen} onClick={handleClick}>
-          <div className={s.container}>
-            {basket !== [] &&
-              basket.map((list) => <CardBasket key={list._id} data={list} />)}
-          </div>
-          <div className={s.priceContainer}>
-            <b className={s.prise}>{sumPrice}</b>
-            <Button
-              sx={{ width: 200 }}
-              color="success"
-              variant="contained"
-              onClick={handleOrder}
-            >
-              To order
-            </Button>
-          </div>
-        </ModalCustom>
-      )}
+      <ModalCustom open={isOpen} onClick={handleClick}>
+        <div className={s.container}>
+          {basket !== [] &&
+            basket.map((list) => <CardBasket key={list._id} data={list} />)}
+        </div>
+        <div className={s.priceContainer}>
+          <b className={s.prise}>{sumPrice}</b>
+          <Button
+            sx={{ width: 200 }}
+            color="success"
+            variant="contained"
+            onClick={handleOrder}
+          >
+            To order
+          </Button>
+        </div>
+      </ModalCustom>
     </div>
   );
 }
