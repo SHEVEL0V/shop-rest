@@ -4,10 +4,10 @@ import React from "react";
 import { Modal } from "@mui/material";
 import s from "./style.module.css";
 
-export default function ModalCustom({ children, open = false, onClick }) {
+export default function ModalCustom({ children, open, onClick }) {
   return (
     <Modal
-      open={false}
+      open={open}
       onClose={onClick}
       sx={{
         paddingTop: 10,

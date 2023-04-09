@@ -21,11 +21,11 @@ export default function Basket() {
   const qty = basket.length;
   const isClose = qty === 0;
 
-  useEffect(() => {
-    if (isClose) {
-      dispatch(setButtonBasket());
-    }
-  }, [dispatch, isClose]);
+  // useEffect(() => {
+  //   if (isClose) {
+  //     dispatch(setButtonBasket());
+  //   }
+  // }, [dispatch, isClose]);
 
   const sumPrice = basket
     .map(({ qty, price }) => qty * price)
