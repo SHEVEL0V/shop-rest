@@ -1,58 +1,63 @@
 /** @format */
 
 import React from "react";
+import { useGetProductsByIdQuery } from "../../services/fetch";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useGetProductsByIdQuery } from "../../services/fetch";
 import { setBasket } from "../../redux/basket/slice";
 import useItemByBasket from "../../hooks/useItemByBasket";
 import Loader from "../../components/loader";
-import LoadingButton from "@mui/lab/LoadingButton";
+import Button from "@mui/material/Button";
 
 import s from "./style.module.css";
 
 export default function Product() {
   const { id } = useParams();
-  const { data, isLoading } = useGetProductsByIdQuery(id);
 
+  const { data, isLoading } = useGetProductsByIdQuery(id);
+  const product = data || {};
   const dispatch = useDispatch();
   const { isDisable } = useItemByBasket(id);
 
-  const { img, price, name, desc, options } = data || {};
+  const { img, price, name, desc, params } = product;
 
-  const handleAddProducts = () => dispatch(setBasket(data));
+  const handleAddProducts = () => dispatch(setBasket(product));
 
   return isLoading ? (
     <Loader />
   ) : (
     <div className={s.container}>
-      <img src={img} alt="logo" className={s.img} />
+      <div className={s.itemContainer}>
+        <img src={img} alt="logo" className={s.img} />
+      </div>
 
-      <h2>{name}</h2>
-      <p>{desc}</p>
-      <div className={s.flex}>
+      <div className={s.itemContainer}>
+        <h2>{name}</h2>
         <div className={s.prise}>
           price: <span>{price}</span> UAH
         </div>
+        <h5>Descriptions:</h5>
+        <p>{desc}</p>
+        <div>
+          {params?.map((e, i) => (
+            <div key={i}>
+              <div style={{ display: "flex" }}>
+                <div className={s.paramContainer}> {e.name}</div>
+                <div className={s.paramContainer}>{e.value}</div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-        <LoadingButton
+        <Button
+          sx={{ marginTop: "auto" }}
           onClick={handleAddProducts}
-          variant="contained"
+          color="secondary"
           disabled={isDisable()}
-          sx={{ marginLeft: "auto" }}
+          variant="contained"
         >
-          <span>Add to basket</span>
-        </LoadingButton>
-      </div>
-      <div>
-        {options?.map((e, i) => (
-          <div key={i}>
-            <p>
-              {e.name}
-              <b>{e.value}</b>
-            </p>
-          </div>
-        ))}
+          <span>{!isDisable() ? "Add to basket" : "item in the basket"}</span>
+        </Button>
       </div>
     </div>
   );
