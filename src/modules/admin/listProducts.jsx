@@ -17,6 +17,7 @@ import ListContainer from "../../components/listContainer";
 export default function ListProductsAdmin() {
   const { params } = useSearchParamsCustom();
   const [options, setOptions] = useState([]);
+  const disabled = options.length === 0;
 
   const { handleCheckBoxArray } = useCheckBox(setOptions);
 
@@ -29,7 +30,11 @@ export default function ListProductsAdmin() {
   return (
     <div className={s.containerList}>
       <Sidebar options={data?.desc} isLoading={isLoading}>
-        <Btn onClick={handleRemoveProducts} loading={isLoadingDelete}>
+        <Btn
+          disabled={disabled}
+          onClick={handleRemoveProducts}
+          loading={isLoadingDelete}
+        >
           remove
         </Btn>
       </Sidebar>
