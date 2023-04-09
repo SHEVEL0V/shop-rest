@@ -9,7 +9,11 @@ export default function ModalCustom({ children, open, onClick }) {
     <Modal
       open={open}
       onClose={onClick}
-      sx={{ paddingTop: 10, paddingInline: 2 }}
+      sx={{
+        paddingTop: 10,
+        paddingInline: 2,
+        display: open ? "block" : "none",
+      }}
       closeAfterTransition={true}
     >
       <div className={s.container}>{children}</div>
