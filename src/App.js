@@ -5,6 +5,18 @@ import { RouterProvider } from "react-router-dom";
 import { setDesc } from "./redux/options/slice";
 import { router } from "./router";
 import { useGetProductsDescQuery } from "./services/fetch";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#2196f3",
+    },
+    secondary: {
+      main: "#f50057",
+    },
+  },
+});
 
 function App() {
   const dispatch = useDispatch();
@@ -17,7 +29,11 @@ function App() {
     }
   }, [data, dispatch, isSuccess]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
 
 export default App;
