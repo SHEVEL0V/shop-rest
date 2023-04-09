@@ -7,12 +7,11 @@ import s from "./style.module.css";
 export default function ModalCustom({ children, open = false, onClick }) {
   return (
     <Modal
-      open={open}
+      open={false}
       onClose={onClick}
       sx={{
         paddingTop: 10,
         paddingInline: 2,
-        display: open ? "block" : "none",
       }}
       closeAfterTransition={true}
     >
