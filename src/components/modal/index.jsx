@@ -12,7 +12,7 @@ export default function ModalCustom({ children, open = false, onClick }) {
       sx={{
         paddingTop: 10,
         paddingInline: 2,
-        display: "none",
+        display: open ? "none" : "block",
       }}
       closeAfterTransition={true}
     >
