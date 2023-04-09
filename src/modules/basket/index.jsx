@@ -1,5 +1,5 @@
 /** @format */
-import { useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { removeBasket } from "../../redux/basket/slice";
 import { setButtonBasket } from "../../redux/button/slice";
@@ -21,12 +21,6 @@ export default function Basket() {
   const qty = basket.length;
   const isClose = qty === 0;
 
-  // useEffect(() => {
-  //   if (isClose) {
-  //     dispatch(setButtonBasket());
-  //   }
-  // }, [dispatch, isClose]);
-
   const sumPrice = basket
     .map(({ qty, price }) => qty * price)
     .reduce((acc, v) => acc + v, 0);
@@ -46,8 +40,11 @@ export default function Basket() {
       <BasketIkon qty={qty} onClick={handleClick} disabled={isClose} />
       <ModalCustom open={isOpen} onClick={handleClick}>
         <div className={s.container}>
-          {basket !== [] &&
-            basket.map((list) => <CardBasket key={list._id} data={list} />)}
+          {isClose ? (
+            <h3>Add product to cart</h3>
+          ) : (
+            basket.map((list) => <CardBasket key={list._id} data={list} />)
+          )}
         </div>
         <div className={s.priceContainer}>
           <b className={s.prise}>{sumPrice}</b>
